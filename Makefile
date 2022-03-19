@@ -1,5 +1,5 @@
 NAME = minishell
-INC = include
+INC = includes
 SRCS = minishell.c \
 
 OBJS = $(SRCS:.c=.o)
