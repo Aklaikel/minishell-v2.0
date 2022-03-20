@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   add_front.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/20 20:30:29 by osallak          ###   ########.fr       */
+/*   Created: 2022/03/20 20:25:50 by osallak           #+#    #+#             */
+/*   Updated: 2022/03/20 20:27:56 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include<stdio.h>
-# include<unistd.h>
-# include<stdlib.h>
-# include<stdbool.h>
-# include<readline/readline.h>
-# include"gc.h"
+#include "minishell.h"
 
-typedef struct s_gc
+void	add_front(t_gc **head, t_gc *new)
 {
-	void		*content;
-	struct s_gc	*next;
-}	t_gc;
-
-#endif
+	if (!head || !*head || !new)
+		return ;
+	new->next = *head;
+	*head = new;
+}

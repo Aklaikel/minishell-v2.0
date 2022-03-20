@@ -6,15 +6,20 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/19 19:47:40 by osallak          ###   ########.fr       */
+/*   Updated: 2022/03/19 23:17:09 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-int	main(int ac, char **av, char **env)
+int	main(void)
 {
-	(void)ac;
-	(void)av;
-	(void)env;
+	char	*s;
+
+	while (true)
+	{
+		s = readline("minishell-1.0$ ");
+		add_history(s);
+		system(s);
+	}
 }

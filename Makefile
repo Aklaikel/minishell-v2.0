@@ -1,5 +1,5 @@
 NAME = minishell
-INC = include
+INC = includes
 SRCS = minishell.c \
 
 OBJS = $(SRCS:.c=.o)
@@ -10,10 +10,10 @@ RM =  rm -rf
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-		$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+		$(CC) $(CFLAGS) -l readline $(OBJS) -o $(NAME)
 
 %.o:%.c $(INC)/minishell.h
-	$(CC) $(CFLAGS) -lreadline -I $(INC) $(SRCS) -o $(OBJS)
+	$(CC) $(CFLAGS) -I $(INC) -c $(SRCS) -o $(OBJS)
 
 clean :
 	$(RM) $(OBJS)

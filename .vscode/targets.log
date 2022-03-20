@@ -7,13 +7,12 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
  
-make: *** No rule to make target `include', needed by `minishell'.  Stop.
- 
 
-# Make data base, printed on Sat Mar 19 19:49:44 2022
+# Make data base, printed on Sun Mar 20 20:37:08 2022
 
 # Variables
 
+ 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -47,11 +46,11 @@ VSCODE_VERBOSE_LOGGING = true
 # makefile (from `Makefile', line 5)
 OBJS = $(SRCS:.c=.o)
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cd14003389/T/vscode-ipc-4044966d-71b9-4849-94ee-412bde02c4ea.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cd14003389/T/vscode-ipc-ca08150c-c8ed-4bba-b54a-1e8273166964.sock
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.MrhOkxYFE7/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.uSmMw5sSdN/Render
 # environment
 PATH = /Users/osallak/goinfre/.brew/bin:/Users/osallak/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
@@ -63,7 +62,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.l0tSUVrARx/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.5WJEegEtyC/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -110,7 +109,6 @@ USER = osallak
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 1)
 NAME = minishell
- 
 # environment
 LESS = -R
 # automatic
@@ -118,7 +116,7 @@ LESS = -R
 # default
 MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
 # makefile (from `Makefile', line 2)
-INC = include
+INC = includes
 # default
 .VARIABLES := 
 # environment
@@ -134,7 +132,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000001.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000004.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -154,7 +152,7 @@ PAGER = less
 # environment
 LC_ALL = C
 # environment
-SECURITYSESSIONID = 186a7
+SECURITYSESSIONID = 186a8
 # automatic
 ^F = $(notdir $^)
 # default
@@ -166,9 +164,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 3540
+VSCODE_PID = 2149
 # variable set hash-table stats:
-# Load=76/1024=7%, Rehash=0, Collisions=5/106=5%
+# Load=76/1024=7%, Rehash=0, Collisions=8/113=7%
 
 # Pattern-specific Variable Values
 
@@ -176,16 +174,16 @@ VSCODE_PID = 3540
 
 # Directories
 
-# include (device 0, inode 0): No files, 1 impossibilities.
 # . (device 16777227, inode 4758013): 13 files, no impossibilities.
+# includes (device 16777227, inode 4758076): 4 files, no impossibilities so far.
 
-# 13 files, 1 impossibilities in 2 directories.
+# 17 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
-%.o: %.c include/minishell.h
+%.o: %.c includes/minishell.h
 #  commands to execute (from `Makefile', line 16):
-	$(CC) $(CFLAGS) -lreadline -I$(INC) $(SRCS) -o $(OBJS)
+	$(CC) $(CFLAGS) -I $(INC) -c $(SRCS) -o $(OBJS)
 	
 
 # 1 implicit rules, 0 (0.0%) terminal.
@@ -196,9 +194,10 @@ all: minishell
 #  Command-line target.
 #  Implicit rule search has been done.
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
 
 # Not a target:
 .SUFFIXES:
@@ -209,39 +208,51 @@ all: minishell
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-03-19 19:49:07
+ 
+#  Last modified 2022-03-20 20:36:56
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-# Not a target:
-include:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-minishell: minishell.o include
+minishell: minishell.o
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
 #  commands to execute (from `Makefile', line 13):
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) -l readline $(OBJS) -o $(NAME)
 	
 
-# Not a target:
-minishell.o:
+minishell.o: minishell.c includes/minishell.h
 #  Implicit rule search has been done.
- 
-#  Last modified 2022-03-19 19:49:26
+#  Implicit/static pattern stem: `minishell'
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := minishell.o
+# automatic
+# % := 
+# automatic
+# * := minishell
+# automatic
+# + := minishell.c includes/minishell.h
+# automatic
+# | := 
+# automatic
+# < := minishell.c
+# automatic
+# ^ := minishell.c includes/minishell.h
+# automatic
+# ? := minishell.c includes/minishell.h
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+# Load=8/32=25%, Rehash=0, Collisions=2/16=12%
+#  commands to execute (from `Makefile', line 16):
+	$(CC) $(CFLAGS) -I $(INC) -c $(SRCS) -o $(OBJS)
+	
 
 fclean: clean
 #  Implicit rule search has not been done.
@@ -265,8 +276,26 @@ clean:
 	$(RM) $(OBJS)
 	
 
+# Not a target:
+minishell.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-03-19 23:17:09
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+includes/minishell.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-03-20 20:30:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 # files hash-table stats:
-# Load=9/1024=1%, Rehash=0, Collisions=0/30=0%
+# Load=10/1024=1%, Rehash=0, Collisions=0/31=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -278,6 +307,6 @@ clean:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Mar 19 19:49:44 2022
+# Finished Make data base on Sun Mar 20 20:37:08 2022
 
  

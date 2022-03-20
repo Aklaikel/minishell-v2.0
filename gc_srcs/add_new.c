@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   add_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/20 20:30:29 by osallak          ###   ########.fr       */
+/*   Created: 2022/03/20 20:31:29 by osallak           #+#    #+#             */
+/*   Updated: 2022/03/20 20:35:33 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include<stdio.h>
-# include<unistd.h>
-# include<stdlib.h>
-# include<stdbool.h>
-# include<readline/readline.h>
-# include"gc.h"
+#include "../includes/minishell.h"
 
-typedef struct s_gc
+t_gc	*add_new(void *garbage)
 {
-	void		*content;
-	struct s_gc	*next;
-}	t_gc;
+	t_gc	*new;
 
-#endif
+	new = (t_gc *)malloc (sizeof(t_gc));
+	if (!new)
+		clear_exit;
+	new->content = garbage;
+	
+}

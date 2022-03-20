@@ -1,3 +1,7 @@
 {
-	"makefile.extensionOutputFolder": "./.vscode"
+	"makefile.extensionOutputFolder": "./.vscode",
+	"files.associations": {
+		"stdlib.h": "c",
+		"alloca.h": "c"
+	}
 }

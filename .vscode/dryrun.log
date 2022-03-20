@@ -1,6 +1,6 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/osallak/Desktop/minishell-v2.0'
+cc -Wall -Wextra -Werror -I includes -c minishell.c  -o minishell.o
+cc -Wall -Wextra -Werror -l readline minishell.o -o minishell
 make: Leaving directory `/Users/osallak/Desktop/minishell-v2.0'
- 
-make: *** No rule to make target `include', needed by `minishell'.
  
