@@ -6,23 +6,26 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/20 20:30:29 by osallak          ###   ########.fr       */
+/*   Updated: 2022/03/20 22:30:37 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include<stdio.h>
-# include<unistd.h>
-# include<stdlib.h>
-# include<stdbool.h>
-# include<readline/readline.h>
-# include"gc.h"
+# include "../libft/libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <signal.h>
+# include <stdbool.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include "gc.h"
 
-typedef struct s_gc
-{
-	void		*content;
-	struct s_gc	*next;
-}	t_gc;
+extern t_gc	*g_garbage;
 
 #endif

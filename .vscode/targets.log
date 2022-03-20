@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Sun Mar 20 20:37:08 2022
+# Make data base, printed on Sun Mar 20 23:02:14 2022
 
 # Variables
 
@@ -29,21 +29,21 @@ VSCODE_LOG_NATIVE = false
 CURDIR := /Users/osallak/Desktop/minishell-v2.0
 # makefile
 SHELL = /bin/sh
-# makefile (from `Makefile', line 8)
+# makefile (from `Makefile', line 12)
 RM = rm -rf
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
-# makefile (from `Makefile', line 7)
+# makefile (from `Makefile', line 11)
 CFLAGS = -Wall -Wextra -Werror
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 3)
-SRCS = minishell.c 
+SRCS = minishell.c g_c/add_front.c g_c/add_new.c g_c/clear_exit.c g_c/collect.c
 # environment
 VSCODE_VERBOSE_LOGGING = true
-# makefile (from `Makefile', line 5)
+# makefile (from `Makefile', line 9)
 OBJS = $(SRCS:.c=.o)
 # environment
 VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cd14003389/T/vscode-ipc-ca08150c-c8ed-4bba-b54a-1e8273166964.sock
@@ -166,7 +166,8 @@ LANG = C
 # environment
 VSCODE_PID = 2149
 # variable set hash-table stats:
-# Load=76/1024=7%, Rehash=0, Collisions=8/113=7%
+ 
+# Load=76/1024=7%, Rehash=0, Collisions=6/112=5%
 
 # Pattern-specific Variable Values
 
@@ -182,13 +183,31 @@ VSCODE_PID = 2149
 # Implicit Rules
 
 %.o: %.c includes/minishell.h
-#  commands to execute (from `Makefile', line 16):
-	$(CC) $(CFLAGS) -I $(INC) -c $(SRCS) -o $(OBJS)
+#  commands to execute (from `Makefile', line 20):
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
 	
 
 # 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
+
+# Not a target:
+g_c/clear_exit.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+g_c/add_front.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+g_c/add_new.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 all: minishell
 #  Command-line target.
@@ -197,7 +216,7 @@ all: minishell
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
 
 # Not a target:
 .SUFFIXES:
@@ -208,22 +227,21 @@ all: minishell
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
- 
-#  Last modified 2022-03-20 20:36:56
+#  Last modified 2022-03-20 23:01:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-minishell: minishell.o
+minishell: minishell.o g_c/add_front.o g_c/add_new.o g_c/clear_exit.o g_c/collect.o
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
-#  commands to execute (from `Makefile', line 13):
-	$(CC) $(CFLAGS) -l readline $(OBJS) -o $(NAME)
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  commands to execute (from `Makefile', line 17):
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) -o $(NAME)
 	
 
 minishell.o: minishell.c includes/minishell.h
@@ -249,17 +267,19 @@ minishell.o: minishell.c includes/minishell.h
 # automatic
 # ? := minishell.c includes/minishell.h
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/16=12%
-#  commands to execute (from `Makefile', line 16):
-	$(CC) $(CFLAGS) -I $(INC) -c $(SRCS) -o $(OBJS)
+# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  commands to execute (from `Makefile', line 20):
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
 	
 
 fclean: clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 21):
+#  commands to execute (from `Makefile', line 31):
 	$(RM) $(NAME)
+	@make clean -C libft
+	@make clean -C printf_err
 	
 
 # Not a target:
@@ -272,14 +292,16 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 19):
+#  commands to execute (from `Makefile', line 27):
 	$(RM) $(OBJS)
+	@make clean -C libft
+	@make clean -C printf_err
 	
 
 # Not a target:
 minishell.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-03-19 23:17:09
+#  Last modified 2022-03-20 23:00:10
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -288,14 +310,20 @@ minishell.c:
 # Not a target:
 includes/minishell.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-03-20 20:30:29
+#  Last modified 2022-03-20 22:30:37
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
+# Not a target:
+g_c/collect.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=10/1024=1%, Rehash=0, Collisions=0/31=0%
+# Load=14/1024=1%, Rehash=0, Collisions=0/39=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -307,6 +335,6 @@ includes/minishell.h:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sun Mar 20 20:37:08 2022
+# Finished Make data base on Sun Mar 20 23:02:14 2022
 
  

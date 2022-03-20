@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_new.c                                          :+:      :+:    :+:   */
+/*   clear_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 20:31:29 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/20 20:35:33 by osallak          ###   ########.fr       */
+/*   Created: 2022/03/20 21:12:13 by osallak           #+#    #+#             */
+/*   Updated: 2022/03/20 22:31:06 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include"minishell.h"
 
-t_gc	*add_new(void *garbage)
+void	clear_exit(void)
 {
-	t_gc	*new;
+	t_gc	*tmp;
 
-	new = (t_gc *)malloc (sizeof(t_gc));
-	if (!new)
-		clear_exit;
-	new->content = garbage;
-	
+	while (g_garbage)
+	{
+		tmp = g_garbage;
+		g_garbage = g_garbage->next;
+		free(tmp->content);
+		free(tmp);
+	}
+	exit(0);
 }
