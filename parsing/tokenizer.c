@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collect.c                                          :+:      :+:    :+:   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 15:50:21 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/21 13:29:35 by osallak          ###   ########.fr       */
+/*   Created: 2022/03/30 17:18:39 by osallak           #+#    #+#             */
+/*   Updated: 2022/03/30 17:58:22 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-void	*collect(void *gb)
+t_tokens	*tokenizer(char *input)
 {
-	if (!gb)
+	t_tokens	*tokens;
+	int			i;
+
+	i = 0;
+	while (input[i])
 	{
-		perror("Error");
-		clear_exit();
+		if (input[i] == '|')
+			tokenize_pipe(input + i);
+		else if (input[i] == '>' || input[i] == '<')
+			tokenize_redirection(input + i);
+		else if (input[i] == '&')
+			tokenize_and(input + i);
+		else if (input[i] == ' ')
+			tokenize_space(input + i);
+		else
+			tokenize_word(input + i);
+		i++;
 	}
-	add_front(add_new(gb));
-	return (gb);
 }

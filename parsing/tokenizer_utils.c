@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/30 18:13:23 by aklaikel         ###   ########.fr       */
+/*   Created: 2022/03/30 17:35:08 by osallak           #+#    #+#             */
+/*   Updated: 2022/03/30 18:30:47 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include"minishell.h"
 
-t_gc *g_garbage = NULL;
-void	sigquit_handler(int siq)
+t_tokens	*init_list_dll(char *input, int flag)
 {
-	(void)siq;
-	// exit status must be 128 + sig like the bash but for now i use (0)
-	// must clear the readline
-	exit(0);
+	t_tokens	*new;
+
+	new = (t_tokens *)collect(malloc(sizeof(t_tokens)));
+	new->token = ft_strdup(input);
+	new->flag = flag;
+	new->next = NULL;
+	new->previous = NULL; //todo
+	return (new);
 }
 
-void	handle_signals(void)
+void	add_back_dll(t_tokens **tokens_list, t_tokens *new)
 {
-	signal(SIGQUIT, &sigquit_handler);
-	signal(SIGINT, SIG_IGN);
-}
+	t_tokens	*head;
 
-int	main(int ac, char **av, char **env)
-{
-	(void)ac;
-	(void)av;
-	(void)env;
-	handle_signals();
+	head = *tokens_list;
+	while (head->next != NULL)
+		head = head->next;
+	head->next = new;
+	new->previous = head;
 }

@@ -1,12 +1,12 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/osallak/Desktop/minishell-v2.0'
 cc -Wall -Wextra -Werror -I includes -c minishell.c -o minishell.o
- 
 cc -Wall -Wextra -Werror -I includes -c g_c/add_front.c -o g_c/add_front.o
 cc -Wall -Wextra -Werror -I includes -c g_c/add_new.c -o g_c/add_new.o
 cc -Wall -Wextra -Werror -I includes -c g_c/clear_exit.c -o g_c/clear_exit.o
- 
 cc -Wall -Wextra -Werror -I includes -c g_c/collect.c -o g_c/collect.o
-cc -Wall -Wextra -Werror minishell.o g_c/add_front.o g_c/add_new.o g_c/clear_exit.o g_c/collect.o   -o minishell
+make bonus -C libft
+make -C printf_err
+cc -Wall -Wextra -Werror -lreadline -lncurses minishell.o g_c/add_front.o g_c/add_new.o g_c/clear_exit.o g_c/collect.o libft/libft.a printf_err/libftprintf.a -o minishell
 make: Leaving directory `/Users/osallak/Desktop/minishell-v2.0'
  

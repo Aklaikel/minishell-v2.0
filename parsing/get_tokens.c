@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collect.c                                          :+:      :+:    :+:   */
+/*   get_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 15:50:21 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/21 13:29:35 by osallak          ###   ########.fr       */
+/*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
+/*   Updated: 2022/03/30 18:12:08 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"minishell.h"
+#include "minishell.h"
 
-void	*collect(void *gb)
+void	tokenize_pipe(char *input, t_tokens **head)
 {
-	if (!gb)
-	{
-		perror("Error");
-		clear_exit();
-	}
-	add_front(add_new(gb));
-	return (gb);
+	int	i;
+
+	if (input[1] == '|')
+		front(head, init_list(collect(ft_strdup(""))))
 }
