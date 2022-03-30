@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/30 20:58:51 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/03/30 21:05:32 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef enum tokens
 	SPACE,
 	OBRACKET,
 	CBRACKET,
+	SQUOTE,
+	DQUOTE,
 }	t_tokens_flag;
 
 typedef struct s_tokens

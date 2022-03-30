@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:18:39 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/30 20:58:31 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/03/30 21:06:32 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_tokens	*tokenizer(char *input)
 			tokenize_space(input + i);
 		else if (input[i] == '(' || input[i] == ')')
 			tokenize_brackets(input + i);
+		else if (input[i] == '\"' || input[i] == '\'')
+			tokenize_quotes(input + i);
 		else
 			tokenize_word(input + i);
 		i++;
