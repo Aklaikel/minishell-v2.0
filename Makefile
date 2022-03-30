@@ -1,5 +1,7 @@
 NAME = minishell
 INC = includes
+LIBFT = libft/libft.a 
+PRINTF = printf_err/libftprintf.a
 SRCS = minishell.c \
 		g_c/add_front.c \
 		g_c/add_new.c \
@@ -13,7 +15,7 @@ RM =  rm -rf
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) $(LIBFT) $(PRINTF)
 		$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) -o $(NAME)
 
 %.o:%.c $(INC)/minishell.h
@@ -29,5 +31,5 @@ clean :
 	@make clean -C printf_err
 fclean : clean
 	$(RM) $(NAME)
-	@make clean -C libft
-	@make clean -C printf_err
+	@make fclean -C libft
+	@make fclean -C printf_err
