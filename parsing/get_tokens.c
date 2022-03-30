@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   get_tokens.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/27 15:51:39 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/27 15:53:32 by osallak          ###   ########.fr       */
+/*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
+/*   Updated: 2022/03/30 18:12:08 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"minishell.h"
+#include "minishell.h"
 
-bool	shell(char *input)
+void	tokenize_pipe(char *input, t_tokens **head)
 {
-	
+	int	i;
+
+	if (input[1] == '|')
+		front(head, init_list(collect(ft_strdup(""))))
 }
