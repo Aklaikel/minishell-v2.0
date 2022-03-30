@@ -6,10 +6,9 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/20 22:30:37 by osallak          ###   ########.fr       */
+/*   Updated: 2022/03/30 17:29:47 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -24,7 +23,26 @@
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <string.h>
 # include "gc.h"
+
+typedef enum tokens
+{
+	WORD,
+	PIPE,
+	REDIRECTION,
+	AND,
+	OR,
+	SPACE,
+}	t_tokens_flag;
+
+typedef struct s_tokens
+{
+	char			*token;
+	int				flag;
+	struct s_tokens	*next;
+	struct s_tokens	*previous;
+}	t_tokens;
 
 extern t_gc	*g_garbage;
 

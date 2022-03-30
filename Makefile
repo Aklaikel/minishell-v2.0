@@ -1,4 +1,8 @@
 NAME = minishell
+
+LIBFT = libft/libft.a
+PRINTF = printf_err/libftprintf.a
+
 INC = includes
 SRCS = minishell.c \
 		g_c/add_front.c \
@@ -13,21 +17,22 @@ RM =  rm -rf
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
-		$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) -o $(NAME)
+$(NAME) : $(OBJS) $(LIBFT) $(PRINTF)
+		$(CC) $(CFLAGS) -lreadline -lncurses $^ -o $(NAME)
 
 %.o:%.c $(INC)/minishell.h
 	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
 
 $(LIBFT):
-	@make bonus -C libft
+	make bonus -C libft
 $(PRINTF):
-	@make -C printf_err
+	make -C printf_err
 clean :
 	$(RM) $(OBJS)
-	@make clean -C libft
-	@make clean -C printf_err
+	make clean -C libft
+	make clean -C printf_err
 fclean : clean
 	$(RM) $(NAME)
-	@make clean -C libft
-	@make clean -C printf_err
+	make fclean -C libft
+	make fclean -C printf_err
+re : fclean all

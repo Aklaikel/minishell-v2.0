@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collect.c                                          :+:      :+:    :+:   */
+/*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 15:50:21 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/21 13:29:35 by osallak          ###   ########.fr       */
+/*   Created: 2022/03/27 15:51:39 by osallak           #+#    #+#             */
+/*   Updated: 2022/03/27 15:53:32 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-void	*collect(void *gb)
+bool	shell(char *input)
 {
-	if (!gb)
-	{
-		perror("Error");
-		clear_exit();
-	}
-	add_front(add_new(gb));
-	return (gb);
+	
 }
