@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/31 09:48:13 by osallak          ###   ########.fr       */
+/*   Updated: 2022/03/31 09:48:16 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	tkenize_and(t_tokens **head, char *input)
 	else
 		init_list_dll(collect(ft_substr(input, 0, 1)), AND);
 }
+
 
 void	tokenize_space(t_tokens **head, char *input)
 {
