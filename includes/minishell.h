@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/30 21:17:15 by osallak          ###   ########.fr       */
+/*   Updated: 2022/03/31 09:29:04 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,14 @@ typedef enum tokens
 {
 	WORD,
 	PIPE,
-	REDIRECTION,// < and > and >> and <<
-	AND,//& and &&
+	REDIRECTION,
+	AND,
 	OR,
 	SPACE,
+	OBRACKET,
+	CBRACKET,
+	SQUOTE,
+	DQUOTE,
 }	t_tokens_flag;
 
 typedef struct s_tokens

@@ -4,6 +4,8 @@ LIBFT = libft/libft.a
 PRINTF = printf_err/libftprintf.a
 
 INC = includes
+LIBFT = libft/libft.a 
+PRINTF = printf_err/libftprintf.a
 SRCS = minishell.c \
 		g_c/add_front.c \
 		g_c/add_new.c \

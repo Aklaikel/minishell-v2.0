@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:18:39 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/30 20:26:50 by osallak          ###   ########.fr       */
+/*   Updated: 2022/03/31 09:28:38 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,18 @@ t_tokens	*tokenizer(char *input)
 
 	while (*input)
 	{
-		if (*input == '|')
-			tokenize_pipe(&tokens, input);
-		else if (*input == '>' || *input == '<')
-			tokenize_redirection(&tokens, input);
-		else if (*input == '&')
-			tokenize_and(&tokens, input);
-		else if (*input == ' ')
-			tokenize_space(&tokens, input);
+		if (input[i] == '|')
+			tokenize_pipe(input + i);
+		else if (input[i] == '>' || input[i] == '<')
+			tokenize_redirection(input + i);
+		else if (input[i] == '&')
+			tokenize_and(input + i);
+		else if (input[i] == ' ')
+			tokenize_space(input + i);
+		else if (input[i] == '(' || input[i] == ')')
+			tokenize_brackets(input + i);
+		else if (input[i] == '\"' || input[i] == '\'')
+			tokenize_quotes(input + i);
 		else
 			tokenize_word(&tokens, input);
 	}
