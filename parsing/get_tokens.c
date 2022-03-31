@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/31 09:48:37 by osallak          ###   ########.fr       */
+/*   Updated: 2022/03/31 09:48:48 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	tkenize_and(t_tokens **head, char *input)
 	{
 		add_back_dll(head, \
 			init_list_dll(collect(ft_substr(input, 0, 2)), AND));
-		input++;//!needs some modifications
+		input++;
 	}
 	else
 		init_list_dll(collect(ft_substr(input, 0, 1)), AND);
