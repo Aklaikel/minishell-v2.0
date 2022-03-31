@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/31 09:49:02 by osallak          ###   ########.fr       */
+/*   Updated: 2022/03/31 10:13:41 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,38 +24,3 @@ void	tokenize_pipe(t_tokens **head, char *input)
 	input++;
 }
 
-void	tokenize_redirection(t_tokens **head, char *input)
-{
-	if (input[1] == '>' || input[1] == '<')
-	{
-		add_back_dll(head, \
-			init_list_dll(collect(ft_substr(input, 0, 2)), REDIRECTION));
-		input++;
-	}
-	else
-		init_list_dll(collect(ft_substr(input, 0, 1)), REDIRECTION);
-	input++;
-}
-
-void	tkenize_and(t_tokens **head, char *input)
-{
-	if (input[1] == '&')
-	{
-		add_back_dll(head, \
-			init_list_dll(collect(ft_substr(input, 0, 2)), AND));
-		input++;
-	}
-	else
-		init_list_dll(collect(ft_substr(input, 0, 1)), AND);
-	input++;
-}
-
-//tokenize a single space and skip all white spaces
-
-void	tokenize_space(t_tokens **head, char *input)
-{
-	init_list_dll(collect(ft_strdup(" ")), SPACE);
-	input++;
-	while (*input == ' ')
-		input++;
-}
