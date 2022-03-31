@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:18:39 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/31 09:28:38 by osallak          ###   ########.fr       */
+/*   Updated: 2022/03/31 09:49:59 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_tokens	*tokenizer(char *input)
 
 	while (*input)
 	{
-		if (input[i] == '|')
+		if (input == '|')
 			tokenize_pipe(input + i);
 		else if (input[i] == '>' || input[i] == '<')
 			tokenize_redirection(input + i);
