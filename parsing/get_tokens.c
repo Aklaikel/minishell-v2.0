@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/31 10:14:54 by osallak          ###   ########.fr       */
+/*   Updated: 2022/03/31 10:14:55 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	get_tokens(t_tokens **head, char *input, int len, int flag)
 {
-	add_back_dll(head, init_list_dll(collect(ft_substr(input)), PIPE));
+	add_back_dll(head, init_list_dll(collect(ft_substr(input,)), PIPE));
 	input++;
 }
 
