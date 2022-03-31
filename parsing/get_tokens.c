@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/31 09:47:45 by osallak          ###   ########.fr       */
+/*   Updated: 2022/03/31 09:47:53 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	tokenize_space(t_tokens **head, char *input)
 {
 	init_list_dll(collect(ft_strdup(" ")), SPACE);//todo skip all white spaces
 	input++;
-	while ()
+	while (*input == ' ')
 	{
 		
 	}
