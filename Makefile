@@ -10,7 +10,11 @@ SRCS = minishell.c \
 		g_c/add_front.c \
 		g_c/add_new.c \
 		g_c/clear_exit.c \
-		g_c/collect.c
+		g_c/collect.c \
+		parsing/get_tokens.c \
+		parsing/tokenizer_utils.c \
+		parsing/tokenizer.c
+
 
 OBJS = $(SRCS:.c=.o)
 

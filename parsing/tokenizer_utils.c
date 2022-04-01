@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:35:08 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/30 18:30:47 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/03/31 13:28:24 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_tokens	*init_list_dll(char *input, int flag)
 	new->token = ft_strdup(input);
 	new->flag = flag;
 	new->next = NULL;
-	new->previous = NULL; //todo
+	new->previous = NULL;
 	return (new);
 }
 
@@ -28,8 +28,13 @@ void	add_back_dll(t_tokens **tokens_list, t_tokens *new)
 {
 	t_tokens	*head;
 
+	if (!*tokens_list)
+	{
+		*tokens_list = new;
+		return ;
+	}
 	head = *tokens_list;
-	while (head->next != NULL)
+	while (head && head->next != NULL)
 		head = head->next;
 	head->next = new;
 	new->previous = head;

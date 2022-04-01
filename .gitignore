@@ -1,4 +1,6 @@
 a.out
 minishell
+libft.a
+libftprintf.a
 *.o
-*.todo
+*.ig

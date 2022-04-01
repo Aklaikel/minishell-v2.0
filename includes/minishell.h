@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/31 09:29:04 by osallak          ###   ########.fr       */
+/*   Updated: 2022/03/31 20:29:25 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef enum tokens
 	CBRACKET,
 	SQUOTE,
 	DQUOTE,
+	BG,
 }	t_tokens_flag;
 
 typedef struct s_tokens
@@ -50,6 +51,11 @@ typedef struct s_tokens
 
 extern t_gc	*g_garbage;
 
-t_tokens	*init_list_ddl(char *input, int flag);
-
+//tokenizer functions
+t_tokens	*init_list_dll(char *input, int flag);
+void		add_back_dll(t_tokens **tokens_list, t_tokens *new);
+t_tokens	*tokenizer(char *input);
+int			get_tokens(t_tokens **head, char *input, int len, int flag);
+int			tokenize_word(t_tokens **head, char *input, int flag);
+int			tokenize_space(t_tokens **head, char *input);
 #endif

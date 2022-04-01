@@ -1,7 +1,0 @@
-Define a grammar for the parenthesis language, where all sentences in the parenthesis language consist of balanced pairs of left and right parentheses. Some examples:
-
-Valid	Invalid
-()  	())(
-(())	(
-()()	    )(
-(((()())()()))	))))))))))(
