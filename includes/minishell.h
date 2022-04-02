@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/31 20:29:25 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/01 22:50:36 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ typedef enum tokens
 {
 	WORD,
 	PIPE,
-	REDIRECTION,
+	OUTRED,
+	INRED,
+	APPEND,
+	HERDOC,
 	AND,
 	OR,
 	SPACE,

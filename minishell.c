@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/01 09:33:36 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/01 22:52:31 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,15 @@ int	main(int ac, char **av, char **env)
 				printf("PIPE : ");
 			else if (tokens->flag == WORD)
 				printf("WORD : ");
-			else if (tokens->flag == REDIRECTION)
-				printf("REDIRECTION : ");
-			else if (tokens->flag == AND)
+			else if (tokens->flag == OUTRED)
+				printf("OUTRED : ");
+			else if (tokens->flag == INRED)
+				printf("INRED : ");
+			else if (tokens->flag == APPEND)
+				printf("APPEND : ");
+			else if (tokens->flag == HERDOC)
+				printf("HERDOC : ");
+			else if (tokens->flag)
 				printf("AND : ");
 			else if (tokens->flag == OR)
 				printf("OR : ");
