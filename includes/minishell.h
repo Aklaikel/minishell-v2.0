@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/31 20:29:25 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/02 04:36:40 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ typedef struct s_tokens
 	struct s_tokens	*next;
 	struct s_tokens	*previous;
 }	t_tokens;
+
+typedef struct s_dll
+{
+	int			len;
+	t_tokens	*top;
+	t_tokens	*bottom;
+}				t_dll;
 
 extern t_gc	*g_garbage;
 
