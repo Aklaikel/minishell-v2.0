@@ -6,14 +6,14 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/01 22:52:31 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/03 15:42:33 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include"minishell.h"
 
 t_gc *g_garbage = NULL;
+
 void	sigquit_handler(int siq)
 {
 	(void)siq;
