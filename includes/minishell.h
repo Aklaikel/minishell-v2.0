@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/03 15:46:15 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/03 23:24:57 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ t_tokens	*tokenizer(char *input);
 int			get_tokens(t_tokens **head, char *input, int len, int flag);
 int			tokenize_word(t_tokens **head, char *input, int flag);
 int			tokenize_space(t_tokens **head, char *input);
+int			tokenize_quotes(t_tokens **head, char *input);
 #endif

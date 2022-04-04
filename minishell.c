@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/03 15:42:33 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/03 16:43:53 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int ac, char **av, char **env)
 				printf("APPEND : ");
 			else if (tokens->flag == HERDOC)
 				printf("HERDOC : ");
-			else if (tokens->flag)
+			else if (tokens->flag == AND)
 				printf("AND : ");
 			else if (tokens->flag == OR)
 				printf("OR : ");
