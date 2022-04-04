@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/03 23:24:57 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/04 21:58:53 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef enum tokens
 	SQUOTE,
 	DQUOTE,
 	BG,
+	VAR,
 }	t_tokens_flag;
 
 typedef struct s_tokens
