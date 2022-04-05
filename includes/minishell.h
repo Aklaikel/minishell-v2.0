@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/02 04:36:40 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/04/05 08:25:25 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ typedef enum tokens
 {
 	WORD,
 	PIPE,
-	REDIRECTION,
+	OUTRED,
+	INRED,
+	APPEND,
+	HERDOC,
 	AND,
 	OR,
 	SPACE,
@@ -58,6 +61,12 @@ typedef struct s_dll
 
 extern t_gc	*g_garbage;
 
+// double linked list
+t_tokens	*node_del_dll(t_dll *dll, t_tokens *node);
+void		del_dll(t_dll *dll);
+t_tokens	*init_list_dll(char *input, int flag);
+void		add_back_dll(t_tokens **tokens_list, t_tokens *new);
+
 //tokenizer functions
 t_tokens	*init_list_dll(char *input, int flag);
 void		add_back_dll(t_tokens **tokens_list, t_tokens *new);
@@ -65,4 +74,5 @@ t_tokens	*tokenizer(char *input);
 int			get_tokens(t_tokens **head, char *input, int len, int flag);
 int			tokenize_word(t_tokens **head, char *input, int flag);
 int			tokenize_space(t_tokens **head, char *input);
+int			tokenize_quotes(t_tokens **head, char *input);
 #endif

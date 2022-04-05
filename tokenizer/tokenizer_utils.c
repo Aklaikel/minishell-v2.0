@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:35:08 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/02 04:50:39 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/04/05 08:22:59 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,31 +40,44 @@ void	add_back_dll(t_tokens **tokens_list, t_tokens *new)
 	new->previous = head;
 }
 
-t_tokens	*del_last_ddl(t_dll *list)
+t_tokens	*firstdel_dll(t_dll *dll)
 {
 	t_tokens	*node;
 
-	list->bottom = list->bottom->previous;
-	if (list->bottom)
-		list->bottom->next = NULL;
-	list->len--;
+	node = dll->top;
+	dll->top = dll->top->next;
+	if (dll->top)
+		dll->top->previous = NULL;
+	(dll->len)--;
 	return (node);
 }
 
-t_tokens	*del_first_dll(t_dll *list)
+t_tokens	*lastdel_dll(t_dll *dll)
 {
 	t_tokens	*node;
 
-	node = list->top;
-	list->top = list->top->next;
-	if (list->top)
-		list->top->previous = NULL;
-	list->len--;
+	node = dll->bottom;
+	dll->bottom = dll->bottom->previous;
+	if (dll->bottom)
+		dll->bottom->next = NULL;
+	(dll->len)--;
 	return (node);
 }
 
-void	del_dll_list(t_dll	*list)
+t_tokens	*node_del_dll(t_dll *dll, t_tokens *node)
 {
-	while (list->len)
-		del_first_dll(list);
+	if (!node->previous)
+		return (firstdel_dll(dll));
+	if (!node->next)
+		return (lastdel_dll(dll));
+	node->previous->next = node->next;
+	node->next->previous = node->previous;
+	(dll->len)--;
+	return (node);
+}
+
+void	del_dll(t_dll *dll)
+{
+	while (dll->len)
+		firstdel_dll(dll);
 }

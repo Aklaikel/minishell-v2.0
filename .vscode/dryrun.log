@@ -5,11 +5,11 @@ cc -Wall -Wextra -Werror -I includes -c g_c/add_front.c -o g_c/add_front.o
 cc -Wall -Wextra -Werror -I includes -c g_c/add_new.c -o g_c/add_new.o
 cc -Wall -Wextra -Werror -I includes -c g_c/clear_exit.c -o g_c/clear_exit.o
 cc -Wall -Wextra -Werror -I includes -c g_c/collect.c -o g_c/collect.o
-cc -Wall -Wextra -Werror -I includes -c parsing/get_tokens.c -o parsing/get_tokens.o
-cc -Wall -Wextra -Werror -I includes -c parsing/tokenizer_utils.c -o parsing/tokenizer_utils.o
-cc -Wall -Wextra -Werror -I includes -c parsing/tokenizer.c -o parsing/tokenizer.o
+cc -Wall -Wextra -Werror -I includes -c tokenizer/get_tokens.c -o tokenizer/get_tokens.o
+cc -Wall -Wextra -Werror -I includes -c tokenizer/tokenizer_utils.c -o tokenizer/tokenizer_utils.o
+cc -Wall -Wextra -Werror -I includes -c tokenizer/tokenizer.c -o tokenizer/tokenizer.o
 make bonus -C libft
 make -C printf_err
-cc -Wall -Wextra -Werror -lreadline -lncurses minishell.o g_c/add_front.o g_c/add_new.o g_c/clear_exit.o g_c/collect.o parsing/get_tokens.o parsing/tokenizer_utils.o parsing/tokenizer.o libft/libft.a printf_err/libftprintf.a -o minishell
+cc -Wall -Wextra -Werror -lreadline -lncurses minishell.o g_c/add_front.o g_c/add_new.o g_c/clear_exit.o g_c/collect.o tokenizer/get_tokens.o tokenizer/tokenizer_utils.o tokenizer/tokenizer.o libft/libft.a printf_err/libftprintf.a -o minishell
 make: Leaving directory `/Users/osallak/Desktop/minishell-v2.0'
  

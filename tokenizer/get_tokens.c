@@ -6,11 +6,32 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/01 09:28:38 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/03 23:56:23 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	tokenize_quotes(t_tokens **head, char *input)
+{
+	int	i;
+	int	flag;
+
+	i = 1;
+	flag = -1;
+	if (input[0] == '\"')
+		flag = DQUOTE;
+	else if (input[0] == '\'')
+		flag = SQUOTE;
+	while (input[i] && input[i] != input[0])
+		i++;
+	get_tokens(head, input, 1, flag);
+	input++;
+	get_tokens(head, input, i - 1, WORD);
+	input += i - 1;
+	get_tokens(head, input, 1, flag);
+	return (i + 1);
+}
 
 //skip all white spaces and tokenize just one
 int	tokenize_space(t_tokens **head, char *input)
@@ -18,7 +39,7 @@ int	tokenize_space(t_tokens **head, char *input)
 	int	i;
 
 	i = 0;
-	while (*input && *input == ' ' && *(input + 1) == ' ')
+	while (input[i] && input[i] == ' ' && input[i + 1] == ' ')
 		i++;
 	get_tokens(head, input, 1, SPACE);
 	return (i + 1);

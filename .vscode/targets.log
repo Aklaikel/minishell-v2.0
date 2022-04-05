@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Fri Apr  1 09:24:41 2022
+# Make data base, printed on Sun Apr  3 22:16:38 2022
 
 # Variables
 
@@ -38,17 +38,17 @@ CFLAGS = -Wall -Wextra -Werror
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 9)
-SRCS = minishell.c g_c/add_front.c g_c/add_new.c g_c/clear_exit.c g_c/collect.c parsing/get_tokens.c parsing/tokenizer_utils.c parsing/tokenizer.c
+SRCS = minishell.c g_c/add_front.c g_c/add_new.c g_c/clear_exit.c g_c/collect.c tokenizer/get_tokens.c tokenizer/tokenizer_utils.c tokenizer/tokenizer.c
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # makefile (from `Makefile', line 19)
 OBJS = $(SRCS:.c=.o)
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cd14003389/T/vscode-ipc-551452dd-237b-4ef1-880f-cfdbe91fa725.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cd14003389/T/vscode-ipc-a377171a-f532-4ff1-838c-e4b22cefb77e.sock
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.PQDZzd5Pih/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.vDimdhwapI/Render
 # environment
 PATH = /Users/osallak/goinfre/.brew/bin:/Users/osallak/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
@@ -60,7 +60,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.IY6EzMly4m/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.J5gegxrFUG/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -166,9 +166,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 48743
+VSCODE_PID = 3221
 # variable set hash-table stats:
-# Load=78/1024=8%, Rehash=0, Collisions=9/113=8%
+# Load=78/1024=8%, Rehash=0, Collisions=9/118=8%
 
 # Pattern-specific Variable Values
 
@@ -176,12 +176,12 @@ VSCODE_PID = 48743
 
 # Directories
 
-# . (device 16777227, inode 4758013): 17 files, no impossibilities.
+# . (device 16777227, inode 4758013): 18 files, no impossibilities.
 # g_c (device 16777227, inode 4799947): 9 files, no impossibilities so far.
 # includes (device 16777227, inode 4758076): 4 files, no impossibilities so far.
-# parsing (device 16777227, inode 5081380): 7 files, no impossibilities so far.
+# tokenizer (device 16777227, inode 5230602): 3 files, no impossibilities so far.
 
-# 37 files, no impossibilities in 4 directories.
+# 34 files, no impossibilities in 4 directories.
 
 # Implicit Rules
 
@@ -194,10 +194,38 @@ VSCODE_PID = 48743
 
 # Files
 
+tokenizer/get_tokens.o: tokenizer/get_tokens.c includes/minishell.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `tokenizer/get_tokens'
+#  Last modified 2022-04-03 16:44:45
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := tokenizer/get_tokens.o
+# automatic
+# % := 
+# automatic
+# * := tokenizer/get_tokens
+# automatic
+# + := tokenizer/get_tokens.c includes/minishell.h
+# automatic
+# | := 
+# automatic
+# < := tokenizer/get_tokens.c
+# automatic
+# ^ := tokenizer/get_tokens.c includes/minishell.h
+# automatic
+# ? := tokenizer/get_tokens.c
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  commands to execute (from `Makefile', line 30):
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
+	
+
 g_c/clear_exit.o: g_c/clear_exit.c includes/minishell.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `g_c/clear_exit'
-#  Last modified 2022-03-31 20:43:26
+#  Last modified 2022-04-03 16:42:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -208,9 +236,8 @@ g_c/clear_exit.o: g_c/clear_exit.c includes/minishell.h
 
 printf_err/libftprintf.a:
 #  Implicit rule search has not been done.
-#  Last modified 2022-03-31 20:43:51
-#  File has been updated.
-#  Successfully updated.
+#  Modification time never checked.
+#  File has not been updated.
 #  commands to execute (from `Makefile', line 35):
 	make -C printf_err
 	
@@ -218,7 +245,7 @@ printf_err/libftprintf.a:
 g_c/add_front.o: g_c/add_front.c includes/minishell.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `g_c/add_front'
-#  Last modified 2022-03-31 20:43:26
+#  Last modified 2022-04-03 16:42:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -230,7 +257,7 @@ g_c/add_front.o: g_c/add_front.c includes/minishell.h
 g_c/add_new.o: g_c/add_new.c includes/minishell.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `g_c/add_new'
-#  Last modified 2022-03-31 20:43:26
+#  Last modified 2022-04-03 16:42:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -244,42 +271,9 @@ all: minishell
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-parsing/tokenizer_utils.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-03-31 13:28:24
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-parsing/tokenizer.o: parsing/tokenizer.c includes/minishell.h
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `parsing/tokenizer'
-#  Last modified 2022-03-31 20:43:49
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 30):
-	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
-	
-
-parsing/get_tokens.o: parsing/get_tokens.c includes/minishell.h
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `parsing/get_tokens'
-#  Last modified 2022-03-31 20:45:16
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 30):
-	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
-	
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
 
 # Not a target:
 .SUFFIXES:
@@ -292,7 +286,6 @@ g_c/collect.c:
 #  Implicit rule search has been done.
 #  Last modified 2022-03-21 13:29:35
 #  File has been updated.
- 
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
@@ -300,7 +293,17 @@ g_c/collect.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-03-31 13:29:43
+#  Last modified 2022-04-01 10:13:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+ 
+# Not a target:
+tokenizer/get_tokens.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-03 20:19:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -324,13 +327,13 @@ g_c/add_front.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-minishell: minishell.o g_c/add_front.o g_c/add_new.o g_c/clear_exit.o g_c/collect.o parsing/get_tokens.o parsing/tokenizer_utils.o parsing/tokenizer.o libft/libft.a printf_err/libftprintf.a
+minishell: minishell.o g_c/add_front.o g_c/add_new.o g_c/clear_exit.o g_c/collect.o tokenizer/get_tokens.o tokenizer/tokenizer_utils.o tokenizer/tokenizer.o libft/libft.a printf_err/libftprintf.a
 #  Implicit rule search has not been done.
-#  Last modified 2022-03-31 20:45:16
+#  Last modified 2022-04-03 16:44:45
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
 #  commands to execute (from `Makefile', line 27):
 	$(CC) $(CFLAGS) -lreadline -lncurses $^ -o $(NAME)
 	
@@ -338,7 +341,7 @@ minishell: minishell.o g_c/add_front.o g_c/add_new.o g_c/clear_exit.o g_c/collec
 minishell.o: minishell.c includes/minishell.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `minishell'
-#  Last modified 2022-03-31 20:43:25
+#  Last modified 2022-04-03 16:43:59
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -358,9 +361,8 @@ g_c/add_new.c:
 
 libft/libft.a:
 #  Implicit rule search has not been done.
-#  Last modified 2022-03-31 20:43:50
-#  File has been updated.
-#  Successfully updated.
+#  Modification time never checked.
+#  File has not been updated.
 #  commands to execute (from `Makefile', line 33):
 	make bonus -C libft
 	
@@ -376,22 +378,10 @@ fclean: clean
 	
 
 # Not a target:
-parsing/tokenizer.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-03-31 20:29:14
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-parsing/get_tokens.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-03-31 20:45:14
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+tokenizer/tokenizer_utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -414,22 +404,10 @@ clean:
 	make clean -C printf_err
 	
 
-parsing/tokenizer_utils.o: parsing/tokenizer_utils.c includes/minishell.h
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `parsing/tokenizer_utils'
-#  Last modified 2022-03-31 20:43:49
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 30):
-	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
-	
-
 # Not a target:
 minishell.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-03-31 20:36:13
+#  Last modified 2022-04-03 16:43:53
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -438,7 +416,7 @@ minishell.c:
 # Not a target:
 includes/minishell.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-03-31 20:29:25
+#  Last modified 2022-04-03 16:42:09
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -447,7 +425,7 @@ includes/minishell.h:
 g_c/collect.o: g_c/collect.c includes/minishell.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `g_c/collect'
-#  Last modified 2022-03-31 20:43:26
+#  Last modified 2022-04-03 16:42:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -456,8 +434,14 @@ g_c/collect.o: g_c/collect.c includes/minishell.h
 	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
 	
 
+# Not a target:
+tokenizer/tokenizer.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=27/1024=3%, Rehash=0, Collisions=1/94=1%
+# Load=25/1024=2%, Rehash=0, Collisions=0/82=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -469,6 +453,6 @@ g_c/collect.o: g_c/collect.c includes/minishell.h
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Apr  1 09:24:41 2022
+# Finished Make data base on Sun Apr  3 22:16:38 2022
 
  
