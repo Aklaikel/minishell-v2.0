@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/05 08:25:25 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/04/07 07:33:54 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,11 @@ typedef struct s_tokens
 	struct s_tokens	*previous;
 }	t_tokens;
 
-typedef struct s_dll
-{
-	int			len;
-	t_tokens	*top;
-	t_tokens	*bottom;
-}				t_dll;
-
 extern t_gc	*g_garbage;
 
 // double linked list
-t_tokens	*node_del_dll(t_dll *dll, t_tokens *node);
-void		del_dll(t_dll *dll);
+t_tokens	*node_del_dll(t_tokens **dll, t_tokens *node);
+void		del_dll(t_tokens **dll);
 t_tokens	*init_list_dll(char *input, int flag);
 void		add_back_dll(t_tokens **tokens_list, t_tokens *new);
 
