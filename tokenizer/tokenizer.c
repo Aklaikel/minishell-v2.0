@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:18:39 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/04 22:04:13 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:06:25 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_tokens	*tokenizer(char *input)
 		else if (*input == ')')
 			i = get_tokens(&tokens, input, 1, CBRACKET);
 		else if (*input == '$' && isword(*input + 1))
+			i = tokenize_variables(&tokens, input);
 		else
 			i = tokenize_word(&tokens, input, WORD);
 		input += i;

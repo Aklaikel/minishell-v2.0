@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/03 16:43:53 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:07:53 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	main(int ac, char **av, char **env)
 				printf("DQUOTE : ");
 			else if (tokens->flag == BG)
 				printf("BG : ");
+			else if (tokens->flag == VAR)
+				printf("VAR : ");
 			printf("%s\n", tokens->token);
 			tokens = tokens->next;
 		}

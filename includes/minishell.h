@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/04 21:58:53 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:07:05 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,20 @@ typedef struct s_tokens
 	struct s_tokens	*previous;
 }	t_tokens;
 
+typedef struct s_dll
+{
+	int			len;
+	t_tokens	*top;
+	t_tokens	*bottom;
+}				t_dll;
+
 extern t_gc	*g_garbage;
+
+// double linked list
+t_tokens	*node_del_dll(t_dll *dll, t_tokens *node);
+void		del_dll(t_dll *dll);
+t_tokens	*init_list_dll(char *input, int flag);
+void		add_back_dll(t_tokens **tokens_list, t_tokens *new);
 
 //tokenizer functions
 t_tokens	*init_list_dll(char *input, int flag);
@@ -63,4 +76,6 @@ int			get_tokens(t_tokens **head, char *input, int len, int flag);
 int			tokenize_word(t_tokens **head, char *input, int flag);
 int			tokenize_space(t_tokens **head, char *input);
 int			tokenize_quotes(t_tokens **head, char *input);
+int			tokenize_variables(t_tokens **head, char *input);
+bool		isword(int c);
 #endif
