@@ -1,0 +1,14 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/osallak/Desktop/minishell-v2.0/printf_err'
+cc -Wall -Werror -Wextra -c ft_printf.c -o ft_printf.o
+cc -Wall -Werror -Wextra -c ft_print_HEXAA.c -o ft_print_HEXAA.o
+cc -Wall -Werror -Wextra -c ft_print_hexa.c -o ft_print_hexa.o
+cc -Wall -Werror -Wextra -c ft_printstr.c -o ft_printstr.o
+cc -Wall -Werror -Wextra -c ft_putchar_fd.c -o ft_putchar_fd.o
+cc -Wall -Werror -Wextra -c ft_putnbr_fd.c -o ft_putnbr_fd.o
+cc -Wall -Werror -Wextra -c ft_putnbr_u_fd.c -o ft_putnbr_u_fd.o
+cc -Wall -Werror -Wextra -c ft_putstr_fd.c -o ft_putstr_fd.o
+cc -Wall -Werror -Wextra -c ft_strlen.c -o ft_strlen.o
+ar -rcs libftprintf.a ft_printf.o ft_print_HEXAA.o ft_print_hexa.o ft_printstr.o ft_putchar_fd.o ft_putnbr_fd.o ft_putnbr_u_fd.o ft_putstr_fd.o ft_strlen.o
+make: Leaving directory `/Users/osallak/Desktop/minishell-v2.0/printf_err'
+ 

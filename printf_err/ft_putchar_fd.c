@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:20:33 by aklaikel          #+#    #+#             */
-/*   Updated: 2021/11/29 01:01:11 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:21:08 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-int	ft_putchar_fd(char c, int fd)
+int	ft_putchar_pf(char c, int fd)
 {
 	write(fd, &c, 1);
 	return (1);

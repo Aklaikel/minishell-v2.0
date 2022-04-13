@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_hexa.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 19:28:42 by aklaikel          #+#    #+#             */
-/*   Updated: 2021/11/30 00:42:02 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:19:01 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_print_hexa(unsigned long num, int *len)
 	base = "0123456789abcdef";
 	if (num <= 15 )
 	{
-		ft_putchar_fd(base[num], 1);
+		ft_putchar_pf(base[num], 1);
 		(*len)++;	
 	}
 	else

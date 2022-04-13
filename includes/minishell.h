@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/09 13:51:23 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/13 17:22:45 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/wait.h>
 # include <string.h>
 # include "gc.h"
+# include "../printf_err/ft_printf.h"
 
 typedef enum tokens
 {

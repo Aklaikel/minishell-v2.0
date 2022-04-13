@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 01:24:58 by aklaikel          #+#    #+#             */
-/*   Updated: 2021/11/30 00:26:06 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:19:09 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ int	ft_printstr(char *s)
 {
 	if (!s)
 		s ="(null)";
-	ft_putstr_fd(s, 1);
+	ft_putstr_pf(s, 1);
 	return(ft_strlen(s));
 }
