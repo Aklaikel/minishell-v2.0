@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/10 22:55:26 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/13 16:54:54 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	tokenize_quotes(t_tokens **head, char *input)
 {
 	int	i;
 	int	tmp;
+	int	k;
 
 	tmp = 1;
 	if (input[0] == '\'')
@@ -44,8 +45,9 @@ int	tokenize_quotes(t_tokens **head, char *input)
 		{
 			get_tokens(head, input, i, WORD);
 			input += i;
-			input += 1 + tokenize_variables(head, input);
-			tmp += i;
+			k = tokenize_variables(head, input);
+			input += k;
+			tmp += k;
 			i = 0;
 			continue ;
 		}
@@ -85,6 +87,8 @@ int	tokenize_word(t_tokens **head, char *input, int flag)
 	int	i;
 
 	i = 0;
+	if (*input == '$')
+		return (get_tokens(head, input, 1, WORD));
 	while (input[i] && is_not_token(input[i]))
 		i++;
 	get_tokens(head, input, i, flag);
@@ -112,5 +116,5 @@ int	tokenize_variables(t_tokens **head, char *input)
 		return (1);
 	}
 	get_tokens(head, input, i, VAR);
-	return (i - 1);
+	return (i);
 }
