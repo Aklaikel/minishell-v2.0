@@ -13,7 +13,8 @@ SRCS = minishell.c \
 		g_c/collect.c \
 		tokenizer/get_tokens.c \
 		tokenizer/tokenizer_utils.c \
-		tokenizer/tokenizer.c
+		tokenizer/tokenizer.c \
+		parsing/check_basic_errors.c
 
 
 OBJS = $(SRCS:.c=.o)

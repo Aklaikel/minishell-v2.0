@@ -6,13 +6,54 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/05 15:07:53 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/14 01:34:13 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
 t_gc *g_garbage = NULL;
+
+
+//tmp function
+static void print_tokens(t_tokens *tokens)
+{
+	while (tokens)
+	{
+		if (tokens->flag == PIPE)
+			printf("PIPE : ");
+		else if (tokens->flag == WORD)
+			printf("WORD : ");
+		else if (tokens->flag == OUTRED)
+			printf("OUTRED : ");
+		else if (tokens->flag == INRED)
+			printf("INRED : ");
+		else if (tokens->flag == APPEND)
+			printf("APPEND : ");
+		else if (tokens->flag == HERDOC)
+			printf("HERDOC : ");
+		else if (tokens->flag == AND)
+			printf("AND : ");
+		else if (tokens->flag == OR)
+			printf("OR : ");
+		else if (tokens->flag == SPACE)
+			printf("SPACE : ");
+		else if (tokens->flag == OBRACKET)
+			printf("OBRACKET : ");
+		else if (tokens->flag == CBRACKET)
+			printf("CBRACKET : ");
+		else if (tokens->flag == SQUOTE)
+			printf("SQUOTE : ");
+		else if (tokens->flag == DQUOTE)
+			printf("DQUOTE : ");
+		else if (tokens->flag == BG)
+			printf("BG : ");
+		else if (tokens->flag == VAR)
+			printf("VAR : ");
+		printf("%s\n", tokens->token);
+		tokens = tokens->next;
+	}
+}
 
 void	sigquit_handler(int siq)
 {
@@ -43,40 +84,7 @@ int	main(int ac, char **av, char **env)
 		input = (char *)collect(readline("minishell-v2.0$ "));
 		add_history(input);
 		tokens = tokenizer(input);
-		while (tokens)
-		{
-			if (tokens->flag == PIPE)
-				printf("PIPE : ");
-			else if (tokens->flag == WORD)
-				printf("WORD : ");
-			else if (tokens->flag == OUTRED)
-				printf("OUTRED : ");
-			else if (tokens->flag == INRED)
-				printf("INRED : ");
-			else if (tokens->flag == APPEND)
-				printf("APPEND : ");
-			else if (tokens->flag == HERDOC)
-				printf("HERDOC : ");
-			else if (tokens->flag == AND)
-				printf("AND : ");
-			else if (tokens->flag == OR)
-				printf("OR : ");
-			else if (tokens->flag == SPACE)
-				printf("SPACE : ");
-			else if (tokens->flag == OBRACKET)
-				printf("OBRACKET : ");
-			else if (tokens->flag == CBRACKET)
-				printf("CBRACKET : ");
-			else if (tokens->flag == SQUOTE)
-				printf("SQUOTE : ");
-			else if (tokens->flag == DQUOTE)
-				printf("DQUOTE : ");
-			else if (tokens->flag == BG)
-				printf("BG : ");
-			else if (tokens->flag == VAR)
-				printf("VAR : ");
-			printf("%s\n", tokens->token);
-			tokens = tokens->next;
-		}
+		check_basic_errors(tokens);
+		isbalanced_brackets(tokens);
 	}
 }

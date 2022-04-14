@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/13 17:22:45 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/13 22:24:09 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,7 @@ int			tokenize_space(t_tokens **head, char *input);
 int			tokenize_quotes(t_tokens **head, char *input);
 int			tokenize_variables(t_tokens **head, char *input);
 bool		isword(int c);
+//parsing functions
+void		check_basic_errors(t_tokens *head);
+void		isbalanced_brackets(t_tokens *head);
 #endif
