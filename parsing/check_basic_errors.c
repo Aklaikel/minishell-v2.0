@@ -6,33 +6,36 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 20:00:46 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/13 22:40:35 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/24 17:40:49 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_basic_errors(t_tokens *head)
+void	isbalanced_quotes(t_tokens *head)
 {
-	int			i;
-	t_tokens	*node;
+	int		dquot;
+	int		squot;
 
-	i = 0;
-	node = head;
-	while (node)
+	dquot = 0;
+	squot = 0;
+	while (head)
 	{
-		while (node->token[i])
-		{	
-			if (node->token[i] == ';' || node->token[i] == '{'
-				|| node->token[i] == '}' || node->token[i] == '['
-				|| node->token[i] == ']' || node->token[i] == '\\')
-			{
-				ft_printf("minishell: syntax error near unexpected token '%c'\n", node->token[i]);
-				// set_status(2); // need to be defined
-			}
-			i++;
-		}
-		node = node->next;
+		if (head->flag == DQUOTE)
+			dquot++;
+		if (head->flag == SQUOTE)
+			squot++;
+		head = head->next;
+	}
+	if (dquot % 2 != 0)
+	{
+		ft_printf("unexpected EOL while looking for matching `\"'\n");
+		// set_status(2); // need to be defined
+	}
+	else if (squot % 2 != 0)
+	{
+		ft_printf("unexpected EOL while looking for matching `\''\n");
+		// set_status(2); // need to be defined
 	}
 }
 
@@ -59,7 +62,7 @@ void	isbalanced_brackets(t_tokens *head)
 	}
 	if (flag != 0)
 	{
-		ft_printf("minishell: syntax error near unexpected token '('\n");
+		ft_printf("minishell_tst: syntax error near unexpected token: `newline'\n");
 		// set_status(2); // need to be defined
 	}
 }

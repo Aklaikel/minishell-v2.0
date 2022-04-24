@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/13 17:26:15 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/19 19:40:54 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	tokenize_single_quote(t_tokens **head, char *input)
 	input++;
 	get_tokens(head, input, i - 1, WORD);
 	input += i - 1;
-	get_tokens(head, input, 1, SQUOTE);
+	if (*input == '\'')
+		get_tokens(head, input, 1, SQUOTE);
 	return (i + 1);
 }
 
@@ -55,7 +56,8 @@ int	tokenize_quotes(t_tokens **head, char *input)
 		tmp++;
 	}
 	input += get_tokens(head, input, i, WORD);
-	get_tokens(head, input, 1, DQUOTE);
+	if (*input == '"')
+		get_tokens(head, input, 1, DQUOTE);
 	return (tmp + 1);
 }
 

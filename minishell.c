@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/14 01:34:13 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/24 18:00:41 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 t_gc *g_garbage = NULL;
 
-
 //tmp function
-static void print_tokens(t_tokens *tokens)
+void print_tokens(t_tokens *tokens)
 {
 	while (tokens)
 	{
@@ -84,7 +83,12 @@ int	main(int ac, char **av, char **env)
 		input = (char *)collect(readline("minishell-v2.0$ "));
 		add_history(input);
 		tokens = tokenizer(input);
-		check_basic_errors(tokens);
-		isbalanced_brackets(tokens);
+		// isbalanced_brackets(tokens);
+		isbalanced_quotes(tokens);
+		// syntax_analyser(tokens);
+		// check_red_tokens(tokens);
+		// print_tokens(tokens);
+		check_cpar(tokens);
+		check_opar(tokens);
 	}
 }

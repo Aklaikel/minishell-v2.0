@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/13 22:24:09 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/24 18:12:34 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ typedef struct s_tokens
 	struct s_tokens	*previous;
 }	t_tokens;
 
+//pcn stands for previous, current and next
+typedef struct s_pcn_flags
+{
+	int				prev;
+	int				curr;
+	int				next;
+}	t_pcn_flags;
+
 extern t_gc	*g_garbage;
 
 // double linked list
@@ -73,6 +81,18 @@ int			tokenize_quotes(t_tokens **head, char *input);
 int			tokenize_variables(t_tokens **head, char *input);
 bool		isword(int c);
 //parsing functions
-void		check_basic_errors(t_tokens *head);
 void		isbalanced_brackets(t_tokens *head);
+void		isbalanced_quotes(t_tokens *head);
+void		syntax_analyser(t_tokens *tokens);
+void		check_red_tokens(t_tokens *tokens);
+void		check_opar(t_tokens *tokens);
+void		check_cpar(t_tokens *tokens);
+bool		is_string(int flag);
+bool		isredirect(int flag);
+void		print_syntax_error(char *error);
+void		init_flags(t_pcn_flags *flags, t_tokens *tokens);
+void		check_cpar_left(t_tokens *tokens);
+void		check_cpar_right(t_tokens *tokens);
+void 		check_opar_left(t_tokens *tokens);
+void 		check_opar_right(t_tokens *tokens);
 #endif
