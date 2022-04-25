@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 20:00:46 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/24 17:40:49 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/25 11:34:17 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	isbalanced_quotes(t_tokens *head)
 	if (dquot % 2 != 0)
 	{
 		ft_printf("unexpected EOL while looking for matching `\"'\n");
-		// set_status(2); // need to be defined
+		set_status(2);
 	}
 	else if (squot % 2 != 0)
 	{
 		ft_printf("unexpected EOL while looking for matching `\''\n");
-		// set_status(2); // need to be defined
+		set_status(2);
 	}
 }
 
@@ -55,14 +55,14 @@ void	isbalanced_brackets(t_tokens *head)
 		if (flag == -1)
 		{
 			ft_printf("minishell: syntax error near unexpected token ')'\n");
-			// set_status(2); // need to be defined
+			set_status(2);
 			return ;
 		}
 		node = node->next;
 	}
 	if (flag != 0)
 	{
-		ft_printf("minishell_tst: syntax error near unexpected token: `newline'\n");
-		// set_status(2); // need to be defined
+		print_syntax_error("newline");
+		set_status(2);
 	}
 }

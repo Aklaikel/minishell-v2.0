@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/24 18:12:34 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/25 12:45:24 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@
 typedef enum tokens
 {
 	WORD,
-	PIPE,
+	VAR,
 	OUTRED,
 	INRED,
 	APPEND,
 	HERDOC,
+	PIPE,
 	AND,
 	OR,
-	SPACE,
+	BG,
 	OBRACKET,
 	CBRACKET,
 	SQUOTE,
 	DQUOTE,
-	BG,
-	VAR,
+	SPACE,
 }	t_tokens_flag;
 
 typedef struct s_tokens
@@ -62,7 +62,13 @@ typedef struct s_pcn_flags
 	int				next;
 }	t_pcn_flags;
 
-extern t_gc	*g_garbage;
+typedef struct s_global
+{
+	t_gc	*g_garbage;
+	int		exit_status;
+}	t_global;
+
+extern t_global g_global;
 
 // double linked list
 t_tokens	*node_del_dll(t_tokens **dll, t_tokens *node);
@@ -80,7 +86,8 @@ int			tokenize_space(t_tokens **head, char *input);
 int			tokenize_quotes(t_tokens **head, char *input);
 int			tokenize_variables(t_tokens **head, char *input);
 bool		isword(int c);
-//parsing functions
+void		set_status(int status);
+//Syntax analyser functions
 void		isbalanced_brackets(t_tokens *head);
 void		isbalanced_quotes(t_tokens *head);
 void		syntax_analyser(t_tokens *tokens);
@@ -95,4 +102,5 @@ void		check_cpar_left(t_tokens *tokens);
 void		check_cpar_right(t_tokens *tokens);
 void 		check_opar_left(t_tokens *tokens);
 void 		check_opar_right(t_tokens *tokens);
+void		check_and_or_pipe_bg(t_tokens *tokens);
 #endif

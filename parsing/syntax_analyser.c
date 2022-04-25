@@ -6,11 +6,31 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:05:15 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/24 18:09:31 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/25 12:03:23 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
+
+void	syntax_analyser(t_tokens *tokens)
+{
+	isbalanced_quotes(tokens);
+	if (g_global.exit_status != 0)
+		return ;
+	isbalanced_brackets(tokens);
+	if (g_global.exit_status != 0)
+		return ;
+	check_opar(tokens);
+	if (g_global.exit_status != 0)
+		return ;
+	check_cpar(tokens);
+	if (g_global.exit_status != 0)
+		return ;
+	check_and_or_pipe_bg(tokens);
+	if (g_global.exit_status != 0)
+		return ;
+	check_red_tokens(tokens);
+}
 
 void	init_flags(t_pcn_flags *flags, t_tokens *tokens)
 {
@@ -62,10 +82,9 @@ void	check_red_tokens(t_tokens *tokens)
 		tokens = tokens->next;
 	}
 	if (error == 2)
-	{
-		ft_printf("minishell-v2.0: syntax error near unexpected token `newline'\n");
-		// set_status(2);
-	}
+		print_syntax_error("newline");
 	else if (error == 3)
-		ft_printf("minishell-v2.0: syntax error near unexpected token `%s'\n", tokens->next->token);
+		print_syntax_error(tokens->next->token);
+	if (error)
+		set_status(2);
 }

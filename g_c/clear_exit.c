@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 21:12:13 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/20 23:08:52 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/25 10:56:35 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	clear_exit(void)
 {
 	t_gc	*tmp;
 
-	while (g_garbage)
+	while (g_global.g_garbage)
 	{
-		tmp = g_garbage;
-		g_garbage = g_garbage->next;
+		tmp = g_global.g_garbage;
+		g_global.g_garbage = g_global.g_garbage->next;
 		free(tmp->content);
 		free(tmp);
 	}

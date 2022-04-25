@@ -1,9 +1,21 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/osallak/Desktop/minishell-v2.0'
+cc -Wall -Wextra -Werror -I includes -c minishell.c -o minishell.o
+cc -Wall -Wextra -Werror -I includes -c g_c/add_front.c -o g_c/add_front.o
+cc -Wall -Wextra -Werror -I includes -c g_c/add_new.c -o g_c/add_new.o
+cc -Wall -Wextra -Werror -I includes -c g_c/clear_exit.c -o g_c/clear_exit.o
+cc -Wall -Wextra -Werror -I includes -c g_c/collect.c -o g_c/collect.o
+cc -Wall -Wextra -Werror -I includes -c tokenizer/get_tokens.c -o tokenizer/get_tokens.o
+cc -Wall -Wextra -Werror -I includes -c tokenizer/tokenizer_utils.c -o tokenizer/tokenizer_utils.o
+cc -Wall -Wextra -Werror -I includes -c tokenizer/tokenizer.c -o tokenizer/tokenizer.o
+cc -Wall -Wextra -Werror -I includes -c parsing/check_basic_errors.c -o parsing/check_basic_errors.o
+cc -Wall -Wextra -Werror -I includes -c parsing/syntax_analyser.c -o parsing/syntax_analyser.o
 cc -Wall -Wextra -Werror -I includes -c parsing/check_barckets.c -o parsing/check_barckets.o
 cc -Wall -Wextra -Werror -I includes -c parsing/syntax_analyser_utils.c -o parsing/syntax_analyser_utils.o
+cc -Wall -Wextra -Werror -I includes -c parsing/check_and_or_pipe_bg.c -o parsing/check_and_or_pipe_bg.o
+cc -Wall -Wextra -Werror -I includes -c parsing/set_status.c -o parsing/set_status.o
 make bonus -C libft
 make -C printf_err
-cc -Wall -Wextra -Werror -lreadline -lncurses minishell.o g_c/add_front.o g_c/add_new.o g_c/clear_exit.o g_c/collect.o tokenizer/get_tokens.o tokenizer/tokenizer_utils.o tokenizer/tokenizer.o parsing/check_basic_errors.o parsing/syntax_analyser.o parsing/check_barckets.o parsing/syntax_analyser_utils.o libft/libft.a printf_err/libftprintf.a -o minishell
+cc -Wall -Wextra -Werror -lreadline -lncurses minishell.o g_c/add_front.o g_c/add_new.o g_c/clear_exit.o g_c/collect.o tokenizer/get_tokens.o tokenizer/tokenizer_utils.o tokenizer/tokenizer.o parsing/check_basic_errors.o parsing/syntax_analyser.o parsing/check_barckets.o parsing/syntax_analyser_utils.o parsing/check_and_or_pipe_bg.o parsing/set_status.o libft/libft.a printf_err/libftprintf.a -o minishell
 make: Leaving directory `/Users/osallak/Desktop/minishell-v2.0'
  

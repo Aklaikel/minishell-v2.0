@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 18:06:07 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/24 18:13:58 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/25 11:44:14 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	check_cpar_left(t_tokens *tokens)
 		print_syntax_error(tokens->previous->token);
 		status = 2;
 	}
-	// set_status(2);
+	set_status(status);
 }
 
 void	check_cpar_right(t_tokens *tokens)
@@ -58,7 +58,7 @@ void	check_cpar_right(t_tokens *tokens)
 			print_syntax_error(tokens->next->token);
 		status = 2;
 	}
-	// set_status(status);
+	set_status(status);
 	return ;
 }
 
@@ -90,7 +90,7 @@ void check_opar_left(t_tokens *tokens)
 			print_syntax_error(tokens->previous->token);
 		status = 2;
 	}
-	// set_status(status);
+	set_status(status);
 }
 
 void	check_opar_right(t_tokens *tokens)
@@ -115,6 +115,6 @@ void	check_opar_right(t_tokens *tokens)
 			print_syntax_error(tokens->next->next->token);
 		else
 			print_syntax_error(tokens->next->token);
-		// set_status(2);
+		set_status(2);
 	}
 }

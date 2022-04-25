@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 17:33:08 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/24 18:08:55 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/25 11:43:23 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	print_syntax_error(char *error)
 {
 	ft_printf
 		("minishell-v2.0: syntax error near unexpected token: `%s'\n", error);
-	// exit_status = 2;
 }
 
 void	check_cpar(t_tokens *tokens)
@@ -40,7 +39,10 @@ void	check_cpar(t_tokens *tokens)
 		if (flags.curr == CBRACKET)
 		{
 			check_cpar_right(tokens);
-			check_cpar_left(tokens);
+			if (g_global.exit_status == 0)
+				check_cpar_left(tokens);
+			if (g_global.exit_status != 0)
+				break ;
 		}
 		tokens = tokens->next;
 	}
@@ -48,19 +50,15 @@ void	check_cpar(t_tokens *tokens)
 
 void	check_opar(t_tokens *tokens)
 {
-	t_pcn_flags	pcn;
-
 	while (tokens)
 	{
 		if (tokens->flag == OBRACKET)
 		{
-			init_flags(&pcn, tokens);
 			check_opar_right(tokens);
-			// if (status != 0)
-			// 	break ;
-			check_opar_left(tokens);
-			// if (status != 0)
-			// 	break ;
+			if (g_global.exit_status == 0)
+				check_opar_left(tokens);
+			if (g_global.exit_status != 0)
+				break ;
 		}
 		tokens = tokens->next;
 	}
