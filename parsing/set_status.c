@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_front.c                                        :+:      :+:    :+:   */
+/*   set_status.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 20:25:50 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/25 10:57:00 by osallak          ###   ########.fr       */
+/*   Created: 2022/04/25 10:57:47 by osallak           #+#    #+#             */
+/*   Updated: 2022/04/25 10:58:40 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	add_front(t_gc *new)
+void	set_status(int status)
 {
-	if (!new)
-		return ;
-	if (!g_global.g_garbage)
-		g_global.g_garbage = new;
-	else
-	{
-		new->next = g_global.g_garbage;
-		g_global.g_garbage = new;
-	}
+	g_global.exit_status = status;
 }

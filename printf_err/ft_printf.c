@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 00:58:23 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/04/13 17:18:11 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/22 09:34:08 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	print_it(char c, va_list ptr, int *len)
 	else if (c == 'X')
 		ft_print_HEXAA(va_arg(ptr, unsigned int), len);
 	else if (c == 'p')
-	 {
+	{
 		ft_putstr_pf("0x", 1);
 		(*len)+= 2;
 		ft_print_hexa(va_arg(ptr, unsigned long), len);
-	 }
+	}
 }
 
 int	ft_printf(const char *f, ...)

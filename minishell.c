@@ -6,13 +6,17 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/16 07:54:46 by aklaikel         ###   ########.fr       */
+=======
+/*   Updated: 2022/04/25 12:03:34 by osallak          ###   ########.fr       */
+>>>>>>> f3c017e96a348ed34e4819638b37da109890b1b3
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-t_gc *g_garbage = NULL;
+t_global	g_global;
 
 void	sigquit_handler(int siq)
 {
@@ -45,41 +49,10 @@ int	main(int ac, char **av, char **env)
 		input = (char *)collect(readline("minishell-v2.0$ "));
 		add_history(input);
 		tokens = tokenizer(input);
-		while (tokens)
-		{
-			if (tokens->flag == PIPE)
-				printf("PIPE : ");
-			else if (tokens->flag == WORD)
-				printf("WORD : ");
-			else if (tokens->flag == OUTRED)
-				printf("OUTRED : ");
-			else if (tokens->flag == INRED)
-				printf("INRED : ");
-			else if (tokens->flag == APPEND)
-				printf("APPEND : ");
-			else if (tokens->flag == HERDOC)
-				printf("HERDOC : ");
-			else if (tokens->flag == AND)
-				printf("AND : ");
-			else if (tokens->flag == OR)
-				printf("OR : ");
-			else if (tokens->flag == SPACE)
-				printf("SPACE : ");
-			else if (tokens->flag == OBRACKET)
-				printf("OBRACKET : ");
-			else if (tokens->flag == CBRACKET)
-				printf("CBRACKET : ");
-			else if (tokens->flag == SQUOTE)
-				printf("SQUOTE : ");
-			else if (tokens->flag == DQUOTE)
-				printf("DQUOTE : ");
-			else if (tokens->flag == BG)
-				printf("BG : ");
-			else if (tokens->flag == VAR)
-				printf("VAR : ");
-			printf("%s\n", tokens->token);
-			tokens = tokens->next;
-		}
+		syntax_analyser(tokens);
+		// check_and_or_pipe_bg(tokens);
+		printf("exit_status = : %d\n", g_global.exit_status);
+		g_global.exit_status = 0;
 	}
 	rl_clear_history();
 }
