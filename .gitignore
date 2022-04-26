@@ -5,3 +5,4 @@ libftprintf.a
 *.o
 *.ig
 board.excalidraw
+.vscode/*
