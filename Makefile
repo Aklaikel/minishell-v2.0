@@ -14,12 +14,13 @@ SRCS = minishell.c \
 		tokenizer/get_tokens.c \
 		tokenizer/tokenizer_utils.c \
 		tokenizer/tokenizer.c \
-		parsing/check_basic_errors.c \
-		parsing/syntax_analyser.c \
-		parsing/check_barckets.c \
-		parsing/syntax_analyser_utils.c \
-		parsing/check_and_or_pipe_bg.c \
-		parsing/set_status.c 
+		SyntaxAnalyser/check_basic_errors.c \
+		SyntaxAnalyser/syntax_analyser.c \
+		SyntaxAnalyser/check_barckets.c \
+		SyntaxAnalyser/syntax_analyser_utils.c \
+		SyntaxAnalyser/check_and_or_pipe_bg.c \
+		SyntaxAnalyser/set_status.c \
+		SyntaxAnalyser/check_brackets_utils.c \
 
 
 OBJS = $(SRCS:.c=.o)

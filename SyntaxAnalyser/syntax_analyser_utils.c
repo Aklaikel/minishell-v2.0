@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 18:06:07 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/25 11:44:14 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/25 23:43:13 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	check_cpar_left(t_tokens *tokens)
 		pre_flag = tokens->previous->flag;
 	if (!is_string(pre_flag) && pre_flag != CBRACKET)
 	{
-		print_syntax_error(tokens->previous->token);
+		print_syntax_error(tokens->token);
 		status = 2;
 	}
 	set_status(status);
@@ -49,7 +49,7 @@ void	check_cpar_right(t_tokens *tokens)
 	}
 	else
 		next_flag = tokens->next->flag;
-	if (next_flag != AND && next_flag != OR && next_flag != PIPE
+	if (next_flag <= PIPE && next_flag >= BG
 		&& next_flag != CBRACKET && !isredirect(next_flag))
 	{
 		if (tmp == 1)
@@ -62,32 +62,24 @@ void	check_cpar_right(t_tokens *tokens)
 	return ;
 }
 
-void check_opar_left(t_tokens *tokens)
+void	check_opar_left(t_tokens *tokens)
 {
 	int	pre_flag;
 	int	status;
-	int	tmp;
 
-	tmp = 0;
 	status = 0;
 	pre_flag = -1;
 	if (!tokens->previous
 		|| (tokens->previous->flag == SPACE && !tokens->previous->previous))
 		return ;
 	else if (tokens->previous->flag == SPACE)
-	{
 		pre_flag = tokens->previous->previous->flag;
-		tmp = 1;
-	}
 	else
 		pre_flag = tokens->previous->flag;
-	if (pre_flag != AND && pre_flag != OR 
+	if (pre_flag != AND && pre_flag != OR
 		&& pre_flag != PIPE && pre_flag != OBRACKET)
 	{
-		if (tmp)
-			print_syntax_error(tokens->previous->previous->token);
-		else
-			print_syntax_error(tokens->previous->token);
+		print_syntax_error(tokens->token);
 		status = 2;
 	}
 	set_status(status);

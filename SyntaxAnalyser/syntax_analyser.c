@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:05:15 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/25 12:03:23 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/26 00:07:55 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,18 @@
 
 void	syntax_analyser(t_tokens *tokens)
 {
-	isbalanced_quotes(tokens);
-	if (g_global.exit_status != 0)
-		return ;
 	isbalanced_brackets(tokens);
-	if (g_global.exit_status != 0)
-		return ;
-	check_opar(tokens);
-	if (g_global.exit_status != 0)
-		return ;
-	check_cpar(tokens);
-	if (g_global.exit_status != 0)
-		return ;
-	check_and_or_pipe_bg(tokens);
-	if (g_global.exit_status != 0)
-		return ;
-	check_red_tokens(tokens);
+	isbalanced_quotes(tokens);
+	while (tokens && g_global.exit_status == 0)
+	{
+		if (tokens->flag >= 6 && tokens->flag <= 9)
+			check_and_or_pipe_bg(tokens);
+		else if (tokens->flag >= 2 && tokens->flag <= 5)
+			check_red_tokens(tokens);
+		else if (tokens->flag == OBRACKET || tokens->flag == CBRACKET)
+			check_brackets(tokens);
+		tokens = tokens->next;
+	}
 }
 
 void	init_flags(t_pcn_flags *flags, t_tokens *tokens)
@@ -48,7 +44,7 @@ void	init_flags(t_pcn_flags *flags, t_tokens *tokens)
 		flags->next = -1;
 }
 
-static int	get_next_flag(t_tokens *token)
+int	get_next_flag(t_tokens *token)
 {
 	if (token && token->next && token->next->next)
 		return (token->next->next->flag);
@@ -57,34 +53,25 @@ static int	get_next_flag(t_tokens *token)
 
 void	check_red_tokens(t_tokens *tokens)
 {
-	t_pcn_flags	pcn;
-	int			error;
+	int	next_flag;
+	int	status;
 
-	error = 0;
-	while (tokens)
+	status = 0;
+	next_flag = -1;
+	if (!tokens->next || (tokens->next->flag == SPACE && !tokens->next->next))
+		status = 2;
+	else if (tokens->next->flag == SPACE)
+		next_flag = tokens->next->next->flag;
+	else
+		next_flag = tokens->next->flag;
+	if (!is_string(next_flag))
+		status = 2;
+	if (status == 2)
 	{
-		if (isredirect(tokens->flag))
-		{
-			init_flags(&pcn, tokens);
-			if (pcn.next == SPACE)
-			{
-				pcn.next = get_next_flag(tokens);
-				if (!is_string(pcn.next))
-					error = 2;
-			}
-			else if (!is_string(pcn.next) && tokens->next)
-				error = 3;
-			else if (!is_string(pcn.next))
-				error = 2;
-			if (error != 0)
-				break ;
-		}
-		tokens = tokens->next;
+		if (!tokens->next || tokens->next->flag == SPACE)
+			print_syntax_error("newline");
+		else
+			print_syntax_error(tokens->next->token);
 	}
-	if (error == 2)
-		print_syntax_error("newline");
-	else if (error == 3)
-		print_syntax_error(tokens->next->token);
-	if (error)
-		set_status(2);
+	set_status(status);
 }

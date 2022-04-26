@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/25 12:45:24 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/25 23:19:49 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,20 @@ typedef struct s_pcn_flags
 	int				next;
 }	t_pcn_flags;
 
+//the struct below should be global and also contains
+//the exit status for the last command and maybe a variable named is running
 typedef struct s_global
 {
 	t_gc	*g_garbage;
 	int		exit_status;
 }	t_global;
+
+//the next struct contains all env variables and  it's values
+typedef struct s_env
+{
+	char			*env_line;
+	struct s_env	*next;
+}	t_env;
 
 extern t_global g_global;
 
@@ -100,7 +109,11 @@ void		print_syntax_error(char *error);
 void		init_flags(t_pcn_flags *flags, t_tokens *tokens);
 void		check_cpar_left(t_tokens *tokens);
 void		check_cpar_right(t_tokens *tokens);
-void 		check_opar_left(t_tokens *tokens);
-void 		check_opar_right(t_tokens *tokens);
+void		check_opar_left(t_tokens *tokens);
+void		check_opar_right(t_tokens *tokens);
 void		check_and_or_pipe_bg(t_tokens *tokens);
+void		check_brackets(t_tokens *tokens);
+int			get_next_flag(t_tokens *token);
+//expander function
+
 #endif

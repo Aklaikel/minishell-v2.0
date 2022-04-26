@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 20:57:47 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/25 16:22:54 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/25 23:46:42 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,7 @@ void	check_and_or_pipe_bg_right(t_tokens *tokens)
 
 void	check_and_or_pipe_bg(t_tokens *tokens)
 {
-	while (tokens)
-	{
-		if (tokens->flag >= PIPE && tokens->flag <= BG)
-		{
-			check_and_or_pipe_bg_left(tokens);
-			if (!g_global.exit_status)
-				check_and_or_pipe_bg_right(tokens);
-			if (g_global.exit_status)
-				break ;
-		}
-		tokens = tokens->next;
-	}
+	check_and_or_pipe_bg_left(tokens);
+	if (!g_global.exit_status)
+		check_and_or_pipe_bg_right(tokens);
 }

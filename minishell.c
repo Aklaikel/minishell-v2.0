@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/25 12:03:34 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/25 16:42:53 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	main(int ac, char **av, char **env)
 		add_history(input);
 		tokens = tokenizer(input);
 		syntax_analyser(tokens);
-		// check_and_or_pipe_bg(tokens);
 		printf("exit_status = : %d\n", g_global.exit_status);
 		g_global.exit_status = 0;
 	}
