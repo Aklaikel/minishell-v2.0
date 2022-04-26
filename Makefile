@@ -31,10 +31,10 @@ RM =  rm -rf
 all : $(NAME)
 
 $(NAME) : $(OBJS) $(LIBFT) $(PRINTF)
-		$(CC) $(CFLAGS) -lreadline -lncurses $^ -o $(NAME)
+		$(CC) $(CFLAGS) -lreadline -lncurses $^ -o $(NAME) -L /goinfre/osallak/.brew/opt/readline/lib 
 
 %.o:%.c $(INC)/minishell.h
-	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@ -I /goinfre/osallak/.brew/opt/readline/include
 
 $(LIBFT):
 	make bonus -C libft
