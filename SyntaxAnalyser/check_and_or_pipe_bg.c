@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 20:57:47 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/25 23:46:42 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/26 00:24:36 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	check_and_or_pipe_bg_left(t_tokens *tokens)
 	pre_flag = -1;
 	status = 0;
 	if (!tokens->previous
-		|| (tokens->previous->flag == SPACE && !tokens->previous->previous))
+		|| (tokens->previous->flag == _SPACE && !tokens->previous->previous))
 		status = 2;
 	else if (tokens->previous->flag)
 		pre_flag = tokens->previous->previous->flag;
@@ -42,14 +42,14 @@ void	check_and_or_pipe_bg_right(t_tokens *tokens)
 	tmp = 0;
 	status = 0;
 	next = -1;
-	if ((!tokens->next || (tokens->next->flag == SPACE && !tokens->next->next)))
+	if ((!tokens->next || (tokens->next->flag == _SPACE && !tokens->next->next)))
 	{
 		if (tokens->flag == BG)
 			tmp = 1;
 		else
 			status = 2;
 	}
-	else if (tokens->next->flag == SPACE)
+	else if (tokens->next->flag == _SPACE)
 		next = tokens->next->next->flag;
 	else
 		next = tokens->next->flag;

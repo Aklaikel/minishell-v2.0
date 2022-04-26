@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 18:06:07 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/25 23:43:13 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/26 00:24:36 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	check_cpar_left(t_tokens *tokens)
 
 	pre_flag = -1;
 	status = 0;
-	if (tokens->previous->flag == SPACE)
+	if (tokens->previous->flag == _SPACE)
 		pre_flag = tokens->previous->previous->flag;
 	else
 		pre_flag = tokens->previous->flag;
@@ -40,9 +40,9 @@ void	check_cpar_right(t_tokens *tokens)
 	status = 0;
 	tmp = 0;
 	next_flag = -1;
-	if (!tokens->next || (tokens->next->flag == SPACE && !tokens->next->next))
+	if (!tokens->next || (tokens->next->flag == _SPACE && !tokens->next->next))
 		return ;
-	if (tokens->next->flag == SPACE)
+	if (tokens->next->flag == _SPACE)
 	{
 		next_flag = tokens->next->next->flag;
 		tmp = 1;
@@ -70,9 +70,9 @@ void	check_opar_left(t_tokens *tokens)
 	status = 0;
 	pre_flag = -1;
 	if (!tokens->previous
-		|| (tokens->previous->flag == SPACE && !tokens->previous->previous))
+		|| (tokens->previous->flag == _SPACE && !tokens->previous->previous))
 		return ;
-	else if (tokens->previous->flag == SPACE)
+	else if (tokens->previous->flag == _SPACE)
 		pre_flag = tokens->previous->previous->flag;
 	else
 		pre_flag = tokens->previous->flag;
@@ -93,7 +93,7 @@ void	check_opar_right(t_tokens *tokens)
 
 	tmp = 0;
 	status = 0;
-	if (tokens->next->flag == SPACE && tokens->next->next)
+	if (tokens->next->flag == _SPACE && tokens->next->next)
 	{
 		next_flag = tokens->next->next->flag;
 		tmp = 1;

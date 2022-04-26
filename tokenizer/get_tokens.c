@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/19 19:40:54 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/26 00:24:36 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	tokenize_space(t_tokens **head, char *input)
 	i = 0;
 	while (input[i] && input[i] == ' ' && input[i + 1] == ' ')
 		i++;
-	get_tokens(head, input, 1, SPACE);
+	get_tokens(head, input, 1, _SPACE);
 	return (i + 1);
 }
 

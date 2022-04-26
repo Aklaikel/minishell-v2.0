@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/25 16:42:53 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/26 00:21:20 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@ void	sigquit_handler(int siq)
 {
 	(void)siq;
 	// exit status must be 128 + sig like the bash but for now i use (0)
-	// must clear the readline
-	exit(0);
+	printf("\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 void	handle_signals(void)
 {
-	signal(SIGQUIT, &sigquit_handler);
-	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, &sigquit_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 int	main(int ac, char **av, char **env)
@@ -47,4 +49,5 @@ int	main(int ac, char **av, char **env)
 		printf("exit_status = : %d\n", g_global.exit_status);
 		g_global.exit_status = 0;
 	}
+	rl_clear_history();
 }

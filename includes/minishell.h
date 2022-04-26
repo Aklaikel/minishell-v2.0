@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/25 23:19:49 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/26 00:24:40 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef enum tokens
 	CBRACKET,
 	SQUOTE,
 	DQUOTE,
-	SPACE,
+	_SPACE,
 }	t_tokens_flag;
 
 typedef struct s_tokens

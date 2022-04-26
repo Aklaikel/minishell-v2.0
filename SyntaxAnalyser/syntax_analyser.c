@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:05:15 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 00:07:55 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/26 00:24:36 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	check_red_tokens(t_tokens *tokens)
 
 	status = 0;
 	next_flag = -1;
-	if (!tokens->next || (tokens->next->flag == SPACE && !tokens->next->next))
+	if (!tokens->next || (tokens->next->flag == _SPACE && !tokens->next->next))
 		status = 2;
-	else if (tokens->next->flag == SPACE)
+	else if (tokens->next->flag == _SPACE)
 		next_flag = tokens->next->next->flag;
 	else
 		next_flag = tokens->next->flag;
@@ -68,7 +68,7 @@ void	check_red_tokens(t_tokens *tokens)
 		status = 2;
 	if (status == 2)
 	{
-		if (!tokens->next || tokens->next->flag == SPACE)
+		if (!tokens->next || tokens->next->flag == _SPACE)
 			print_syntax_error("newline");
 		else
 			print_syntax_error(tokens->next->token);
