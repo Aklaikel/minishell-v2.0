@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 00:24:40 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/26 23:18:01 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,11 @@ void		check_opar_right(t_tokens *tokens);
 void		check_and_or_pipe_bg(t_tokens *tokens);
 void		check_brackets(t_tokens *tokens);
 int			get_next_flag(t_tokens *token);
-//expander function
+/*****************  expander functions  ********************/
+//env functions
+t_env		*add_new_env(char *line);
+void		add_back_env(t_env **head, t_env *new);
+t_env		*get_env(char **env);
+void		remove_unwanted_tokens(t_tokens **tokens);
 
 #endif

@@ -21,6 +21,10 @@ SRCS = minishell.c \
 		SyntaxAnalyser/check_and_or_pipe_bg.c \
 		SyntaxAnalyser/set_status.c \
 		SyntaxAnalyser/check_brackets_utils.c \
+		expander/expander.c \
+		expander/get_env.c \
+		expander/get_env_utils.c \
+		expander/remove_unwanted_tokens.c \
 
 
 OBJS = $(SRCS:.c=.o)

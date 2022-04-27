@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 00:21:20 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/26 23:19:16 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,23 @@ int	main(int ac, char **av, char **env)
 {
 	char		*input;
 	t_tokens	*tokens;
+	t_env		*env_list;
 
 	(void)ac;
 	(void)av;
-	(void)env;
 	tokens = NULL;
 	handle_signals();
+	env_list = get_env(env);
 	while (true)
 	{
 		input = (char *)collect(readline("minishell-v2.0$ "));
 		add_history(input);
 		tokens = tokenizer(input);
 		syntax_analyser(tokens);
-		printf("exit_status = : %d\n", g_global.exit_status);
+		remove_unwanted_tokens(&tokens);
+		// printf("exit_status = : %d\n", g_global.exit_status);
 		g_global.exit_status = 0;
 	}
 	rl_clear_history();
+	clear_exit();
 }

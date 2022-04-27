@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 20:57:47 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 00:24:36 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/26 01:31:00 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	check_and_or_pipe_bg_left(t_tokens *tokens)
 	set_status(status);
 }
 
-void	check_and_or_pipe_bg_right(t_tokens *tokens)
+void	check_and_or_pipe_bg_right(t_tokens *tok)
 {
 	int	next;
 	int	status;
@@ -42,23 +42,23 @@ void	check_and_or_pipe_bg_right(t_tokens *tokens)
 	tmp = 0;
 	status = 0;
 	next = -1;
-	if ((!tokens->next || (tokens->next->flag == _SPACE && !tokens->next->next)))
+	if ((!tok->next || (tok->next->flag == _SPACE && !tok->next->next)))
 	{
-		if (tokens->flag == BG)
+		if (tok->flag == BG)
 			tmp = 1;
 		else
 			status = 2;
 	}
-	else if (tokens->next->flag == _SPACE)
-		next = tokens->next->next->flag;
+	else if (tok->next->flag == _SPACE)
+		next = tok->next->next->flag;
 	else
-		next = tokens->next->flag;
+		next = tok->next->flag;
 	if (!is_string(next) && !isredirect(next) && next != OBRACKET)
 		status = 2;
 	if (tmp)
 		status = 0;
 	if (status == 2)
-		print_syntax_error(tokens->token);
+		print_syntax_error(tok->token);
 	set_status(status);
 }
 

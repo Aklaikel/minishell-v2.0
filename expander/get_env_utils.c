@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_env.c                                          :+:      :+:    :+:   */
+/*   get_env_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 17:59:56 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 11:36:51 by osallak          ###   ########.fr       */
+/*   Created: 2022/04/26 11:19:22 by osallak           #+#    #+#             */
+/*   Updated: 2022/04/26 19:05:08 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*get_env(char **env)
+t_env	*add_new_env(char *line)
 {
-	t_env	*head;
-	int		i;
+	t_env	*node;
 
-	i = -1;
-	head = NULL;
-	while (env[++i])
-		add_back_env(&head, add_new_env(env[i]));
-	return (head);
+	node = (t_env *)collect(malloc(sizeof(t_env)));
+	node->next = NULL;
+	node->env_line = collect(ft_strdup(line));
+	return (node);
+}
+
+void	add_back_env(t_env **head, t_env *new)
+{
+	t_env	*node;
+
+	if (!head || !*head)
+	{
+		*head = new;
+		return ;
+	}
+	node = *head;
+	while (node && node->next)
+		node = node->next;
+	node->next = new;
 }

@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 00:24:36 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/26 19:07:00 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ int	tokenize_quotes(t_tokens **head, char *input)
 	tmp = 1;
 	if (input[0] == '\'')
 		return (tokenize_single_quote(head, input));
-	get_tokens(head, input, 1, DQUOTE);
-	input++;
+	input += get_tokens(head, input, 1, DQUOTE);
 	i = 0;
 	while (input[i] && input[i] != '"')
 	{
@@ -84,6 +83,7 @@ static bool	is_not_token(char c)
 		&& c != '|' && c != '<' && c != '>' && c != '&'
 		&& c != '(' && c != ')');
 }
+
 int	tokenize_word(t_tokens **head, char *input, int flag)
 {
 	int	i;

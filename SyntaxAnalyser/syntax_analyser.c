@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:05:15 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 00:24:36 by osallak          ###   ########.fr       */
+/*   Updated: 2022/04/26 11:15:35 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,29 @@ int	get_next_flag(t_tokens *token)
 	return (-1);
 }
 
-void	check_red_tokens(t_tokens *tokens)
+void	check_red_tokens(t_tokens *toks)
 {
 	int	next_flag;
 	int	status;
 
 	status = 0;
 	next_flag = -1;
-	if (!tokens->next || (tokens->next->flag == _SPACE && !tokens->next->next))
+	if (!toks->next || (toks->next->flag == _SPACE && !toks->next->next))
 		status = 2;
-	else if (tokens->next->flag == _SPACE)
-		next_flag = tokens->next->next->flag;
+	else if (toks->next->flag == _SPACE)
+		next_flag = toks->next->next->flag;
 	else
-		next_flag = tokens->next->flag;
+		next_flag = toks->next->flag;
 	if (!is_string(next_flag))
 		status = 2;
 	if (status == 2)
 	{
-		if (!tokens->next || tokens->next->flag == _SPACE)
+		if (!toks->next || (toks->next->flag == _SPACE && !toks->next->next))
 			print_syntax_error("newline");
+		else if (toks->next->flag == _SPACE)
+			print_syntax_error(toks->next->next->token);
 		else
-			print_syntax_error(tokens->next->token);
+			print_syntax_error(toks->next->token);
 	}
 	set_status(status);
 }

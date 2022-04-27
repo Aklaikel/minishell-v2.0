@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_env.c                                          :+:      :+:    :+:   */
+/*   remove_unwanted_tokens.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 17:59:56 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 11:36:51 by osallak          ###   ########.fr       */
+/*   Created: 2022/04/26 23:05:05 by osallak           #+#    #+#             */
+/*   Updated: 2022/04/26 23:18:52 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*get_env(char **env)
+void	remove_unwanted_tokens(t_tokens **tokens)
 {
-	t_env	*head;
-	int		i;
+	t_tokens	*node;
 
-	i = -1;
-	head = NULL;
-	while (env[++i])
-		add_back_env(&head, add_new_env(env[i]));
-	return (head);
+	node = *tokens;
+	while (node)
+	{
+		if (node->flag == SQUOTE
+			|| node->flag == SQUOTE || node->flag == _SPACE)
+			node_del_dll(tokens, node);
+		node = node->next;
+	}
 }
