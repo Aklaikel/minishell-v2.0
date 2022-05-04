@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:35:08 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 23:13:04 by osallak          ###   ########.fr       */
+/*   Updated: 2022/05/04 16:51:20 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,14 @@ t_tokens	*lastdel_dll(t_tokens	**dll)
 
 t_tokens	*node_del_dll(t_tokens	**dll, t_tokens *node)
 {
-	if (!node->previous)
+	if (!node->next && !node->previous)
+	{
+		*dll = NULL;
+		return (node);
+	}
+	else if (!node->previous)
 		return (firstdel_dll(dll));
-	if (!node->next)
+	else if (!node->next)
 		return (lastdel_dll(dll));
 	node->previous->next = node->next;
 	node->next->previous = node->previous;
