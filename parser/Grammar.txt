@@ -1,0 +1,8 @@
+<cmdline>		::= <pipeline> {("&&" | "||") <pipeline>}
+
+<pipeline>	::= <command> {"|" <command>}
+
+<command>	::= <cmdlist>
+		| "(" <cmdline> ")" <redir>
+
+<cmdlist>	::= <redir>

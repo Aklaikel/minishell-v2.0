@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/05/01 14:43:18 by osallak          ###   ########.fr       */
+/*   Updated: 2022/05/31 16:57:22 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,15 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <string.h>
+# include <errno.h>
 # include "gc.h"
 # include "../printf_err/ft_printf.h"
+#define CMDLIST 1024
+
+#ifdef NULL
+#undef NULL
+#define NULL (void *)0x0
+#endif
 
 typedef enum tokens
 {
@@ -76,6 +83,37 @@ typedef struct s_env
 	char			*env_line;
 	struct s_env	*next;
 }	t_env;
+
+//the struct below contains the input/output file descriptors for every cmd 
+// the default value is 0 for in and 1 for out
+
+struct s_io
+{
+	int	infd;
+	int	outfd;
+};
+
+//the folowing struct contains the cmd/arg
+typedef struct	s_cmdlist
+{
+	char				*cmd;
+	struct s_cmdlist	*next;
+}						t_cmdlist;
+
+//the role of the errorflag variable is when something went wrong
+// in the opening of one of 
+typedef struct s_tree
+{
+	int				par_flag;
+	int				type;
+	t_cmdlist		*cmdlist;
+	int				infd;
+	int				outfd;
+	struct s_tree	*left;
+	struct s_tree	*right;
+	int				errorflag;
+}	t_tree;
+
 
 extern t_global g_global;
 

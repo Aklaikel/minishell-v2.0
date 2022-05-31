@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:50:21 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/21 13:29:35 by osallak          ###   ########.fr       */
+/*   Updated: 2022/05/30 08:19:45 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*collect(void *gb)
 {
 	if (!gb)
 	{
-		perror("Error");
+		perror(NULL);
 		clear_exit();
 	}
 	add_front(add_new(gb));
