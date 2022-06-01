@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <assert.h>
+#include "includes/minishell.h"
 
-int main(void)
+int main(int ac, char **av, char **env)
 {
-	int fd = open("/bin/main.c", O_RDONLY | O_CREAT);
+	int fd  = open("", O_RDONLY);
 	perror(NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/05/31 16:57:22 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/01 15:15:13 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,18 +100,17 @@ typedef struct	s_cmdlist
 	struct s_cmdlist	*next;
 }						t_cmdlist;
 
-//the role of the errorflag variable is when something went wrong
-// in the opening of one of 
+//the role of the errorflag variable is inn case of an error 
+//in the opening/creating of the in/outfiles it will contains the errno
 typedef struct s_tree
 {
-	int				par_flag;
 	int				type;
 	t_cmdlist		*cmdlist;
 	int				infd;
 	int				outfd;
+	int				errorflag;
 	struct s_tree	*left;
 	struct s_tree	*right;
-	int				errorflag;
 }	t_tree;
 
 
@@ -159,6 +158,13 @@ void		add_back_env(t_env **head, t_env *new);
 t_env		*get_env(char **env);
 void		remove_quotes(t_tokens **tokens);
 void		merge_words(t_tokens **head);
+void		remove_spaces(t_tokens **tokens);
 void		display(t_tokens *tokens);
+//parser
+t_tree		*parser(t_tokens **tokens);
+t_tree  	*parse_cmdline(t_tokens **tokens);
+t_tree		*parse_pipeline(t_tokens **tokens);
+t_tree		*parse_command(t_tokens **tokens);
+t_tree		*parse_cmdlist(t_tokens **tokens);
 
 #endif

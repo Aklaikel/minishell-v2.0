@@ -24,9 +24,11 @@ SRCS = minishell.c \
 		expander/expander.c \
 		expander/get_env.c \
 		expander/get_env_utils.c \
-		expander/remove_quotes.c \
+		expander/remove_unwanted_tokens.c \
 		expander/merge_words.c \
-		display_tokens.c
+		display_tokens.c \
+		parser/parser.c \
+		parser/parser_utils.c 
 
 
 OBJS = $(SRCS:.c=.o)

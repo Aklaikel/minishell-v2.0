@@ -6,11 +6,19 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 07:34:48 by osallak           #+#    #+#             */
-/*   Updated: 2022/05/31 19:12:01 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/01 15:17:06 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	parse_heredoc(t_tokens **tokens)
+{
+	*tokens = (*tokens)->next;
+	*tokens = (*tokens)->next;
+	printf("HEREDOC\n");
+	return ;
+}
 
 t_cmdlist	*create_cmd_list(char *cmd)
 {
@@ -37,19 +45,21 @@ void	add_back_cmdlist(t_cmdlist **head, t_cmdlist *new)
 	node->next = new;
 }
 
-t_tree	*create_tree(t_tree *left, t_tree *right, t_tokens *token, int par_flag, struct s_io io)
+t_tree	*connect_tree(t_tree *left, t_tree *right, t_tokens_flag type)
 {
 	t_tree	*tree;
 
 	tree = (t_tree *)collect(malloc(sizeof(t_tree)));
 	tree->left = left;
 	tree->right = right;
-	tree->par_flag = par_flag;
-	tree->type = token->flag;
-	tree->infd = io.infd;
-	tree->outfd = io.outfd;
+	tree->type = type;
+	tree->errorflag = 0;
+	tree->infd = STDOUT_FILENO;
+	tree->outfd = STDIN_FILENO;
+	tree->cmdlist = NULL;
 	return (tree);
 }
+
 
 int	parse_inred(t_tokens **token, int *err)
 {
@@ -83,25 +93,27 @@ int	parse_outred(t_tokens **token, int *err)
 	}
 	return (fd);
 }
-t_tree	*parse_redirections(t_tokens **tokens)
+
+t_tree	*parse_cmdlist(t_tokens **tokens)
 {
 	t_tree		*tree;
 	t_cmdlist	*cmdlist;
 	struct s_io io;
 	int			err;
+	int			visited;
 
-	io.infd = 0;
-	io.outfd = 1;
+	io.infd = STDIN_FILENO;
+	io.outfd = STDOUT_FILENO;
 	cmdlist = NULL;
 	tree = (t_tree *)collect(malloc(sizeof(t_tree)));
+	visited = 0;
 	err = 0;
 	while (*tokens && (*tokens)->flag != PIPE
 		&& (*tokens)->flag != CBRACKET && (*tokens)->flag != AND && (*tokens)->flag != OR)
 	{
+		visited = 1;
 		if ((*tokens)->flag == INRED)
 			io.infd = parse_inred(tokens, &err);
-		else if ((*tokens)->flag == OUTRED)
-			io.outfd = parse_outred(tokens, &err);
 		else if ((*tokens)->flag == APPEND || (*tokens)->flag == OUTRED)
 			io.outfd = parse_outred(tokens, &err);
 		else if ((*tokens)->flag == HERDOC)
@@ -112,6 +124,8 @@ t_tree	*parse_redirections(t_tokens **tokens)
 			break ;
 		*tokens = (*tokens)->next;
 	}
+	if (visited == 0)
+		return (NULL);
 	tree->errorflag = err;
 	tree->cmdlist = cmdlist;
 	tree->left = NULL;
@@ -122,25 +136,22 @@ t_tree	*parse_redirections(t_tokens **tokens)
 	return (tree);
 }
 
-t_tree	*parse_cmdlist(t_tokens **tokens)
-{
-	t_tree	*tree;
-
-	tree  = parse_redirections(tokens);
-	if (!tree)
-		return (NULL);
-	return (tree);
-}
-
 t_tree  *parse_command(t_tokens **tokens)
 {
 	t_tree  *tree;
 
 	tree = parse_cmdlist(tokens);
+	if (!tree)
+		printf("HERE WE GO\n");
+		
 	if (!tree && (*tokens)->flag == OBRACKET)
 	{
 		*tokens  = (*tokens)->next;
 		tree  = parse_cmdline(tokens);
+		if (!tree)
+			return (NULL);
+		if (*tokens && (*tokens)->flag == CBRACKET)
+			*tokens = (*tokens)->next;
 	}
 	return (tree);
 }
@@ -148,27 +159,40 @@ t_tree  *parse_command(t_tokens **tokens)
 t_tree  *parse_pipeline(t_tokens **tokens)
 {
 	t_tree  *tree;
+	t_tree	*tmp;
 
 	tree = parse_command(tokens);
 	if (!tree)
 		return (NULL);
 	while (*tokens && (*tokens)->flag == PIPE)
-		tree  = create_tree(tree, parse_command(tokens), *tokens, 0);
+	{
+		*tokens = (*tokens)->next;
+		tmp = parse_command(tokens);
+		if (!tmp)
+			return NULL;
+		tree  = connect_tree(tree,tmp, PIPE);
+	}
 	return (tree);
 }
 
 t_tree  *parse_cmdline(t_tokens **tokens)
 {
 	t_tree  *tree;
+	t_tree  *tmp;
+	int		type;
 
 	tree  = NULL;
 	tree  = parse_pipeline(tokens);
 	if (!tree)
 		return (NULL);
-	while ((*tokens) && ((*tokens)->flag == AND || (*tokens)->flag == OR))
+	while (*tokens && ((*tokens)->flag == AND || (*tokens)->flag == OR))
 	{
+		type = (*tokens)->flag;
 		*tokens = (*tokens)->next;
-		tree = create_tree(tree, parse_pipeline(tokens), (*tokens)->previous, 0);
+		tmp = parse_pipeline(tokens);
+		if (!tmp)
+			return (NULL);
+		tree = connect_tree(tree , tmp, type);
 	}
 	return (tree);
 }
