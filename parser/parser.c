@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 07:34:48 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/01 15:17:06 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/01 18:02:41 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_tree	*parse_cmdlist(t_tokens **tokens)
 	visited = 0;
 	err = 0;
 	while (*tokens && (*tokens)->flag != PIPE
-		&& (*tokens)->flag != CBRACKET && (*tokens)->flag != AND && (*tokens)->flag != OR)
+		&& (*tokens)->flag != CBRACKET && (*tokens)->flag != AND && (*tokens)->flag != OR && (*tokens)->flag != OBRACKET)
 	{
 		visited = 1;
 		if ((*tokens)->flag == INRED)
@@ -141,9 +141,6 @@ t_tree  *parse_command(t_tokens **tokens)
 	t_tree  *tree;
 
 	tree = parse_cmdlist(tokens);
-	if (!tree)
-		printf("HERE WE GO\n");
-		
 	if (!tree && (*tokens)->flag == OBRACKET)
 	{
 		*tokens  = (*tokens)->next;
