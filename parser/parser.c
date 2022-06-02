@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 07:34:48 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/01 18:02:41 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/02 09:13:35 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,8 @@ t_tree	*parser(t_tokens **tokens)
 	t_tree	*tree;
 
 	tree = NULL;
+	if (!tokens || !*tokens)
+		return (NULL);
 	tree = parse_cmdline(tokens);
 	return (tree);
 }
