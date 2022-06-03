@@ -6,18 +6,18 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 07:34:48 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/02 09:13:35 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/02 13:09:27 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	parse_heredoc(t_tokens **tokens)
+int	parse_heredoc(t_tokens **tokens)
 {
 	*tokens = (*tokens)->next;
-	*tokens = (*tokens)->next;
+	// *tokens = (*tokens)->next;
 	printf("HEREDOC\n");
-	return ;
+	return (0);
 }
 
 t_cmdlist	*create_cmd_list(char *cmd)
@@ -117,7 +117,7 @@ t_tree	*parse_cmdlist(t_tokens **tokens)
 		else if ((*tokens)->flag == APPEND || (*tokens)->flag == OUTRED)
 			io.outfd = parse_outred(tokens, &err);
 		else if ((*tokens)->flag == HERDOC)
-			parse_heredoc(tokens);
+			io.infd = parse_heredoc(tokens);
 		else
 			add_back_cmdlist(&cmdlist, create_cmd_list((*tokens)->token));
 		if (err != 0)

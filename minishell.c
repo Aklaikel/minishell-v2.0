@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/02 11:43:05 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/02 20:18:06 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,15 @@ void	display_tree(t_tree *root, int level)
 		return ;
 	for (int i = 0; i < level; i++)
 		printf(i == level -1 ? "|->" : "	");
-	if (root->type == CMDLIST) printf("CMDLIST\n");
+	if (root->type == CMDLIST)
+	{
+		while ( root->cmdlist)
+		{
+			printf("%s ",  root->cmdlist->cmd);
+			 root->cmdlist =  root->cmdlist->next;
+		}
+		printf("\n");
+	}
 	else if (root->type == PIPE) printf("PIPE\n");
 	else if (root->type == OR) printf("OR\n");
 	else if (root->type == AND) printf("AND\n");
@@ -57,7 +65,12 @@ int	main(int ac, char **av, char **env)
 	env_list = get_env(env);
 	while (true)
 	{
-		input = (char *)collect(readline("minishell-v2.0$ "));
+		input = readline("minishell-v2.0$ ");
+		if (!input)
+		{
+			write (1, "exit\n", 5);
+			clear_exit();
+		}
 		add_history(input);
 		tokens = tokenizer(input);
 		g_global.exit_status = 0;
@@ -75,7 +88,6 @@ int	main(int ac, char **av, char **env)
 			display_tree(tree, 0);
 		}
 		// printf("%s\n", get_var_value(get_env(env), input));
-		
 	}
 	rl_clear_history();
 	clear_exit();
