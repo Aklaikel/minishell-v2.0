@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anass <anass@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/02 11:42:33 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/03 05:59:25 by anass            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ typedef struct s_global
 //the next struct contains all env variables and  it's values
 typedef struct s_env
 {
-	char			*env_line;
+	char			*env_name;
+	char			*env_value;
 	struct s_env	*next;
 }	t_env;
 
@@ -160,6 +161,8 @@ void		remove_quotes(t_tokens **tokens);
 void		merge_words(t_tokens **head);
 void		remove_spaces(t_tokens **tokens);
 void		display(t_tokens *tokens);
+void		find_remove_env(char *find, t_env **venv);
+char		*find_env(char *find, t_env *venv);
 //parser
 t_tree		*parser(t_tokens **tokens);
 t_tree  	*parse_cmdline(t_tokens **tokens);
