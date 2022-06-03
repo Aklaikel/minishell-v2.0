@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anass <anass@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 03:08:43 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/03 05:31:09 by anass            ###   ########.fr       */
+/*   Updated: 2022/06/03 06:37:34 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_error(char **cmd)
 {
-	g_globa.exit_status = 1;
+	g_global.exit_status = 1;
 	printf("%s: illegal option -- %c\n", cmd[0], cmd[1][1]);
 	printf("usage: cd [with no options]\n");
 	return ;
@@ -22,7 +22,7 @@ static void	ft_error(char **cmd)
 
 static void	ft_error_home(void)
 {
-	g_globa.exit_status = 1;
+	g_global.exit_status = 1;
 	printf("minishell: cd: HOME not set");
 }
 
@@ -36,7 +36,7 @@ getcwd: cannot access parent directories");
 	return (chdir(path));
 }
 
-void	cd_cmd(char **cmd, t_var *env)
+void	cd_cmd(char **cmd, t_env *env)
 {
 	int		i;
 	char	*path;
