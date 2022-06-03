@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 06:07:30 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/03 07:18:48 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/03 07:27:25 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	display_venv(t_env *venv)
 		venv = venv->next;
 	}
 }
-void	export(char **cmd, t_env **venv)
+
+void	export_cmd(char **cmd, t_env **venv)
 {
     int i;
 

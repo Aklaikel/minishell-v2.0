@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anass <anass@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/03 05:59:25 by anass            ###   ########.fr       */
+/*   Updated: 2022/06/03 07:27:14 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,4 +172,16 @@ t_tree		*parse_cmdlist(t_tokens **tokens);
 //expander
 char	*get_var_value(t_env *env, char *varname);
 void	expander(t_env *env, t_tokens *tokens);
+
+//execution
+
+// builting cmds
+void	cd_cmd(char **cmd, t_env *env);
+void	echo_cmd(char **cmd);
+void	env_cmd(char **cmd, t_env *venv);
+void	exit_cmd(char **cmd);
+void	export_cmd(char **cmd, t_env **venv);
+void	pwd_cmd(char **cmd);
+void	unset_cmd(char **cmd, t_env **env);
+
 #endif

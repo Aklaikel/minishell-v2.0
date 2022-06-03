@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anass <anass@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:59:56 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/03 05:52:44 by anass            ###   ########.fr       */
+/*   Updated: 2022/06/03 06:44:10 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	find_remove_env(char *find, t_env **venv)
 	t_env	*var;
 
 	var = *venv;
-	if (!ft_strncmp(find, var->find, 255))
+	if (!ft_strncmp(find, var->env_name, 255))
 	{
 		*venv = var->next;
 		return ;

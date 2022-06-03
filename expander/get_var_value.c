@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_var_value.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 07:29:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/02 11:35:36 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/03 06:44:48 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,16 @@ int	ft_strstr(char *haystack, char *needle)
 	return (0);
 }
 
-char	*get_varline(t_env  *env, char *varname)
-{
-	while (env)
-	{
-		if (ft_strstr(env->env_line, varname))
-			return (env->env_line);
-		env = env->next;
-	}
-	return (NULL);
-}
+// char	*get_varline(t_env  *env, char *varname)
+// {
+// 	while (env)
+// 	{
+// 		if (ft_strstr(env->env_line, varname))
+// 			return (env->env_line);
+// 		env = env->next;
+// 	}
+// 	return (NULL);
+// }
 
 char	*get_var_value(t_env *env, char *varname)
 {
