@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/03 07:27:14 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/04 05:05:45 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,11 +170,12 @@ t_tree		*parse_pipeline(t_tokens **tokens);
 t_tree		*parse_command(t_tokens **tokens);
 t_tree		*parse_cmdlist(t_tokens **tokens);
 //expander
-char	*get_var_value(t_env *env, char *varname);
-void	expander(t_env *env, t_tokens *tokens);
+//char	*get_var_value(t_env *env, char *varname);
+//void	expander(t_env *env, t_tokens *tokens);
 
 //execution
-
+void    run(t_tree  *cmd, char **env);
+void	execute_cmd(char *cmd, char **argv, char **env);
 // builting cmds
 void	cd_cmd(char **cmd, t_env *env);
 void	echo_cmd(char **cmd);

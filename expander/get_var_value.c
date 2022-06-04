@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 07:29:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/03 06:44:48 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/04 04:27:05 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ int	ft_strstr(char *haystack, char *needle)
 // 	return (NULL);
 // }
 
-char	*get_var_value(t_env *env, char *varname)
-{
-	char	*varline;
-	char	*varvalue;
+// char	*get_var_value(t_env *env, char *varname)
+// {
+// 	char	*varline;
+// 	char	*varvalue;
 
-	varline = get_varline(env, varname);
-	if (!varline)
-		return ((char *)collect(ft_strdup("")));
-	varvalue = (char *)collect(ft_substr(varline, ft_strlen(varname) + 1, ft_strlen(varline)));
-	return (varvalue);
-}
+// 	varline = get_varline(env, varname);
+// 	if (!varline)
+// 		return ((char *)collect(ft_strdup("")));
+// 	varvalue = (char *)collect(ft_substr(varline, ft_strlen(varname) + 1, ft_strlen(varline)));
+// 	return (varvalue);
+// }
