@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/03 23:09:35 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/04 08:13:36 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	sigquit_handler(int siq)
 
 void	handle_signals(void)
 {
-	signal(SIGINT, &sigquit_handler);
+	//signal(SIGINT, &sigquit_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
 
@@ -79,11 +79,12 @@ int	main(int ac, char **av, char **env)
 		merge_words(&tokens);
 		remove_spaces(&tokens);
 		// display(tokens);
-		// expander(env_list, tokens);
+		// expander(get_env(env), tokens);
 		if (g_global.exit_status == 0)
 		{
 			tree = parser(&tokens);
-			display_tree(tree, 0);
+			run(tree, env);
+			//display_tree(tree, 0);
 		}
 		// printf("%s\n", get_var_value(get_env(env), input));
 	}

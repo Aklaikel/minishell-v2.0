@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 07:34:48 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/03 23:16:13 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/04 08:12:32 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	parse_heredoc(t_tokens **tokens)
 		input = readline("> ");
 		if (!input)
 		{
-			ft_printf("warning: unexpected EOF (wanted `%s')", delim);
+			ft_printf("warning: unexpected EOF (wanted `%s')\n", delim);
 			close(fd[1]);
 			return (-1);
 		}

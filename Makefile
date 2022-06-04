@@ -30,6 +30,9 @@ SRCS = minishell.c \
 		display_tokens.c \
 		parser/parser.c \
 		parser/parser_utils.c \
+		execution/run.c \
+		execution/execute_cmdlist.c \
+		execution/builtin_cmds/echo_cmd.c
 
 
 
