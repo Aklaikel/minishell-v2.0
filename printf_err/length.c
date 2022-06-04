@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   length.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 19:47:07 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/03 09:06:41 by osallak          ###   ########.fr       */
+/*   Created: 2022/06/03 09:17:02 by osallak           #+#    #+#             */
+/*   Updated: 2022/06/03 09:19:14 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "ft_printf.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	length(const char *s)
 {
-	size_t	i;
+	int	i;
 
+	if (!s || !*s)
+		return (0);
 	i = 0;
-	if (n == 0 || !s1 || !*s1 || !s2 || !*s2)
-		return (-1);
-	while ((s1[i] || s2[i]) && i < n)
-	{
-		if (s1[i] != s2[i])
-			return (1);
+	while (s[i])
 		i++;
-	}
-	return (0);
+	return (i);
 }

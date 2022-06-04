@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 07:34:48 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/02 13:09:27 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/03 23:16:13 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,34 @@
 
 int	parse_heredoc(t_tokens **tokens)
 {
+	int		fd[2];
+	char	*delim;
+	char	*input;
+
 	*tokens = (*tokens)->next;
+	delim = (*tokens)->token;
 	// *tokens = (*tokens)->next;
-	printf("HEREDOC\n");
-	return (0);
+	if (pipe(fd) == -1)
+	{
+		perror(NULL);
+		clear_exit();
+	}
+	while (true)
+	{
+		input = readline("> ");
+		if (!input)
+		{
+			ft_printf("warning: unexpected EOF (wanted `%s')", delim);
+			close(fd[1]);
+			return (-1);
+		}
+		if (!strcmp(input, delim))
+			break ;
+		write(fd[1], input, ft_strlen(input));
+		write(fd[1], "\n", 1);
+	}
+	close(fd[1]);
+	return (fd[0]);
 }
 
 t_cmdlist	*create_cmd_list(char *cmd)
@@ -113,9 +137,17 @@ t_tree	*parse_cmdlist(t_tokens **tokens)
 	{
 		visited = 1;
 		if ((*tokens)->flag == INRED)
+		{
+			if (io.infd != STDIN_FILENO)
+				close(io.infd);
 			io.infd = parse_inred(tokens, &err);
+		}
 		else if ((*tokens)->flag == APPEND || (*tokens)->flag == OUTRED)
-			io.outfd = parse_outred(tokens, &err);
+		{
+			if (io.outfd != STDOUT_FILENO)
+				close(io.outfd);
+			io.outfd = parse_outred(tokens, &err);	
+		}
 		else if ((*tokens)->flag == HERDOC)
 			io.infd = parse_heredoc(tokens);
 		else

@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 20:57:47 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 01:31:00 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/03 14:18:29 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,17 @@ void	check_and_or_pipe_bg_right(t_tokens *tok)
 {
 	int	next;
 	int	status;
-	int	tmp;
 
-	tmp = 0;
 	status = 0;
 	next = -1;
 	if ((!tok->next || (tok->next->flag == _SPACE && !tok->next->next)))
-	{
-		if (tok->flag == BG)
-			tmp = 1;
-		else
-			status = 2;
-	}
+		status = 2;
 	else if (tok->next->flag == _SPACE)
 		next = tok->next->next->flag;
 	else
 		next = tok->next->flag;
 	if (!is_string(next) && !isredirect(next) && next != OBRACKET)
 		status = 2;
-	if (tmp)
-		status = 0;
 	if (status == 2)
 		print_syntax_error(tok->token);
 	set_status(status);

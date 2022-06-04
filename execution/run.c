@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 19:47:07 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/03 09:06:41 by osallak          ###   ########.fr       */
+/*   Created: 2022/06/03 07:10:34 by aklaikel          #+#    #+#             */
+/*   Updated: 2022/06/03 21:00:58 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void    run_cmdlist(t_tree *cmd)
 {
-	size_t	i;
-
-	i = 0;
-	if (n == 0 || !s1 || !*s1 || !s2 || !*s2)
-		return (-1);
-	while ((s1[i] || s2[i]) && i < n)
-	{
-		if (s1[i] != s2[i])
-			return (1);
-		i++;
-	}
-	return (0);
+}
+void    run(t_tree  *cmd)
+{
+    int i = 0;
+    if(!cmd)
+        return ;
+    if (cmd->type == CMDLIST)
+    {
+        while (cmd->cmdlist && ++i)
+            cmd->cmdlist = cmd->cmdlist->next;
+    }
 }

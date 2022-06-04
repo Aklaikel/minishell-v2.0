@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 07:29:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/02 11:35:36 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/03 08:52:59 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,25 @@ int	ft_strstr(char *haystack, char *needle)
 	return (0);
 }
 
-char	*get_varline(t_env  *env, char *varname)
-{
-	while (env)
-	{
-		if (ft_strstr(env->env_line, varname))
-			return (env->env_line);
-		env = env->next;
-	}
-	return (NULL);
-}
+// char	*get_varline(t_env  *env, char *varname)
+// {
+// 	while (env)
+// 	{
+// 		if (ft_strstr(env->env_line, varname))
+// 			return (env->env_line);
+// 		env = env->next;
+// 	}
+// 	return (NULL);
+// }
 
-char	*get_var_value(t_env *env, char *varname)
-{
-	char	*varline;
-	char	*varvalue;
+// char	*get_var_value(t_env *env, char *varname)
+// {
+// 	char	*varline;
+// 	char	*varvalue;
 
-	varline = get_varline(env, varname);
-	if (!varline)
-		return ((char *)collect(ft_strdup("")));
-	varvalue = (char *)collect(ft_substr(varline, ft_strlen(varname) + 1, ft_strlen(varline)));
-	return (varvalue);
-}
+// 	varline = get_varline(env, varname);
+// 	if (!varline)
+// 		return ((char *)collect(ft_strdup("")));
+// 	varvalue = (char *)collect(ft_substr(varline, ft_strlen(varname) + 1, ft_strlen(varline)));
+// 	return (varvalue);
+// }

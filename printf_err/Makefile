@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+         #
+#    By: osallak <osallak@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 01:55:25 by aklaikel          #+#    #+#              #
-#    Updated: 2021/11/30 21:12:11 by aklaikel         ###   ########.fr        #
+#    Updated: 2022/06/03 09:19:41 by osallak          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS =  ft_printf.c\
 		ft_putnbr_fd.c\
 		ft_putnbr_u_fd.c\
 		ft_putstr_fd.c\
-		ft_strlen.c
+		length.c
 OBJS = $(SRCS:%.c=%.o)
 
 CC = cc

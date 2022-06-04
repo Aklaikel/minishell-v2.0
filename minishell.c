@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/02 20:18:06 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/03 23:09:35 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	display_tree(t_tree *root, int level)
 	if (root == NULL)
 		return ;
 	for (int i = 0; i < level; i++)
-		printf(i == level -1 ? "|->" : "	");
+		printf(i == level -1 ? "|->" : "\t");
 	if (root->type == CMDLIST)
 	{
 		while ( root->cmdlist)
@@ -75,13 +75,11 @@ int	main(int ac, char **av, char **env)
 		tokens = tokenizer(input);
 		g_global.exit_status = 0;
 		syntax_analyser(tokens);
-		// remove_unwanted_tokens(&tokens);
-		// printf("exit_status = : %d\n", g_global.exit_status);
 		remove_quotes(&tokens);
 		merge_words(&tokens);
 		remove_spaces(&tokens);
 		// display(tokens);
-		expander(get_env(env), tokens);
+		// expander(env_list, tokens);
 		if (g_global.exit_status == 0)
 		{
 			tree = parser(&tokens);

@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/02 20:16:12 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/03 14:20:13 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ typedef struct s_global
 //the next struct contains all env variables and  it's values
 typedef struct s_env
 {
-	char			*env_line;
+	char			*env_name;
+	char			*env_value;
 	struct s_env	*next;
 }	t_env;
 
@@ -160,6 +161,8 @@ void		remove_quotes(t_tokens **tokens);
 void		merge_words(t_tokens **head);
 void		remove_spaces(t_tokens **tokens);
 void		display(t_tokens *tokens);
+void		find_remove_env(char *find, t_env **venv);
+char		*find_env(char *find, t_env *venv);
 //parser
 t_tree		*parser(t_tokens **tokens);
 t_tree  	*parse_cmdline(t_tokens **tokens);
@@ -169,4 +172,16 @@ t_tree		*parse_cmdlist(t_tokens **tokens);
 //expander
 char	*get_var_value(t_env *env, char *varname);
 void	expander(t_env *env, t_tokens *tokens);
+
+//execution
+
+// builting cmds
+void	cd_cmd(char **cmd, t_env *env);
+void	echo_cmd(char **cmd);
+void	env_cmd(char **cmd, t_env *venv);
+void	exit_cmd(char **cmd);
+void	export_cmd(char **cmd, t_env **venv);
+void	pwd_cmd(char **cmd);
+void	unset_cmd(char **cmd, t_env **env);
+
 #endif

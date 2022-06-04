@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:18:39 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/13 17:25:56 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/03 12:07:33 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ t_tokens	*tokenizer(char *input)
 			i = get_tokens(&tokens, input, 2, OR);
 		else if (*input == '&' && *(input + 1) == '&')
 			i = get_tokens(&tokens, input, 2, AND);
-		else if (*input == '&' && *(input + 1) != '&')
-			i = get_tokens(&tokens, input, 1, BG);
 		else if (*input == ' ')
 			i = tokenize_space(&tokens, input);
 		else if (*input == '"' || *input == '\'')
