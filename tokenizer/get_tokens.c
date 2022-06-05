@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 19:07:00 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/05 08:18:22 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ bool	isword(int c)
 static bool	is_not_token(char c)
 {
 	return (c != ' ' && c != '$' && c != '\'' && c != '"'
-		&& c != '|' && c != '<' && c != '>' && c != '&'
-		&& c != '(' && c != ')');
+		&& c != '|' && c != '<' && c != '>' && c != '(' && c != ')');
 }
 
 int	tokenize_word(t_tokens **head, char *input, int flag)
@@ -91,7 +90,8 @@ int	tokenize_word(t_tokens **head, char *input, int flag)
 	i = 0;
 	if (*input == '$')
 		return (get_tokens(head, input, 1, WORD));
-	while (input[i] && is_not_token(input[i]))
+	while ((input[i] && is_not_token(input[i]))
+		|| (input[i] && input[i] == '&' && input[i + 1] != '&'))
 		i++;
 	get_tokens(head, input, i, flag);
 	return (i);

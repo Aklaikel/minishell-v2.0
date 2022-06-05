@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/04 08:06:48 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/04 15:57:27 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef enum tokens
 	PIPE,
 	AND,
 	OR,
-	BG,
 	OBRACKET,
 	CBRACKET,
 	SQUOTE,
@@ -170,8 +169,7 @@ t_tree		*parse_pipeline(t_tokens **tokens);
 t_tree		*parse_command(t_tokens **tokens);
 t_tree		*parse_cmdlist(t_tokens **tokens);
 //expander
-//char	*get_var_value(t_env *env, char *varname);
-//void	expander(t_env *env, t_tokens *tokens);
+void	expander(t_env *env, t_tokens *tokens);
 
 //execution
 void    run(t_tree  *cmd, char **env);

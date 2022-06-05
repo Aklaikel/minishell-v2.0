@@ -26,7 +26,6 @@ SRCS = minishell.c \
 		expander/get_env_utils.c \
 		expander/remove_unwanted_tokens.c \
 		expander/merge_words.c \
-		expander/get_var_value.c \
 		display_tokens.c \
 		parser/parser.c \
 		parser/parser_utils.c \

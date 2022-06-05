@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 18:06:07 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 00:24:36 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/04 08:41:56 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	check_cpar_right(t_tokens *tokens)
 	}
 	else
 		next_flag = tokens->next->flag;
-	if (next_flag <= PIPE && next_flag >= BG
+	if (next_flag <= PIPE && next_flag >= OR
 		&& next_flag != CBRACKET && !isredirect(next_flag))
 	{
 		if (tmp == 1)
