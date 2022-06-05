@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/05 09:08:21 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/05 17:31:06 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <sys/wait.h>
 # include <string.h>
 # include <errno.h>
+# include <sys/types.h>
+# include <dirent.h>
 # include "gc.h"
 # include "../printf_err/ft_printf.h"
 #define CMDLIST 1024
@@ -133,6 +135,7 @@ int			tokenize_word(t_tokens **head, char *input, int flag);
 int			tokenize_space(t_tokens **head, char *input);
 int			tokenize_quotes(t_tokens **head, char *input);
 int			tokenize_variables(t_tokens **head, char *input);
+int			tokenize_wildcard(t_tokens **head, char *input);
 bool		isword(int c);
 void		set_status(int status);
 //Syntax analyser functions
