@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:18:39 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/05 08:24:19 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/05 09:25:50 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,13 @@ t_tokens	*tokenizer(char *input)
 		else if (*input == ')')
 			i = get_tokens(&tokens, input, 1, CBRACKET);
 		else if (*input == '$' &&
-			(ft_isalpha(*(input + 1)) || *(input + 1) == '_' || *(input + 1) == '?'))
+			(ft_isalpha(*(input + 1)) || *(input + 1) == '_' || *(input + 1) == '?' || *(input + 1) == '0'))
 			i = tokenize_variables(&tokens, input);
+		else if (*input == '*')
+			i = get_tokens(&tokens, input, 1, WC);
+		else if (*input == '~' && (!*(input + 1)
+			|| *(input + 1) == '/' || *(input + 1) == ' ' ))
+			i = get_tokens(&tokens, input, 1, TILDE);
 		else
 			i = tokenize_word(&tokens, input, WORD);
 		input += i;
