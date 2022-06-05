@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/05 08:18:22 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/05 08:26:15 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ int	tokenize_variables(t_tokens **head, char *input)
 	int	i;
 
 	i = 1;
+	if (*(input + 1) == '?')
+		return (get_tokens(head, input, 2, VAR));
 	while (input[i] && isword(input[i]))
 		i++;
 	if (i == 1)
