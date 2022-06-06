@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 20:57:47 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/03 14:18:29 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/06 10:09:45 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	check_and_or_pipe_bg_left(t_tokens *tokens)
 	if (!tokens->previous
 		|| (tokens->previous->flag == _SPACE && !tokens->previous->previous))
 		status = 2;
-	else if (tokens->previous->flag)
+	else if (tokens->previous->flag == _SPACE)
 		pre_flag = tokens->previous->previous->flag;
 	else
 		pre_flag = tokens->previous->flag;
@@ -57,5 +57,7 @@ void	check_and_or_pipe_bg(t_tokens *tokens)
 {
 	check_and_or_pipe_bg_left(tokens);
 	if (!g_global.exit_status)
+	{
 		check_and_or_pipe_bg_right(tokens);
+	}
 }
