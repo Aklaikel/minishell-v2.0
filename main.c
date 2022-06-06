@@ -9,3 +9,4 @@ int main(int ac, char **av, char **env)
 	int fd  = open("", O_RDONLY);
 	perror(NULL);
 }
+

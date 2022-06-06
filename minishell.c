@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/04 05:03:37 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/05 16:49:30 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int ac, char **av, char **env)
 		if (g_global.exit_status == 0)
 		{
 			tree = parser(&tokens);
-			run(tree, env);
+			run(tree, env_list, env);
 			//display_tree(tree, 0);
 		}
 		// printf("%s\n", get_var_value(get_env(env), input));

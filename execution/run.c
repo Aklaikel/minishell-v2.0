@@ -6,13 +6,13 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 07:10:34 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/04 05:06:31 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/06 09:15:34 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    run_cmdlist(t_tree *cmd, char **env)
+void    run_cmdlist(t_tree *cmd, t_env **env)
 {
     int len = 0;
 	t_cmdlist	*list;
@@ -38,10 +38,12 @@ void    run_cmdlist(t_tree *cmd, char **env)
    execute_cmd(*cmdlist,cmdlist,env);
 }
 
-void    run(t_tree  *cmd, char **env)
+void    run(t_tree  *cmd, t_env **env)
 {
     if(!cmd)
         return ;
     if (cmd->type == CMDLIST)
         return (run_cmdlist(cmd, env));
+    if (cmd->type == AND || cmd->type == OR)
+        return(run_and_or(cmd, env));
 }
