@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:35:08 by osallak           #+#    #+#             */
-/*   Updated: 2022/05/04 16:51:20 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/06 08:44:30 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,6 @@ void	add_back_dll(t_tokens **tokens_list, t_tokens *new)
 	new->previous = head;
 }
 
-t_tokens	*firstdel_dll(t_tokens	**dll)
-{
-	t_tokens	*node;
-
-	node = (*dll)->next;
-	(*dll)->next = NULL;
-	(*dll) = node;
-	node->previous = NULL;
-	return (node);
-}
-
 t_tokens	*lastdel_dll(t_tokens	**dll)
 {
 	t_tokens	*node;
@@ -79,7 +68,10 @@ t_tokens	*node_del_dll(t_tokens	**dll, t_tokens *node)
 		return (node);
 	}
 	else if (!node->previous)
-		return (firstdel_dll(dll));
+	{
+		*dll = (*dll)->next;
+		return (node);
+	}
 	else if (!node->next)
 		return (lastdel_dll(dll));
 	node->previous->next = node->next;
