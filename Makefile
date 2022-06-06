@@ -12,6 +12,7 @@ SRCS = minishell.c \
 		g_c/clear_exit.c \
 		g_c/collect.c \
 		tokenizer/get_tokens.c \
+		tokenizer/get_tokens_utils.c \
 		tokenizer/tokenizer_utils.c \
 		tokenizer/tokenizer.c \
 		SyntaxAnalyser/check_basic_errors.c \
@@ -29,6 +30,7 @@ SRCS = minishell.c \
 		display_tokens.c \
 		parser/parser.c \
 		parser/parser_utils.c \
+		parser/parse_redirections.c \
 		execution/run.c \
 		execution/execute_cmdlist.c \
 		execution/builtin_cmds/echo_cmd.c

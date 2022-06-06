@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_analyser_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 18:06:07 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/06 09:37:47 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/06 17:24:30 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ void	check_cpar_left(t_tokens *tokens)
 	set_status(status);
 }
 
+static int	check_cpar_right_helper(t_tokens *tokens, int tmp)
+{
+	if (tmp == 1)
+		print_syntax_error(tokens->next->next->token);
+	else
+		print_syntax_error(tokens->next->token);
+	return (2);
+}
+
 void	check_cpar_right(t_tokens *tokens)
 {
 	int	next_flag;
@@ -49,14 +58,9 @@ void	check_cpar_right(t_tokens *tokens)
 	}
 	else
 		next_flag = tokens->next->flag;
-	if ((next_flag == PIPE || next_flag == OR || next_flag == AND) && next_flag != CBRACKET && !isredirect(next_flag))
-	{
-		if (tmp == 1)
-			print_syntax_error(tokens->next->next->token);
-		else
-			print_syntax_error(tokens->next->token);
-		status = 2;
-	}
+	if ((next_flag == PIPE || next_flag == OR || next_flag == AND)
+		&& next_flag != CBRACKET && !isredirect(next_flag))
+		status = check_cpar_right_helper(tokens, tmp);
 	set_status(status);
 	return ;
 }

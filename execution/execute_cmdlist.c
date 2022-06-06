@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmdlist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 04:41:06 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/06 09:50:40 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/06 17:29:13 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	execute_cmd(char *cmd, char **argv, t_env **env)
 	// if(is_builtin(cmd, argv, env))
 	// 	return ;
 	cmd = get_path(cmd,*env);
-	printf("%s\n" ,cmd);
 	venv = env_arr(*env);
 	pid = fork();
 	if (pid == -1)
@@ -121,7 +120,7 @@ void	execute_cmd(char *cmd, char **argv, t_env **env)
 	else if (pid == 0)
 	{
 		execve(cmd, argv, venv);
-		ft_printf("minishell: %s: command not found\n", cmd);
+		ft_printf("minishell: %s: command not found\n", *argv);
 		exit(1);
 	}
 	waitpid(pid, &g_global.exit_status, 0);
