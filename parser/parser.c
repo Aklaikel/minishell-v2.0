@@ -6,13 +6,13 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 07:34:48 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/04 08:12:32 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/04 15:50:13 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	parse_heredoc(t_tokens **tokens)
+int	parse_heredoc(t_tokens **tokens, int *err)
 {
 	int		fd[2];
 	char	*delim;
@@ -20,11 +20,10 @@ int	parse_heredoc(t_tokens **tokens)
 
 	*tokens = (*tokens)->next;
 	delim = (*tokens)->token;
-	// *tokens = (*tokens)->next;
 	if (pipe(fd) == -1)
 	{
-		perror(NULL);
-		clear_exit();
+		*err = errno;
+		return (-1);
 	}
 	while (true)
 	{
@@ -109,7 +108,7 @@ int	parse_outred(t_tokens **token, int *err)
 	else
 		flags = O_CREAT | O_WRONLY | O_TRUNC;
 	*token = (*token)->next;
-	fd = open((*token)->token, flags);
+	fd = open((*token)->token, flags, 0666);
 	if (fd == -1)
 	{
 		*err = errno;
@@ -149,7 +148,7 @@ t_tree	*parse_cmdlist(t_tokens **tokens)
 			io.outfd = parse_outred(tokens, &err);	
 		}
 		else if ((*tokens)->flag == HERDOC)
-			io.infd = parse_heredoc(tokens);
+			io.infd = parse_heredoc(tokens, &err);
 		else
 			add_back_cmdlist(&cmdlist, create_cmd_list((*tokens)->token));
 		if (err != 0)

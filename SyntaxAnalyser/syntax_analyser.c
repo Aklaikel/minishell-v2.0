@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:05:15 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 11:15:35 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/04 08:39:39 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	syntax_analyser(t_tokens *tokens)
 	isbalanced_quotes(tokens);
 	while (tokens && g_global.exit_status == 0)
 	{
-		if (tokens->flag >= 6 && tokens->flag <= 9)
+		if (tokens->flag >= 6 && tokens->flag <= 8)
 			check_and_or_pipe_bg(tokens);
 		else if (tokens->flag >= 2 && tokens->flag <= 5)
 			check_red_tokens(tokens);

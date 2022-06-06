@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/06 09:24:02 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/06 09:31:57 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <sys/wait.h>
 # include <string.h>
 # include <errno.h>
+# include <sys/types.h>
+# include <dirent.h>
 # include "gc.h"
 # include "../printf_err/ft_printf.h"
 #define CMDLIST 1024
@@ -45,12 +47,13 @@ typedef enum tokens
 	PIPE,
 	AND,
 	OR,
-	BG,
 	OBRACKET,
 	CBRACKET,
 	SQUOTE,
 	DQUOTE,
 	_SPACE,
+	WC,
+	TILDE,
 }	t_tokens_flag;
 
 typedef struct s_tokens
@@ -132,6 +135,7 @@ int			tokenize_word(t_tokens **head, char *input, int flag);
 int			tokenize_space(t_tokens **head, char *input);
 int			tokenize_quotes(t_tokens **head, char *input);
 int			tokenize_variables(t_tokens **head, char *input);
+int			tokenize_wildcard(t_tokens **head, char *input);
 bool		isword(int c);
 void		set_status(int status);
 //Syntax analyser functions
@@ -170,8 +174,7 @@ t_tree		*parse_pipeline(t_tokens **tokens);
 t_tree		*parse_command(t_tokens **tokens);
 t_tree		*parse_cmdlist(t_tokens **tokens);
 //expander
-//char	*get_var_value(t_env *env, char *varname);
-//void	expander(t_env *env, t_tokens *tokens);
+void	expander(t_env *env, t_tokens **tokens);
 
 //execution
 void    run(t_tree  *cmd, t_env **env);

@@ -6,7 +6,11 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 18:06:07 by osallak           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/06/06 09:27:17 by osallak          ###   ########.fr       */
+=======
+/*   Updated: 2022/06/05 13:24:54 by osallak          ###   ########.fr       */
+>>>>>>> parser
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +53,7 @@ void	check_cpar_right(t_tokens *tokens)
 	}
 	else
 		next_flag = tokens->next->flag;
-	if (next_flag == PIPE || next_flag == AND
-		&& next_flag != CBRACKET && !isredirect(next_flag))
+	if ((next_flag == PIPE || next_flag == OR || next_flag == AND) && next_flag != CBRACKET && !isredirect(next_flag))
 	{
 		if (tmp == 1)
 			print_syntax_error(tokens->next->next->token);

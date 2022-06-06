@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 18:07:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 19:07:00 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/05 10:15:27 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ bool	isword(int c)
 static bool	is_not_token(char c)
 {
 	return (c != ' ' && c != '$' && c != '\'' && c != '"'
-		&& c != '|' && c != '<' && c != '>' && c != '&'
-		&& c != '(' && c != ')');
+		&& c != '|' && c != '<' && c != '>' && c != '(' && c != ')' && c != '*');
 }
 
 int	tokenize_word(t_tokens **head, char *input, int flag)
@@ -91,7 +90,8 @@ int	tokenize_word(t_tokens **head, char *input, int flag)
 	i = 0;
 	if (*input == '$')
 		return (get_tokens(head, input, 1, WORD));
-	while (input[i] && is_not_token(input[i]))
+	while ((input[i] && is_not_token(input[i]))
+		|| (input[i] && input[i] == '&' && input[i + 1] != '&'))
 		i++;
 	get_tokens(head, input, i, flag);
 	return (i);
@@ -110,6 +110,8 @@ int	tokenize_variables(t_tokens **head, char *input)
 	int	i;
 
 	i = 1;
+	if (*(input + 1) == '?' || *(input + 1) == '0')
+		return (get_tokens(head, input, 2, VAR));
 	while (input[i] && isword(input[i]))
 		i++;
 	if (i == 1)
@@ -119,4 +121,15 @@ int	tokenize_variables(t_tokens **head, char *input)
 	}
 	get_tokens(head, input, i, VAR);
 	return (i);
+}
+
+int	tokenize_wildcard(t_tokens **head, char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i] && input[i] == '*')
+		i++;
+	get_tokens(head, input, 1, WC);
+	return (i + 1);
 }
