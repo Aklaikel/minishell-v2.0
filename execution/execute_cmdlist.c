@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmdlist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 04:41:06 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/06 09:31:41 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/06 09:50:40 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,10 @@ char **env_arr(t_env *env)
 	i = 0;
 	while(env)
 	{
-		env->env_name = env_arr[i];
+		env_arr[i] = env->env_name;
 		collect(append_char(env_arr[i], '='));
 		collect(ft_strjoin(env_arr[i++], env->env_value));
+		env = env->next;
 	}
 	env_arr[i] = NULL;
 	return (env_arr);		 
@@ -111,14 +112,15 @@ void	execute_cmd(char *cmd, char **argv, t_env **env)
 
 	// if(is_builtin(cmd, argv, env))
 	// 	return ;
-	cmd = get_path(cmd,env);
+	cmd = get_path(cmd,*env);
+	printf("%s\n" ,cmd);
 	venv = env_arr(*env);
 	pid = fork();
 	if (pid == -1)
 		return ;
 	else if (pid == 0)
 	{
-		execve(cmd, argv, env_arr);
+		execve(cmd, argv, venv);
 		ft_printf("minishell: %s: command not found\n", cmd);
 		exit(1);
 	}

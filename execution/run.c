@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 07:10:34 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/06 09:31:47 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/06 09:45:02 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ void    run(t_tree  *cmd, t_env **env)
         return ;
     if (cmd->type == CMDLIST)
         return (run_cmdlist(cmd, env));
-    if (cmd->type == AND || cmd->type == OR)
-        return(run_and_or(cmd, env));
+    // if (cmd->type == AND || cmd->type == OR)
+    //     return(run_and_or(cmd, env));
 }
