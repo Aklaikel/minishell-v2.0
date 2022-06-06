@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/04 08:06:48 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/06 09:24:02 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,8 @@ t_tree		*parse_cmdlist(t_tokens **tokens);
 //void	expander(t_env *env, t_tokens *tokens);
 
 //execution
-void    run(t_tree  *cmd, char **env);
-void	execute_cmd(char *cmd, char **argv, char **env);
+void    run(t_tree  *cmd, t_env **env);
+void	execute_cmd(char *cmd, char **argv, t_env **env);
 // builting cmds
 void	cd_cmd(char **cmd, t_env *env);
 void	echo_cmd(char **cmd);
