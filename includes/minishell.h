@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/06 09:31:57 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/07 03:41:08 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,8 @@ void	expander(t_env *env, t_tokens **tokens);
 
 //execution
 void    run(t_tree  *cmd, t_env **env);
-void	execute_cmd(char *cmd, char **argv, t_env **env);
+void	execute_cmd(char *cmd, char **argv, t_env **env, int *fd);
+void    run_and_or(t_tree *cmd, t_env **env);
 // builting cmds
 void	cd_cmd(char **cmd, t_env *env);
 void	echo_cmd(char **cmd);

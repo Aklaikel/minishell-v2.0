@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/06 10:07:07 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/07 05:55:30 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ int	main(int ac, char **av, char **env)
 		merge_words(&tokens);
 		remove_spaces(&tokens);
 		expander(get_env(env), &tokens);
-		display(tokens);
-		// if (g_global.exit_status == 0)
-		// {
-		// 	tree = parser(&tokens);
-		// 	run(tree, &env_list);
-		// 	//display_tree(tree, 0);
-		// }
+		// display(tokens);
+		if (g_global.exit_status == 0)
+		{
+			t_tree *tree = parser(&tokens);
+			run(tree, &env_list);
+			// display_tree(tree, 0);
+		}
 		// printf("%s\n", get_var_value(get_env(env), input));
 	}
 	rl_clear_history();

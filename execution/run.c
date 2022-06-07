@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 07:10:34 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/06 09:45:02 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/07 06:45:24 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 void    run_cmdlist(t_tree *cmd, t_env **env)
 {
-    int len = 0;
+	int len = 0;
 	t_cmdlist	*list;
-    int i;
+	int fd[2];
+
+	int i;
 	list = cmd->cmdlist;
-    while(cmd->cmdlist)
-    {
-        len++;
-        cmd->cmdlist = cmd->cmdlist->next;
-    }
+	while(cmd->cmdlist)
+	{
+		len++;
+		cmd->cmdlist = cmd->cmdlist->next;
+	}
 
 	char	**cmdlist;
 
@@ -35,15 +37,62 @@ void    run_cmdlist(t_tree *cmd, t_env **env)
 		i++;
 	}
 	cmdlist[i] = NULL;
-   execute_cmd(*cmdlist,cmdlist,env);
+
+	fd[0] = cmd->infd;
+	fd[1] = cmd->outfd;
+	execute_cmd(*cmdlist,cmdlist,env, fd);
+}
+
+void    run_and_or(t_tree *cmd, t_env **env)
+{
+	run(cmd->left, env);
+	if ( ((cmd->type == OR) && (g_global.exit_status != 0))
+		|| ((cmd->type == AND) && (g_global.exit_status == 0)) )
+			run(cmd->right, env);
+}
+
+void	pipe_handler(t_tree	*cmd, t_env **env)
+{
+	int vfd[2];
+	int pids[2];
+
+	if (pipe(vfd) == -1)
+		return ;
+	pids[0] = fork();
+	if(pids[0] == 0)
+	{
+		close(1);
+		dup2(vfd[1], 1);
+		close(vfd[1]);
+		close(vfd[0]);
+		run(cmd->left, env);
+		exit(0);
+	} 
+	pids[1] = fork();
+	if(pids[1] == 0)
+	{
+		close(0);
+		dup2(vfd[0], 0);
+		close(vfd[0]);
+		close(vfd[1]);
+		run(cmd->right, env);
+		exit(0);
+	} 
+	close(vfd[0]);
+    close(vfd[1]);
+    waitpid(-1, &g_global.exit_status, 0);
+    waitpid(-1, &g_global.exit_status, 0);
+	return ;
 }
 
 void    run(t_tree  *cmd, t_env **env)
 {
-    if(!cmd)
-        return ;
-    if (cmd->type == CMDLIST)
-        return (run_cmdlist(cmd, env));
-    // if (cmd->type == AND || cmd->type == OR)
-    //     return(run_and_or(cmd, env));
+	if(!cmd)
+		return ;
+	if (cmd->type == CMDLIST)
+		return (run_cmdlist(cmd, env));
+	if (cmd->type == AND || cmd->type == OR)
+		return(run_and_or(cmd, env));
+	if (cmd->type == PIPE)
+		return(pipe_handler(cmd,env));
 }

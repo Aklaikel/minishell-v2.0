@@ -6,12 +6,11 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 07:03:46 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/03 07:08:26 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/07 06:30:35 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
-
 
 int	get_nbr(const char *str)
 {
@@ -38,7 +37,7 @@ int	get_nbr(const char *str)
 		i++;
 	if (str[i])
 		return (printf("exit: %s: numeric argument required\n", str), \
-			clear(), exit(255), 255);
+			exit(255), 255);
 	return (result * n);
 }
 
@@ -50,9 +49,10 @@ void	exit_cmd(char **cmd)
 		return ;
 	if (!cmd[1])
 	{
-		clear();
+		// clear();
 		exit(0);
 	}
+	printf("%s\n",cmd[1]);
 	status = get_nbr(cmd[1]);
 	if (cmd[2])
 	{
@@ -61,7 +61,7 @@ void	exit_cmd(char **cmd)
 	}
 	else
 	{
-		clear();
+		// clear();
 		exit(status);
 	}
 }

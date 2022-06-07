@@ -31,9 +31,12 @@ SRCS = minishell.c \
 		parser/parser_utils.c \
 		execution/run.c \
 		execution/execute_cmdlist.c \
-		execution/builtin_cmds/echo_cmd.c
-
-
+		execution/builtin_cmds/echo_cmd.c \
+		execution/builtin_cmds/exit_cmd.c \
+		execution/builtin_cmds/cd_cmd.c \
+		execution/builtin_cmds/unset_cmd.c \
+		execution/builtin_cmds/export_cmd.c \
+		execution/builtin_cmds/pwd_cmd.c 
 
 OBJS = $(SRCS:.c=.o)
 
@@ -43,10 +46,10 @@ RM =  rm -rf
 all : $(NAME)
 
 $(NAME) : $(OBJS) $(LIBFT) $(PRINTF)
-		$(CC) $(CFLAGS) -lreadline -lncurses $^ -o $(NAME) -L /goinfre/osallak/.brew/opt/readline/lib 
+		$(CC) $(CFLAGS) -lreadline -lncurses $^ -o $(NAME) -L /goinfre/aklaikel/.brew/opt/readline/lib 
 
 %.o:%.c $(INC)/minishell.h
-	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@ -I /goinfre/osallak/.brew/opt/readline/include
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@ -I /goinfre/aklaikel/.brew/opt/readline/include
 
 $(LIBFT):
 	make bonus -C libft

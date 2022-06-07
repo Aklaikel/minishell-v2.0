@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 04:41:06 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/06 09:50:40 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/07 06:41:47 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,32 +97,56 @@ char **env_arr(t_env *env)
 	*	- exit		-> Exit the shell.
 **/
 
-// static bool	is_builtin(char *cmd, char **argv, char **env)
-// {
-// 	(void)env;
-// 	if (!ft_strncmp(cmd, "echo", sizeof("echo") + 1))
-// 		return (echo_cmd(argv), true);
-// 	return true;
-// }
+static bool	is_builtin(char *cmd, char **argv, t_env **env)
+{
+	(void)env;
+	if (!ft_strncmp(cmd, "echo", sizeof("echo") + 1))
+		return (echo_cmd(argv), true);
+	else if (!ft_strncmp(cmd, "cd", sizeof("cd") + 1))
+		return (cd_cmd(argv, *env), true);
+	else if (!ft_strncmp(cmd, "pwd", sizeof("pwd") + 1))
+		return (pwd_cmd(argv), true);
+	if (!ft_strncmp(cmd, "unset", sizeof("unset") + 1))
+		return (unset_cmd(argv, env), true);
+	// if (!ft_strncmp(cmd, "export", sizeof("export") + 1))
+	// 	return (export_cmd(argv, env), true);
+	if (!ft_strncmp(cmd, "exit", sizeof("exit") + 1))
+		return (exit_cmd(argv), true);
+	return false;
+}
 
-void	execute_cmd(char *cmd, char **argv, t_env **env)                                                                                                                    
+int	get_status(int x)
+{
+	if (WIFEXITED(x))
+		return (WEXITSTATUS(x));
+	return (1);
+}
+
+void	execute_cmd(char *cmd, char **argv, t_env **env, int *fd)                                                                                                                    
 {
 	int	pid;
 	char **venv;
+	int tmp = 0;
 
-	// if(is_builtin(cmd, argv, env))
-	// 	return ;
+	if(is_builtin(cmd, argv, env))
+		return ;
 	cmd = get_path(cmd,*env);
-	printf("%s\n" ,cmd);
 	venv = env_arr(*env);
 	pid = fork();
 	if (pid == -1)
 		return ;
 	else if (pid == 0)
 	{
+		dup2(fd[1], 1);
+		if (fd[1] != 1)
+			close(fd[1]);
+		dup2(fd[0], 0);
+		if (fd[0] != 0)
+			close(fd[0]);
 		execve(cmd, argv, venv);
-		ft_printf("minishell: %s: command not found\n", cmd);
+		ft_printf("minishell: %s: command not found\n", argv[0]);
 		exit(1);
 	}
-	waitpid(pid, &g_global.exit_status, 0);
+	waitpid(pid, &tmp, 0);
+	g_global.exit_status = get_status(tmp);
 }
