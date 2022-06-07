@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/07 03:41:08 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/07 06:52:56 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,13 @@ struct s_io
 };
 
 //the folowing struct contains the cmd/arg
-typedef struct	s_cmdlist
+typedef struct s_cmdlist
 {
 	char				*cmd;
 	struct s_cmdlist	*next;
 }						t_cmdlist;
 
-//the role of the errorflag variable is inn case of an error 
+//the role of the errorflag variable is in case of an error 
 //in the opening/creating of the in/outfiles it will contains the errno
 typedef struct s_tree
 {
@@ -116,7 +116,6 @@ typedef struct s_tree
 	struct s_tree	*left;
 	struct s_tree	*right;
 }	t_tree;
-
 
 extern t_global g_global;
 
@@ -136,6 +135,8 @@ int			tokenize_space(t_tokens **head, char *input);
 int			tokenize_quotes(t_tokens **head, char *input);
 int			tokenize_variables(t_tokens **head, char *input);
 int			tokenize_wildcard(t_tokens **head, char *input);
+void		tokenize_quotes_helper(t_tokens **head, char *input, int i);
+bool		is_not_token(char c);
 bool		isword(int c);
 void		set_status(int status);
 //Syntax analyser functions
@@ -169,24 +170,31 @@ void		find_remove_env(char *find, t_env **venv);
 char		*find_env(char *find, t_env *venv);
 //parser
 t_tree		*parser(t_tokens **tokens);
-t_tree  	*parse_cmdline(t_tokens **tokens);
+t_tree		*parse_cmdline(t_tokens **tokens);
 t_tree		*parse_pipeline(t_tokens **tokens);
 t_tree		*parse_command(t_tokens **tokens);
 t_tree		*parse_cmdlist(t_tokens **tokens);
+int			parse_heredoc(t_tokens **tokens, int *err);
+t_cmdlist	*create_cmd_list(char *cmd);
+void		add_back_cmdlist(t_cmdlist **head, t_cmdlist *new);
+t_tree		*connect_tree(t_tree *left, t_tree *right, t_tokens_flag type);
+int			parse_inred(t_tokens **token, int *err);
+int		parse_outred(t_tokens **token, int *err);
+
 //expander
-void	expander(t_env *env, t_tokens **tokens);
+void		expander(t_env *env, t_tokens **tokens);
 
 //execution
 void    run(t_tree  *cmd, t_env **env);
 void	execute_cmd(char *cmd, char **argv, t_env **env, int *fd);
 void    run_and_or(t_tree *cmd, t_env **env);
 // builting cmds
-void	cd_cmd(char **cmd, t_env *env);
-void	echo_cmd(char **cmd);
-void	env_cmd(char **cmd, t_env *venv);
-void	exit_cmd(char **cmd);
-void	export_cmd(char **cmd, t_env **venv);
-void	pwd_cmd(char **cmd);
-void	unset_cmd(char **cmd, t_env **env);
+void		cd_cmd(char **cmd, t_env *env);
+void		echo_cmd(char **cmd);
+void		env_cmd(char **cmd, t_env *venv);
+void		exit_cmd(char **cmd);
+void		export_cmd(char **cmd, t_env **venv);
+void		pwd_cmd(char **cmd);
+void		unset_cmd(char **cmd, t_env **env);
 
 #endif

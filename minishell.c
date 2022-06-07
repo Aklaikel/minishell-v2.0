@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/07 05:55:30 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/07 06:54:27 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,63 +14,49 @@
 
 t_global	g_global;
 
-void	sigquit_handler(int siq)
-{
-	(void)siq;
-	// exit status must be 128 + sig like the bash but for now i use (0)
-	printf("\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
+// void	sigquit_handler(int siq)
+// {
+// 	(void)siq;
+// 	// exit status must be 128 + sig like the bash but for now i use (0)
+// 	printf("\n");
+// 	rl_replace_line("", 0);
+// 	rl_on_new_line();
+// 	rl_redisplay();
+// }
 
-void	handle_signals(void)
-{
-	signal(SIGINT, &sigquit_handler);
-	signal(SIGQUIT, SIG_IGN);
-}
+// void	handle_signals(void)
+// {
+// 	signal(SIGINT, &sigquit_handler);
+// 	signal(SIGQUIT, SIG_IGN);
+// }
 
-void	display_tree(t_tree *root, int level)
+void	print_version(char **av)
 {
-	if (root == NULL)
+	if (!av || !av[1] || !*av[1])
 		return ;
-	for (int i = 0; i < level; i++)
-		printf(i == level -1 ? "|->" : "\t");
-	if (root->type == CMDLIST)
+	if (!ft_strncmp(av[1], "--version", ft_strlen(av[1])))
 	{
-		while ( root->cmdlist)
-		{
-			printf("%s ",  root->cmdlist->cmd);
-			 root->cmdlist =  root->cmdlist->next;
-		}
-		printf("\n");
+		ft_putstr_fd("minishell, version 2.0.0(1)-release (x86_64-apple-darwin18.7.0)\n", 1);
+		ft_putstr_fd("Copyright (C) 2022 Oussama Sallak aka (uss4ma) && anass klaikel aka (aklaikel)\n", 1);
+		ft_putstr_fd("if you find an issue please be a man and tell us on this github repo:\n", 1);
+		ft_putstr_fd("<<https://github.com/Aklaikel/minishell-v2.0/issues>>\n", 1);
+		clear_exit();
 	}
-	else if (root->type == PIPE) printf("PIPE\n");
-	else if (root->type == OR) printf("OR\n");
-	else if (root->type == AND) printf("AND\n");
-	display_tree(root->left, level + 1);
-	display_tree(root->right, level + 1);
 }
+
 int	main(int ac, char **av, char **env)
 {
 	char		*input;
 	t_tokens	*tokens;
 	t_env		*env_list;
-	// t_tree		*tree;
+	t_tree		*tree;
 
 	(void)ac;
 	(void)av;
 	tokens = NULL;
-	handle_signals();
+	// handle_signals();
 	env_list = get_env(env);
-	// if (!ft_strncmp(av[1], "--version", ft_strlen(av[1])))
-	// {
-	// 	ft_putstr_fd("minishell, version 2.0.0(1)-release (x86_64-apple-darwin18.7.0)\n", 1);
-	// 	ft_putstr_fd("Copyright (C) 2022 Oussama Sallak aka (uss4ma) && anass klaikel aka (aklaikel)\n", 1);
-	// 	ft_putstr_fd("if you find an issue please be a man and tell us on this github repo:\n", 1);
-	// 	ft_putstr_fd("<<https://github.com/Aklaikel/minishell-v2.0/issues>>\n", 1);
-	// 	clear_exit();
-	// }
+	print_version(av);
 	while (true)
 	{
 		input = readline("minishell-v2.0$ ");
@@ -90,7 +76,7 @@ int	main(int ac, char **av, char **env)
 		// display(tokens);
 		if (g_global.exit_status == 0)
 		{
-			t_tree *tree = parser(&tokens);
+			tree = parser(&tokens);
 			run(tree, &env_list);
 			// display_tree(tree, 0);
 		}
