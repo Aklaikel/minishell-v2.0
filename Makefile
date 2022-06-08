@@ -38,7 +38,8 @@ SRCS = minishell.c \
 		execution/builtin_cmds/cd_cmd.c \
 		execution/builtin_cmds/unset_cmd.c \
 		execution/builtin_cmds/export_cmd.c \
-		execution/builtin_cmds/pwd_cmd.c 
+		execution/builtin_cmds/pwd_cmd.c \
+		execution/builtin_cmds/env_cmd.c 
 
 OBJS = $(SRCS:.c=.o)
 

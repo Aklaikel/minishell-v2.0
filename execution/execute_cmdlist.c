@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 04:41:06 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/07 06:53:43 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/08 02:14:05 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_path(char *word, t_env *env)
 	char	*path;
 	int		i;
 
-	if (!word || !*word || !env )
+	if (!word || !*word || !env)
 		return (NULL);
 	if (access(word, X_OK) == 0)
 		return (word);
@@ -66,24 +66,25 @@ char **env_arr(t_env *env)
 
 	i = 0;
 	var = env;
-	while(var)
+	while (var)
 	{
 		var = var->next;
 		i++;
 	}
 	env_arr = malloc(sizeof(char *) * i);
-	if(!env_arr)
+	if (!env_arr)
 		return (NULL);
 	i = 0;
-	while(env)
+	while (env)
 	{
 		env_arr[i] = env->env_name;
-		collect(append_char(env_arr[i], '='));
-		collect(ft_strjoin(env_arr[i++], env->env_value));
+		env_arr[i] = collect(append_char(env_arr[i], '='));
+		env_arr[i] = collect(ft_strjoin(env_arr[i], env->env_value));
+		i++;
 		env = env->next;
 	}
 	env_arr[i] = NULL;
-	return (env_arr);		 
+	return (env_arr);
 }
 
 /**
@@ -108,6 +109,8 @@ static bool	is_builtin(char *cmd, char **argv, t_env **env)
 		return (pwd_cmd(argv), true);
 	if (!ft_strncmp(cmd, "unset", sizeof("unset") + 1))
 		return (unset_cmd(argv, env), true);
+	if (!ft_strncmp(cmd, "env", sizeof("env") + 1))
+		return (env_cmd(argv, *env), true);
 	// if (!ft_strncmp(cmd, "export", sizeof("export") + 1))
 	// 	return (export_cmd(argv, env), true);
 	if (!ft_strncmp(cmd, "exit", sizeof("exit") + 1))
@@ -137,6 +140,7 @@ void	execute_cmd(char *cmd, char **argv, t_env **env, int *fd)
 		return ;
 	else if (pid == 0)
 	{
+		sigreset();
 		dup2(fd[1], 1);
 		if (fd[1] != 1)
 			close(fd[1]);

@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/07 06:54:27 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/08 01:44:42 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,29 @@
 
 t_global	g_global;
 
-// void	sigquit_handler(int siq)
-// {
-// 	(void)siq;
-// 	// exit status must be 128 + sig like the bash but for now i use (0)
-// 	printf("\n");
-// 	rl_replace_line("", 0);
-// 	rl_on_new_line();
-// 	rl_redisplay();
-// }
+void	sigquit_handler(int siq)
+{
+	(void)siq;
+	if (g_global.is_runing)
+		return ;
+	// exit status must be 128 + sig like the bash but for now i use (0)
+	printf("\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+}
 
-// void	handle_signals(void)
-// {
-// 	signal(SIGINT, &sigquit_handler);
-// 	signal(SIGQUIT, SIG_IGN);
-// }
+void	handle_signals(void)
+{
+	signal(SIGINT, &sigquit_handler);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	sigreset(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+}
 
 void	print_version(char **av)
 {
@@ -54,8 +62,11 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	tokens = NULL;
-	// handle_signals();
+	handle_signals();
 	env_list = get_env(env);
+	// for (t_env *head = env_list; head; head = head->next) {
+	// 	printf("%s=%s\n", head->env_name, head->env_value);
+	// }
 	print_version(av);
 	while (true)
 	{
@@ -77,7 +88,9 @@ int	main(int ac, char **av, char **env)
 		if (g_global.exit_status == 0)
 		{
 			tree = parser(&tokens);
+			g_global.is_runing = 1;
 			run(tree, &env_list);
+			g_global.is_runing = 0;
 			// display_tree(tree, 0);
 		}
 		// printf("%s\n", get_var_value(get_env(env), input));

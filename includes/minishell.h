@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/07 06:52:56 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/07 21:31:56 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_global
 {
 	t_gc	*g_garbage;
 	int		exit_status;
+	int		is_runing;
 }	t_global;
 
 //the next struct contains all env variables and  it's values
@@ -188,6 +189,7 @@ void		expander(t_env *env, t_tokens **tokens);
 void    run(t_tree  *cmd, t_env **env);
 void	execute_cmd(char *cmd, char **argv, t_env **env, int *fd);
 void    run_and_or(t_tree *cmd, t_env **env);
+void	sigreset(void);
 // builting cmds
 void		cd_cmd(char **cmd, t_env *env);
 void		echo_cmd(char **cmd);

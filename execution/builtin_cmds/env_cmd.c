@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 05:28:55 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/03 06:48:26 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/08 01:44:42 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	env_cmd(char **cmd, t_env *venv)
 		g_global.exit_status = 1;
 		if (cmd[1][0] == '-' \
 			&& cmd[1][1] != '\0' && cmd[1][1] != '-')
-			err_printf("%s: illegal option -- %c\n", cmd[0], \
+			printf("%s: illegal option -- %c\n", cmd[0], \
 				cmd[1][1]);
-		err_printf("usage: env [with no options] [with no arguments]\n");
+		printf("usage: env [with no options] [with no arguments]\n");
 		return ;
 	}
     var = venv;
@@ -39,6 +39,4 @@ void	env_cmd(char **cmd, t_env *venv)
 		}
 		var = var->next;
 	}
-    
 }
-
