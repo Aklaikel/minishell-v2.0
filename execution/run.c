@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 07:10:34 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/07 06:45:24 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:44:49 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ void    run_cmdlist(t_tree *cmd, t_env **env)
 
 	fd[0] = cmd->infd;
 	fd[1] = cmd->outfd;
+	if(cmd->errorflag)
+	{
+		printf("minishell :%s\n", strerror(cmd->errorflag));
+		return ;
+	}
+	if(!*cmdlist)
+	{
+		printf("minishell :command not found");
+		return ;
+	}
 	execute_cmd(*cmdlist,cmdlist,env, fd);
 }
 
