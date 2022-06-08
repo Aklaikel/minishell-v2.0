@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 07:34:48 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/07 06:53:30 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:26:00 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_tree	*parse_command(t_tokens **tokens)
 {
 	t_tree	*tree;
 
+	if (!*tokens)
+		return (NULL);
 	tree = parse_cmdlist(tokens);
 	if (!tree && (*tokens)->flag == OBRACKET)
 	{
@@ -53,6 +55,8 @@ t_tree	*parse_pipeline(t_tokens **tokens)
 	t_tree	*tree;
 	t_tree	*tmp;
 
+	if (!*tokens)
+		return (NULL);
 	tree = parse_command(tokens);
 	if (!tree)
 		return (NULL);
@@ -83,7 +87,9 @@ t_tree	*parse_cmdline(t_tokens **tokens)
 		*tokens = (*tokens)->next;
 		tmp = parse_pipeline(tokens);
 		if (!tmp)
+		{
 			return (NULL);
+		}
 		tree = connect_tree(tree, tmp, type);
 	}
 	return (tree);

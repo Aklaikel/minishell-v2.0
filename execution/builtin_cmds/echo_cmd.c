@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 05:40:35 by kalikel           #+#    #+#             */
-/*   Updated: 2022/06/03 06:37:58 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:21:29 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ static int	valid_newline(char *str)
 	return (0);
 }
 
-static void	print_words(char **words)
+static void	print_words(char **words, int *fd)
 {
 	int	i;
 
 	i = 0;
 	while (words[i])
 	{
-		ft_putstr_fd(words[i++], 1);
+		ft_putstr_fd(words[i++], fd[1]);
 		if (words[i])
-			ft_putstr_fd(" ", 1);
+			ft_putstr_fd(" ", fd[1]);
 	}
 }
 
-void	echo_cmd(char **cmd)
+void	echo_cmd(char **cmd, int *fd)
 {
 	int		i;
 	bool	is_set;
@@ -53,7 +53,7 @@ void	echo_cmd(char **cmd)
 			break ;
 		i++;
 	}
-	print_words(&cmd[i]);
+	print_words(&cmd[i], fd);
 	if (is_set)
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\n", fd[1]);
 }

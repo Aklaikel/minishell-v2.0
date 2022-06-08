@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/07 21:31:56 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:22:29 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,11 +192,11 @@ void    run_and_or(t_tree *cmd, t_env **env);
 void	sigreset(void);
 // builting cmds
 void		cd_cmd(char **cmd, t_env *env);
-void		echo_cmd(char **cmd);
+void		echo_cmd(char **cmd, int *fd);
 void		env_cmd(char **cmd, t_env *venv);
 void		exit_cmd(char **cmd);
 void		export_cmd(char **cmd, t_env **venv);
-void		pwd_cmd(char **cmd);
+void		pwd_cmd(char **cmd, int *fd);
 void		unset_cmd(char **cmd, t_env **env);
 
 #endif

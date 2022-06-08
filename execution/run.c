@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 07:10:34 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/08 17:44:49 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:17:15 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,19 @@ void    run_cmdlist(t_tree *cmd, t_env **env)
 		i++;
 	}
 	cmdlist[i] = NULL;
-
-	fd[0] = cmd->infd;
-	fd[1] = cmd->outfd;
 	if(cmd->errorflag)
 	{
-		printf("minishell :%s\n", strerror(cmd->errorflag));
+		printf("minishell: %s\n", strerror(cmd->errorflag));
+		g_global.exit_status = 1;
 		return ;
 	}
-	if(!*cmdlist)
+	fd[0] = cmd->infd;
+	fd[1] = cmd->outfd;
+	if (!*cmdlist)
 	{
+		
 		printf("minishell :command not found");
+		g_global.exit_status = 1;
 		return ;
 	}
 	execute_cmd(*cmdlist,cmdlist,env, fd);
@@ -77,9 +79,9 @@ void	pipe_handler(t_tree	*cmd, t_env **env)
 		close(vfd[0]);
 		run(cmd->left, env);
 		exit(0);
-	} 
+	}
 	pids[1] = fork();
-	if(pids[1] == 0)
+	if (pids[1] == 0)
 	{
 		close(0);
 		dup2(vfd[0], 0);

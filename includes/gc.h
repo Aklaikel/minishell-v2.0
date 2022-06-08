@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 20:28:51 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/20 22:40:14 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/08 18:04:18 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_gc
 
 void	add_front(t_gc *new);
 t_gc	*add_new(void *garbage);
-void	clear_exit(void);
+void	clear_exit(int status);
 void	*collect(void *gb);
 
 #endif

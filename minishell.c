@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/08 01:44:42 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/08 19:11:45 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	print_version(char **av)
 	if (!ft_strncmp(av[1], "--version", ft_strlen(av[1])))
 	{
 		ft_putstr_fd("minishell, version 2.0.0(1)-release (x86_64-apple-darwin18.7.0)\n", 1);
-		ft_putstr_fd("Copyright (C) 2022 Oussama Sallak aka (uss4ma) && anass klaikel aka (aklaikel)\n", 1);
+		ft_putstr_fd("Copyright (C) 2022 Oussama Sallak aka (uss4ma) && anass klaikel aka (9li9el)\n", 1);
 		ft_putstr_fd("if you find an issue please be a man and tell us on this github repo:\n", 1);
 		ft_putstr_fd("<<https://github.com/Aklaikel/minishell-v2.0/issues>>\n", 1);
-		clear_exit();
+		clear_exit(0);
 	}
 }
 
@@ -74,27 +74,20 @@ int	main(int ac, char **av, char **env)
 		if (!input || !ft_strncmp("exit", input, 4))
 		{
 			write (1, "exit\n", 5);
-			clear_exit();
+			clear_exit(255);
 		}
 		add_history(input);
 		tokens = tokenizer(input);
-		g_global.exit_status = 0;
 		syntax_analyser(tokens);
 		remove_quotes(&tokens);
 		merge_words(&tokens);
 		remove_spaces(&tokens);
 		expander(get_env(env), &tokens);
-		// display(tokens);
-		if (g_global.exit_status == 0)
-		{
-			tree = parser(&tokens);
-			g_global.is_runing = 1;
-			run(tree, &env_list);
-			g_global.is_runing = 0;
-			// display_tree(tree, 0);
-		}
-		// printf("%s\n", get_var_value(get_env(env), input));
+		tree = parser(&tokens);
+		g_global.is_runing = 1;
+		run(tree, &env_list);
+		g_global.is_runing = 0;
 	}
 	rl_clear_history();
-	clear_exit();
+	clear_exit(0);
 }

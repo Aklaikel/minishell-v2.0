@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collect.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:50:21 by osallak           #+#    #+#             */
-/*   Updated: 2022/05/30 08:19:45 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/08 18:05:16 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*collect(void *gb)
 	if (!gb)
 	{
 		perror(NULL);
-		clear_exit();
+		clear_exit(1);
 	}
 	add_front(add_new(gb));
 	return (gb);

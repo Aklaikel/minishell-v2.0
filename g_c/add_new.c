@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 20:31:29 by osallak           #+#    #+#             */
-/*   Updated: 2022/03/20 22:40:38 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/08 18:05:00 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_gc	*add_new(void *garbage)
 	if (!new)
 	{
 		perror("Error :");
-		clear_exit();
+		clear_exit(1);
 	}
 	new->content = garbage;
 	new->next = NULL;

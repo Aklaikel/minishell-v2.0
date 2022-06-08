@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 04:41:06 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/08 17:40:30 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:20:20 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ char	*append_char(char *str, char c)
 	append[len] = c;
 	append[len + 1] = 0;
 	return (append);
+}
+void free_array(char **cmd)
+{
+	int i=-1; 
+	while(cmd[++i])
+		free(cmd[i]);
+	free(cmd);
 }
 
 char	*get_path(char *word, t_env *env)
@@ -58,10 +65,10 @@ char	*get_path(char *word, t_env *env)
 	return (free(cmd), NULL);
 }
 
-char **env_arr(t_env *env)
+char	**env_arr(t_env *env)
 {
 	char	**env_arr;
-	int 	i;
+	int		i;
 	t_env	*var;
 
 	i = 0;
@@ -98,21 +105,21 @@ char **env_arr(t_env *env)
 	*	- exit		-> Exit the shell.
 **/
 
-static bool	is_builtin(char *cmd, char **argv, t_env **env)
+static bool	is_builtin(char *cmd, char **argv, t_env **env, int *fd)
 {
 	(void)env;
 	if (!ft_strncmp(cmd, "echo", sizeof("echo") + 1))
-		return (echo_cmd(argv), true);
+		return (echo_cmd(argv, fd), true);
 	else if (!ft_strncmp(cmd, "cd", sizeof("cd") + 1))
 		return (cd_cmd(argv, *env), true);
 	else if (!ft_strncmp(cmd, "pwd", sizeof("pwd") + 1))
-		return (pwd_cmd(argv), true);
+		return (pwd_cmd(argv, fd), true);
 	if (!ft_strncmp(cmd, "unset", sizeof("unset") + 1))
 		return (unset_cmd(argv, env), true);
 	if (!ft_strncmp(cmd, "env", sizeof("env") + 1))
 		return (env_cmd(argv, *env), true);
-	// if (!ft_strncmp(cmd, "export", sizeof("export") + 1))
-	// 	return (export_cmd(argv, env), true);
+	if (!ft_strncmp(cmd, "export", sizeof("export") + 1))
+		return (export_cmd(argv, env), true);
 	if (!ft_strncmp(cmd, "exit", sizeof("exit") + 1))
 		return (exit_cmd(argv), true);
 	return false;
@@ -131,7 +138,7 @@ void	execute_cmd(char *cmd, char **argv, t_env **env, int *fd)
 	char **venv;
 	int tmp = 0;
 
-	if(is_builtin(cmd, argv, env))
+	if(is_builtin(cmd, argv, env, fd))
 		return ;
 	cmd = get_path(cmd,*env);
 	venv = env_arr(*env);
@@ -149,6 +156,7 @@ void	execute_cmd(char *cmd, char **argv, t_env **env, int *fd)
 			close(fd[0]);
 		execve(cmd, argv, venv);
 		ft_printf("minishell: %s: command not found\n", argv[0]);
+		g_global.exit_status = 127;
 		exit(1);
 	}
 	waitpid(pid, &tmp, 0);
