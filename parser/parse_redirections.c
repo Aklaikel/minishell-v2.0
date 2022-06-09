@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 17:44:32 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/08 15:45:29 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/09 16:21:10 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	close_fd(int oldfd, int stdfd, t_tokens **tokens, int *err)
 	{
 		*err = 2;
 		return (-1);
-	} 
+	}
 	if (oldfd != stdfd)
 		close(oldfd);
 	if (stdfd == STDIN_FILENO)
@@ -47,7 +47,6 @@ int	pcmdlist_helper(t_tokens **tokens, struct s_io *io, t_cmdlist **lst)
 	int	err;
 
 	err = 0;
-
 	if ((*tokens)->flag == INRED)
 		io->infd = close_fd(io->infd, 0, tokens, &err);
 	else if ((*tokens)->flag == APPEND || (*tokens)->flag == OUTRED)

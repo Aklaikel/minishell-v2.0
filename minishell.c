@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/09 11:54:55 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/09 16:39:08 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,28 @@ void	print_version(char **av)
 	}
 }
 
+void	display_tree(t_tree *root, int level)
+{
+	if (root == NULL)
+		return ;
+	for (int i = 0; i < level; i++)
+		printf(i == level -1 ? "|->" : "\t");
+	if (root->type == CMDLIST)
+	{
+		while ( root->cmdlist)
+		{
+			printf("%s ",  root->cmdlist->cmd);
+			 root->cmdlist =  root->cmdlist->next;
+		}
+		printf("\n");
+	}
+	else if (root->type == PIPE) printf("PIPE\n");
+	else if (root->type == OR) printf("OR\n");
+	else if (root->type == AND) printf("AND\n");
+	display_tree(root->left, level + 1);
+	display_tree(root->right, level + 1);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	char		*input;
@@ -84,6 +106,7 @@ int	main(int ac, char **av, char **env)
 		remove_spaces(&tokens);
 		expander(get_env(env), &tokens);
 		tree = parser(&tokens);
+		// display_tree(tree, 0);
 		g_global.is_runing = 1;
 		run(tree, &env_list);
 		g_global.is_runing = 0;
