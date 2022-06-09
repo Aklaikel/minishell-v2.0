@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 18:06:07 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/09 07:55:07 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/09 16:02:15 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	check_opar_left(t_tokens *tokens)
 	else
 		pre_flag = tokens->previous->flag;
 	if (pre_flag != AND && pre_flag != OR
-		&& pre_flag != PIPE && pre_flag != OBRACKET && !is_string(pre_flag))
+		&& pre_flag != PIPE && pre_flag != OBRACKET)
 	{
 		print_syntax_error(tokens->token);
 		status = 2;
