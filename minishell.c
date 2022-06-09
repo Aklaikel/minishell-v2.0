@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/06 09:12:10 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/09 07:24:47 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ int	main(int ac, char **av, char **env)
 		merge_words(&tokens);
 		remove_spaces(&tokens);
 		expander(get_env(env), &tokens);
-		display(tokens);
+		// display(tokens);
 		if (g_global.exit_status == 0)
 		{
 			tree = parser(&tokens);
 			run(tree, env);
-			//display_tree(tree, 0);
+			display_tree(tree, 0);
 		}
 		// printf("%s\n", get_var_value(get_env(env), input));
 	}
