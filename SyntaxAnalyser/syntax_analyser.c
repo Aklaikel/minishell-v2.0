@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:05:15 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/06 10:07:49 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/09 09:37:26 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 void	syntax_analyser(t_tokens *tokens)
 {
 	isbalanced_brackets(tokens);
-	isbalanced_quotes(tokens);
+	// isbalanced_quotes(tokens);
 	while (tokens && g_global.exit_status == 0)
 	{
-		if (tokens->flag == PIPE || tokens->flag == AND || tokens->flag == OR)
-			check_and_or_pipe_bg(tokens);
-		else if (tokens->flag >= 2 && tokens->flag <= 5)
+		// if (tokens->flag == PIPE || tokens->flag == AND || tokens->flag == OR)
+		// 	check_and_or_pipe_bg(tokens);
+		if (isredirect(tokens->flag))
+		{
+			printf("%d\n", tokens->flag);
 			check_red_tokens(tokens);
-		else if (tokens->flag == OBRACKET || tokens->flag == CBRACKET)
-			check_brackets(tokens);
+		}
+		// else if (tokens->flag == OBRACKET || tokens->flag == CBRACKET)
+		// 	check_brackets(tokens);
 		tokens = tokens->next;
 	}
 }

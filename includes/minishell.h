@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/08 20:22:29 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/09 09:26:13 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ int			tokenize_wildcard(t_tokens **head, char *input);
 void		tokenize_quotes_helper(t_tokens **head, char *input, int i);
 bool		is_not_token(char c);
 bool		isword(int c);
+bool		isredirect(int flag);
 void		set_status(int status);
 //Syntax analyser functions
 void		isbalanced_brackets(t_tokens *head);
@@ -180,7 +181,7 @@ t_cmdlist	*create_cmd_list(char *cmd);
 void		add_back_cmdlist(t_cmdlist **head, t_cmdlist *new);
 t_tree		*connect_tree(t_tree *left, t_tree *right, t_tokens_flag type);
 int			parse_inred(t_tokens **token, int *err);
-int		parse_outred(t_tokens **token, int *err);
+int			parse_outred(t_tokens **token, int *err);
 
 //expander
 void		expander(t_env *env, t_tokens **tokens);

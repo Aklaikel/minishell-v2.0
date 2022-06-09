@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 20:00:46 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/26 01:31:15 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/09 09:40:02 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	isbalanced_brackets(t_tokens *head)
 			flag--;
 		if (flag == -1)
 		{
-			ft_printf("minishell: syntax error near unexpected token `)'\n");
+			ft_printf("minishell: Syntax error near unexpected token `)'\n");
 			set_status(2);
 			return ;
 		}
