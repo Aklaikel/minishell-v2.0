@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/09 16:39:08 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:17:44 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	main(int ac, char **av, char **env)
 	t_tokens	*tokens;
 	t_env		*env_list;
 	t_tree		*tree;
+	int			status;
 
 	(void)ac;
 	(void)av;
@@ -100,7 +101,9 @@ int	main(int ac, char **av, char **env)
 		}
 		add_history(input);
 		tokens = tokenizer(input);
-		syntax_analyser(tokens);
+		status = syntax_analyser(tokens);
+		if (status != 0)
+			continue ;
 		remove_quotes(&tokens);
 		merge_words(&tokens);
 		remove_spaces(&tokens);
@@ -108,6 +111,7 @@ int	main(int ac, char **av, char **env)
 		tree = parser(&tokens);
 		// display_tree(tree, 0);
 		g_global.is_runing = 1;
+		g_global.exit_status = 0;
 		run(tree, &env_list);
 		g_global.is_runing = 0;
 		// display(tokens);

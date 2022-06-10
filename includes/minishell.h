@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/09 09:26:13 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/10 08:39:56 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,22 +142,22 @@ bool		isword(int c);
 bool		isredirect(int flag);
 void		set_status(int status);
 //Syntax analyser functions
-void		isbalanced_brackets(t_tokens *head);
-void		isbalanced_quotes(t_tokens *head);
-void		syntax_analyser(t_tokens *tokens);
-void		check_red_tokens(t_tokens *tokens);
-void		check_opar(t_tokens *tokens);
-void		check_cpar(t_tokens *tokens);
+int			isbalanced_brackets(t_tokens *head);
+int			isbalanced_quotes(t_tokens *head);
+int			syntax_analyser(t_tokens *tokens);
+int			check_red_tokens(t_tokens *tokens);
+int			check_opar(t_tokens *tokens);
+int			check_cpar(t_tokens *tokens);
 bool		is_string(int flag);
 bool		isredirect(int flag);
 void		print_syntax_error(char *error);
 void		init_flags(t_pcn_flags *flags, t_tokens *tokens);
-void		check_cpar_left(t_tokens *tokens);
-void		check_cpar_right(t_tokens *tokens);
-void		check_opar_left(t_tokens *tokens);
-void		check_opar_right(t_tokens *tokens);
-void		check_and_or_pipe_bg(t_tokens *tokens);
-void		check_brackets(t_tokens *tokens);
+int			check_cpar_left(t_tokens *tokens);
+int			check_cpar_right(t_tokens *tokens);
+int			check_opar_left(t_tokens *tokens);
+int			check_opar_right(t_tokens *tokens);
+int			check_and_or_pipe_bg(t_tokens *tokens);
+int			check_brackets(t_tokens *tokens);
 int			get_next_flag(t_tokens *token);
 /*****************  expander functions  ********************/
 //env functions

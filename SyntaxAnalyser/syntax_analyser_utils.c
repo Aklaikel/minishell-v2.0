@@ -6,13 +6,13 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 18:06:07 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/09 16:02:15 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/10 08:40:31 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_cpar_left(t_tokens *tokens)
+int	check_cpar_left(t_tokens *tokens)
 {
 	int	pre_flag;
 	int	status;
@@ -28,7 +28,7 @@ void	check_cpar_left(t_tokens *tokens)
 		print_syntax_error(tokens->token);
 		status = 2;
 	}
-	set_status(status);
+	return (status);
 }
 
 int	check_cpar_right_helper(t_tokens *tokens, int tmp)
@@ -40,7 +40,7 @@ int	check_cpar_right_helper(t_tokens *tokens, int tmp)
 	return (2);
 }
 
-void	check_cpar_right(t_tokens *tokens)
+int	check_cpar_right(t_tokens *tokens)
 {
 	int	next_flag;
 	int	status;
@@ -50,7 +50,7 @@ void	check_cpar_right(t_tokens *tokens)
 	tmp = 0;
 	next_flag = -1;
 	if (!tokens->next || (tokens->next->flag == _SPACE && !tokens->next->next))
-		return ;
+		return (0);
 	if (tokens->next->flag == _SPACE)
 	{
 		next_flag = tokens->next->next->flag;
@@ -66,11 +66,10 @@ void	check_cpar_right(t_tokens *tokens)
 			print_syntax_error(tokens->next->token);
 		status = 2;
 	}
-	set_status(status);
-	return ;
+	return (status);
 }
 
-void	check_opar_left(t_tokens *tokens)
+int	check_opar_left(t_tokens *tokens)
 {
 	int	pre_flag;
 	int	status;
@@ -79,7 +78,7 @@ void	check_opar_left(t_tokens *tokens)
 	pre_flag = -1;
 	if (!tokens->previous
 		|| (tokens->previous->flag == _SPACE && !tokens->previous->previous))
-		return ;
+		return (0);
 	else if (tokens->previous->flag == _SPACE)
 		pre_flag = tokens->previous->previous->flag;
 	else
@@ -90,10 +89,10 @@ void	check_opar_left(t_tokens *tokens)
 		print_syntax_error(tokens->token);
 		status = 2;
 	}
-	set_status(status);
+	return (status);
 }
 
-void	check_opar_right(t_tokens *tokens)
+int	check_opar_right(t_tokens *tokens)
 {
 	int	next_flag;
 	int	tmp;
@@ -115,6 +114,6 @@ void	check_opar_right(t_tokens *tokens)
 			print_syntax_error(tokens->next->next->token);
 		else
 			print_syntax_error(tokens->next->token);
-		set_status(2);
 	}
+	return (status);
 }
