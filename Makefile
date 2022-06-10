@@ -52,10 +52,10 @@ RM =  rm -rf
 all : $(NAME)
 
 $(NAME) : $(OBJS) $(LIBFT) $(PRINTF)
-		$(CC) $(CFLAGS) -lreadline -lncurses $^ -o $(NAME) -L ~/goinfre/.brew/opt/readline/lib 
+		$(CC) $(CFLAGS) -lreadline -lncurses $^ -o $(NAME) -L /goinfre/aklaikel/homebrew/opt/readline/lib 
 
 %.o:%.c $(INC)/minishell.h
-	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@ -I ~/goinfre/.brew/opt/readline/include
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@ -I /goinfre/aklaikel/homebrew/opt/readline/include
 
 $(LIBFT):
 	make bonus -C libft

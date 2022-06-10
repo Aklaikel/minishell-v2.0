@@ -6,34 +6,47 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 22:58:16 by osallak           #+#    #+#             */
-/*   Updated: 2022/04/25 23:12:38 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/10 08:36:00 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_opar(t_tokens *tokens)
+int	check_opar(t_tokens *tokens)
 {
+	int	status;
+
+	status = 0;
 	if (tokens->flag == OBRACKET)
 	{
-		check_opar_right(tokens);
-		if (g_global.exit_status == 0)
-			check_opar_left(tokens);
+		status = check_opar_right(tokens);
+		if (status == 0)
+			status = check_opar_left(tokens);
 	}
+	return (status);
 }
 
-void	check_cpar(t_tokens *tokens)
+int	check_cpar(t_tokens *tokens)
 {
+	int	status;
+
+	status = 0;
 	if (tokens->flag == CBRACKET)
 	{
-		check_cpar_right(tokens);
-		if (g_global.exit_status == 0)
-			check_cpar_left(tokens);
+		status = check_cpar_right(tokens);
+		if (status == 0)
+			status = check_cpar_left(tokens);
 	}
+	return (status);
 }
 
-void	check_brackets(t_tokens *tokens)
+int	check_brackets(t_tokens *tokens)
 {
-	check_opar(tokens);
-	check_cpar(tokens);
+	int	status;
+
+	status = 0;
+	status = check_opar(tokens);
+	if (status == 0)
+		status = check_cpar(tokens);
+	return (status);
 }

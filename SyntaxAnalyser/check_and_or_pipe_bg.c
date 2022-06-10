@@ -6,13 +6,13 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 20:57:47 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/06 10:09:45 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/10 08:27:05 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_and_or_pipe_bg_left(t_tokens *tokens)
+int	check_and_or_pipe_bg_left(t_tokens *tokens)
 {
 	int	pre_flag;
 	int	status;
@@ -30,10 +30,10 @@ void	check_and_or_pipe_bg_left(t_tokens *tokens)
 		status = 2;
 	if (status == 2)
 		print_syntax_error(tokens->token);
-	set_status(status);
+	return (status);
 }
 
-void	check_and_or_pipe_bg_right(t_tokens *tok)
+int	check_and_or_pipe_bg_right(t_tokens *tok)
 {
 	int	next;
 	int	status;
@@ -50,14 +50,16 @@ void	check_and_or_pipe_bg_right(t_tokens *tok)
 		status = 2;
 	if (status == 2)
 		print_syntax_error(tok->token);
-	set_status(status);
+	return (status);
 }
 
-void	check_and_or_pipe_bg(t_tokens *tokens)
+int	check_and_or_pipe_bg(t_tokens *tokens)
 {
-	check_and_or_pipe_bg_left(tokens);
-	if (!g_global.exit_status)
-	{
-		check_and_or_pipe_bg_right(tokens);
-	}
+	int	status;
+
+	status = 0;
+	status = check_and_or_pipe_bg_left(tokens);
+	if (status == 0)
+		status = check_and_or_pipe_bg_right(tokens);
+	return (status);
 }

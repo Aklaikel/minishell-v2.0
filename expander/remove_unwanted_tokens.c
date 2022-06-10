@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 23:05:05 by osallak           #+#    #+#             */
-/*   Updated: 2022/05/04 17:36:29 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/09 16:45:20 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,18 @@ void	remove_quotes(t_tokens **tokens)
 	{
 		if (node->flag == SQUOTE || node->flag == DQUOTE)
 		{
-			node_del_dll(tokens, node);
-			node = *tokens;
-			continue ;
+			if (!node->next || node->next->flag != node->flag)
+			{
+				node_del_dll(tokens, node);
+				node = *tokens;
+				continue ;
+			}
+			else
+			{
+				node->flag = WORD;
+				node->token = collect(ft_strdup(""));
+				continue ;
+			}
 		}
 		node = node->next;
 	}

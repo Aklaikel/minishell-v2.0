@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 00:25:57 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/10 04:51:05 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/11 00:44:19 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,26 @@ char	*get_path(char *word, t_env *env)
 {
 	char	**cmd;
 	char	*path;
+	char	*ret;
 	int		i;
 
+	ret = NULL;
 	if (!word || !*word || !env)
 		return (NULL);
 	if (access(word, X_OK) == 0)
 		return (word);
 	path = find_env("PATH", env);
-	cmd = ft_split(path, ':');
-	if (!cmd)
-		return (NULL);
+	cmd = (char **)collect(ft_split(path, ':'));
 	i = -1;
 	while (cmd[++i])
 	{
 		collect(cmd[i]);
 		cmd[i] = collect(append_char(cmd[i], '/'));
 		cmd[i] = collect(ft_strjoin(cmd[i], word));
-		if (access(cmd[i], X_OK) == 0)
-			return (free(cmd), cmd[i]);
+		if (!ret && access(cmd[i], X_OK) == 0)
+			ret = cmd[i];
 	}
-	return (free(cmd), NULL);
+	return (ret);
 }
 
 char	**env_arr(t_env *env)
@@ -85,9 +85,7 @@ char	**env_arr(t_env *env)
 	var = env;
 	while (var)
 		var = (i++, var->next);
-	env_arr = malloc(sizeof(char *) * i);
-	if (!env_arr)
-		return (NULL);
+	env_arr = collect(malloc(sizeof(char *) * i));
 	i = 0;
 	while (env)
 	{

@@ -1,0 +1,24 @@
+total 200
+drwxr-xr-x  23 aklaikel  candidate    782 Jun 11 00:44 .
+drwx------  35 aklaikel  candidate   1190 Jun 11 00:22 ..
+drwxr-xr-x  18 aklaikel  candidate    612 Jun 10 16:38 .git
+-rw-r--r--   1 aklaikel  candidate     74 Jun  3 06:36 .gitignore
+drwxr-xr-x   3 aklaikel  candidate    102 Jun  7 03:35 .vscode
+-rw-r--r--   1 aklaikel  candidate   1843 Jun 11 00:22 Makefile
+-rw-r--r--   1 aklaikel  candidate     11 Jun  3 06:36 README.md
+drwxr-xr-x  16 aklaikel  candidate    544 Jun 11 00:22 SyntaxAnalyser
+-rw-r--r--   1 aklaikel  candidate      0 Jun 11 00:44 a
+-rw-r--r--   1 aklaikel  candidate   1879 Jun  6 09:37 display_tokens.c
+-rw-r--r--   1 aklaikel  candidate   1732 Jun 11 00:22 display_tokens.o
+drwxr-xr-x  11 aklaikel  candidate    374 Jun 11 00:44 execution
+drwxr-xr-x  14 aklaikel  candidate    476 Jun 11 00:22 expander
+drwxr-xr-x  10 aklaikel  candidate    340 Jun 11 00:22 g_c
+drwxr-xr-x   4 aklaikel  candidate    136 Jun 10 16:38 includes
+drwxr-xr-x  91 aklaikel  candidate   3094 Jun 11 00:22 libft
+-rwxr-xr-x   1 aklaikel  candidate  73568 Jun 11 00:44 minishell
+-rw-r--r--   1 aklaikel  candidate   3237 Jun 10 16:48 minishell.c
+drwxr-xr-x   3 aklaikel  candidate    102 Jun  9 16:13 minishell.dSYM
+-rw-r--r--   1 aklaikel  candidate   3804 Jun 11 00:22 minishell.o
+drwxr-xr-x   9 aklaikel  candidate    306 Jun 11 00:22 parser
+drwxr-xr-x  25 aklaikel  candidate    850 Jun 11 00:22 printf_err
+drwxr-xr-x  10 aklaikel  candidate    340 Jun 11 00:22 tokenizer

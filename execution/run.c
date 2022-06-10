@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 07:10:34 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/10 04:54:52 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/10 16:53:55 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	**len_cmdlist(t_tree *cmd)
 		len++;
 		cmd->cmdlist = cmd->cmdlist->next;
 	}
-	cmdlist = (char **)malloc(sizeof(char *) * (len + 1));
+	cmdlist = (char **)collect(malloc(sizeof(char *) * (len + 1)));
 	i = 0;
 	while (list)
 	{

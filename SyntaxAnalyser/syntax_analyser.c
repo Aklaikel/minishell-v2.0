@@ -6,26 +6,30 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:05:15 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/06 10:07:49 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/10 08:28:34 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-void	syntax_analyser(t_tokens *tokens)
+int	syntax_analyser(t_tokens *tokens)
 {
+	int	status;
+
+	status = 0;
 	isbalanced_brackets(tokens);
 	isbalanced_quotes(tokens);
-	while (tokens && g_global.exit_status == 0)
+	while (tokens && status == 0)
 	{
 		if (tokens->flag == PIPE || tokens->flag == AND || tokens->flag == OR)
-			check_and_or_pipe_bg(tokens);
-		else if (tokens->flag >= 2 && tokens->flag <= 5)
-			check_red_tokens(tokens);
+			status = check_and_or_pipe_bg(tokens);
+		else if (isredirect(tokens->flag))
+			status = check_red_tokens(tokens);
 		else if (tokens->flag == OBRACKET || tokens->flag == CBRACKET)
-			check_brackets(tokens);
+			status = check_brackets(tokens);
 		tokens = tokens->next;
 	}
+	return (status);
 }
 
 void	init_flags(t_pcn_flags *flags, t_tokens *tokens)
@@ -51,7 +55,7 @@ int	get_next_flag(t_tokens *token)
 	return (-1);
 }
 
-void	check_red_tokens(t_tokens *toks)
+int	check_red_tokens(t_tokens *toks)
 {
 	int	next_flag;
 	int	status;
@@ -75,5 +79,5 @@ void	check_red_tokens(t_tokens *toks)
 		else
 			print_syntax_error(toks->next->token);
 	}
-	set_status(status);
+	return (status);
 }
