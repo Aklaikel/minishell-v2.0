@@ -25,6 +25,7 @@ SRCS = minishell.c \
 		expander/expander.c \
 		expander/get_env.c \
 		expander/get_env_utils.c \
+		expander/get_env_utils2.c \
 		expander/remove_unwanted_tokens.c \
 		expander/merge_words.c \
 		display_tokens.c \
@@ -33,6 +34,8 @@ SRCS = minishell.c \
 		parser/parse_redirections.c \
 		execution/run.c \
 		execution/execute_cmdlist.c \
+		execution/handle_pipe.c \
+		execution/exec_utils.c \
 		execution/builtin_cmds/echo_cmd.c \
 		execution/builtin_cmds/exit_cmd.c \
 		execution/builtin_cmds/cd_cmd.c \

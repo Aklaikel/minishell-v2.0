@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 05:28:55 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/08 01:44:42 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/10 01:56:42 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	env_cmd(char **cmd, t_env *venv)
 		printf("usage: env [with no options] [with no arguments]\n");
 		return ;
 	}
-    var = venv;
+	var = venv;
 	while (var != NULL)
 	{
 		if (var->env_value != NULL)

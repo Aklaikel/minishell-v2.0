@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 07:03:46 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/07 06:30:35 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/10 01:54:08 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,8 @@ void	exit_cmd(char **cmd)
 	if (!cmd || !*cmd || ft_strncmp(*cmd, "exit", 255))
 		return ;
 	if (!cmd[1])
-	{
-		// clear();
-		exit(0);
-	}
-	printf("%s\n",cmd[1]);
+		clear_exit(1);
+	printf("%s\n", cmd[1]);
 	status = get_nbr(cmd[1]);
 	if (cmd[2])
 	{
@@ -60,8 +57,5 @@ void	exit_cmd(char **cmd)
 		printf("minishell: exit: too many arguments\n");
 	}
 	else
-	{
-		// clear();
-		exit(status);
-	}
+		clear_exit(status);
 }

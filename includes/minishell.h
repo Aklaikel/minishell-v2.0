@@ -6,7 +6,7 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/08 20:22:29 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/10 02:31:34 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,16 +180,25 @@ t_cmdlist	*create_cmd_list(char *cmd);
 void		add_back_cmdlist(t_cmdlist **head, t_cmdlist *new);
 t_tree		*connect_tree(t_tree *left, t_tree *right, t_tokens_flag type);
 int			parse_inred(t_tokens **token, int *err);
-int		parse_outred(t_tokens **token, int *err);
+int			parse_outred(t_tokens **token, int *err);
 
 //expander
 void		expander(t_env *env, t_tokens **tokens);
+void		add_back(t_env **lst, t_env *new);
+
+//execution utils
+int			get_status(int x);
+void		handle_red(int *fd);
+char		*append_char(char *str, char c);
+char		*get_path(char *word, t_env *env);
+char		**env_arr(t_env *env);
 
 //execution
-void    run(t_tree  *cmd, t_env **env);
-void	execute_cmd(char *cmd, char **argv, t_env **env, int *fd);
-void    run_and_or(t_tree *cmd, t_env **env);
-void	sigreset(void);
+void		run(t_tree *cmd, t_env **env);
+void		execute_cmd(char *cmd, char **argv, t_env **env, int *fd);
+void		run_and_or(t_tree *cmd, t_env **env);
+void		pipe_handler(t_tree	*cmd, t_env **env);
+void		sigreset(void);
 // builting cmds
 void		cd_cmd(char **cmd, t_env *env);
 void		echo_cmd(char **cmd, int *fd);

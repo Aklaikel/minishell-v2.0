@@ -6,31 +6,12 @@
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 06:07:30 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/08 19:22:33 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/10 02:30:15 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_env	*get_last(t_env *lst)
-{
-	while (lst && lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-void	add_back(t_env **lst, t_env *new)
-{
-	t_env	*last_node;
-
-	if (*lst == NULL)
-		*lst = new;
-	else
-	{	
-		last_node = get_last(*lst);
-		last_node->next = new;
-	}
-}
 static void	display_venv(t_env *venv)
 {
 	while (venv)
@@ -106,6 +87,7 @@ static int	append_var(char *line, t_env **env)
 	tab[1] = env_value;
 	return (append_to_env(tab, (line[i] == '+'), env), 0);
 }
+
 void	export_cmd(char **cmd, t_env **venv)
 {
 	int	i;
@@ -125,6 +107,6 @@ void	export_cmd(char **cmd, t_env **venv)
 	}
 	i = 0;
 	while (cmd[++i])
-		if (append_var(cmd[i],venv) == -1)
+		if (append_var(cmd[i], venv) == -1)
 			return ;
 }
