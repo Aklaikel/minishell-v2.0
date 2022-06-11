@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/10 20:48:13 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/10 21:07:01 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int ac, char **av, char **env)
 	while (true)
 	{
 		input = readline("minishell-v2.0$ ");
-		if (!input || !ft_strncmp("exit", input, 4))
+		if (!input)
 		{
 			write (1, "exit\n", 5);
 			clear_exit(255);
