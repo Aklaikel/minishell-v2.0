@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_status.c                                       :+:      :+:    :+:   */
+/*   get_env_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 10:57:47 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/10 01:49:46 by aklaikel         ###   ########.fr       */
+/*   Created: 2022/06/10 02:31:00 by aklaikel          #+#    #+#             */
+/*   Updated: 2022/06/10 02:31:16 by aklaikel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include"minishell.h"
 
-void	set_status(int status)
+static t_env	*get_last(t_env *lst)
 {
-	g_global.exit_status = status;
+	while (lst && lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+void	add_back(t_env **lst, t_env *new)
+{
+	t_env	*last_node;
+
+	if (*lst == NULL)
+		*lst = new;
+	else
+	{	
+		last_node = get_last(*lst);
+		last_node->next = new;
+	}
 }
