@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 17:44:32 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/09 16:21:10 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/11 08:26:06 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ int	pcmdlist_helper(t_tokens **tokens, struct s_io *io, t_cmdlist **lst)
 	return (err);
 }
 
+static void	init_variables(struct s_io *io, t_cmdlist **cmdlist)
+{
+	io->infd = STDIN_FILENO;
+	io->outfd = STDOUT_FILENO;
+	*cmdlist = NULL;
+}
+
 t_tree	*parse_cmdlist(t_tokens **tokens)
 {
 	t_tree		*tree;
@@ -68,9 +75,7 @@ t_tree	*parse_cmdlist(t_tokens **tokens)
 
 	if (!*tokens)
 		return (NULL);
-	io.infd = STDIN_FILENO;
-	io.outfd = STDOUT_FILENO;
-	cmdlist = NULL;
+	init_variables(&io, &cmdlist);
 	tree = (t_tree *)collect(malloc(sizeof(t_tree)));
 	visited = 0;
 	err = 0;

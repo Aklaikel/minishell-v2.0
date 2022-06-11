@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:22:08 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/08 17:20:46 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/11 08:26:58 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_cmdlist	*create_cmd_list(char *cmd)
 	t_cmdlist	*new;
 
 	new = (t_cmdlist *)collect(malloc(sizeof(t_cmdlist)));
-	new->cmd  = cmd;
+	new->cmd = cmd;
 	new->next = NULL;
 	return (new);
 }

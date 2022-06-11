@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/11 07:26:52 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/11 08:09:41 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,9 @@
 
 t_global	g_global;
 
-void	sigint_handler(int siq)
+void	print_version(char **av, int ac)
 {
-	if (g_global.is_runing)
-		return ;
-	g_global.exit_status = 128 + siq;
-	printf("\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
-
-
-void	handle_signals(void)
-{
-	signal(SIGINT, &sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
-}
-
-void	sigreset(void)
-{
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-}
-
-void	print_version(char **av)
-{
+	(void)ac;
 	if (!av || !av[1] || !*av[1])
 		return ;
 	if (!ft_strncmp(av[1], "--version", ft_strlen(av[1])))
@@ -56,37 +33,44 @@ void	print_version(char **av)
 	}
 }
 
+int	get_input(t_tokens **tokens)
+{
+	char	*input;
+	int		status;
+
+	status = 0;
+	input = readline("minishell-v2.0$ ");
+	if (!input)
+	{
+		write (1, "exit\n", 5);
+		clear_exit(0);
+	}
+	add_history(input);
+	*tokens = tokenizer(input);
+	free(input);
+	status = syntax_analyser(*tokens);
+	if (status != 0)
+	{
+		set_status(status);
+		return (status);
+	}
+	return (0);
+}
+
 int	main(int ac, char **av, char **env)
 {
-	char		*input;
 	t_tokens	*tokens;
 	t_env		*env_list;
 	t_tree		*tree;
-	int			status;
 
-	(void)ac;
-	(void)av;
 	tokens = NULL;
-	env_list = get_env(env);
-	print_version(av);
 	handle_signals();
+	env_list = get_env(env);
+	print_version(av, ac);
 	while (true)
 	{
-		input = readline("minishell-v2.0$ ");
-		if (!input)
-		{
-			write (1, "exit\n", 5);
-			clear_exit(g_global.exit_status);
-		}
-		add_history(input);
-		tokens = tokenizer(input);
-		free(input);
-		status = syntax_analyser(tokens);
-		if (status != 0)
-		{
-			g_global.exit_status = status;
+		if (get_input(&tokens) != 0)
 			continue ;
-		}
 		remove_quotes(&tokens);
 		merge_words(&tokens);
 		remove_spaces(&tokens);

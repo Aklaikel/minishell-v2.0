@@ -6,7 +6,7 @@
 #    By: osallak <osallak@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 01:55:25 by aklaikel          #+#    #+#              #
-#    Updated: 2022/06/03 09:19:41 by osallak          ###   ########.fr        #
+#    Updated: 2022/06/11 09:19:19 by osallak          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ $(NAME):$(OBJS)
 clean:
 		$(RM) $(OBJS)
 
-fclean:
+fclean: clean
 		$(RM) $(NAME) 
 
 re: fclean all

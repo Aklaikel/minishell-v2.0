@@ -6,13 +6,13 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 17:38:32 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/04/13 17:21:00 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/11 09:20:47 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-void	ft_putnbr_pf(int n,int *len, int fd)
+void	ft_putnbr_pf(int n, int *len, int fd)
 {
 	long int	i;
 

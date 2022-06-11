@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmdlist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 04:41:06 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/10 04:54:28 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/11 07:33:08 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@
 static bool	is_builtin(char *cmd, char **argv, t_env **env, int *fd)
 {
 	if (!ft_strncmp(cmd, "echo", sizeof("echo") + 1))
-		return (echo_cmd(argv, fd), true);
+		return (echo_cmd(argv, fd), set_status(0), true);
 	else if (!ft_strncmp(cmd, "cd", sizeof("cd") + 1))
-		return (cd_cmd(argv, *env), true);
+		return (cd_cmd(argv, *env), set_status(0), true);
 	else if (!ft_strncmp(cmd, "pwd", sizeof("pwd") + 1))
-		return (pwd_cmd(argv, fd), true);
+		return (pwd_cmd(argv, fd), set_status(0), true);
 	if (!ft_strncmp(cmd, "unset", sizeof("unset") + 1))
-		return (unset_cmd(argv, env), true);
+		return (unset_cmd(argv, env), set_status(0), true);
 	if (!ft_strncmp(cmd, "env", sizeof("env") + 1))
-		return (env_cmd(argv, *env), true);
+		return (env_cmd(argv, *env), set_status(0), true);
 	if (!ft_strncmp(cmd, "export", sizeof("export") + 1))
-		return (export_cmd(argv, env), true);
+		return (export_cmd(argv, env), set_status(0), true);
 	if (!ft_strncmp(cmd, "exit", sizeof("exit") + 1))
-		return (exit_cmd(argv), true);
+		return (exit_cmd(argv), set_status(0), true);
 	return (false);
 }
 

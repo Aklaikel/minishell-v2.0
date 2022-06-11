@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 18:06:07 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/10 08:40:31 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/11 08:21:00 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ int	check_cpar_right(t_tokens *tokens)
 	if (!tokens->next || (tokens->next->flag == _SPACE && !tokens->next->next))
 		return (0);
 	if (tokens->next->flag == _SPACE)
-	{
 		next_flag = tokens->next->next->flag;
+	if (tokens->next->flag == _SPACE)
 		tmp = 1;
-	}
 	else
 		next_flag = tokens->next->flag;
-	if (next_flag != PIPE && next_flag != OR && next_flag != AND && next_flag != CBRACKET && !isredirect(next_flag))
+	if (next_flag != PIPE && next_flag != OR
+		&& next_flag != AND && next_flag != CBRACKET && !isredirect(next_flag))
 	{
 		if (tmp == 1)
 			print_syntax_error(tokens->next->next->token);

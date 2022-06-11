@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 01:24:58 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/03 09:16:13 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/11 08:18:42 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,5 @@ int	ft_printstr(char *s)
 	if (!s)
 		s = "(null)";
 	ft_putstr_pf(s, 1);
-	return(length(s));
+	return (length(s));
 }

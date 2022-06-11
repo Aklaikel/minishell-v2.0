@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklaikel <aklaikel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/10 16:38:29 by aklaikel         ###   ########.fr       */
+/*   Updated: 2022/06/11 08:15:41 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,7 @@
 # include <dirent.h>
 # include "gc.h"
 # include "../printf_err/ft_printf.h"
-#define CMDLIST 1024
-
-#ifdef NULL
-#undef NULL
-#define NULL (void *)0x0
-#endif
+# define CMDLIST 1024
 
 typedef enum tokens
 {
@@ -118,7 +113,7 @@ typedef struct s_tree
 	struct s_tree	*right;
 }	t_tree;
 
-extern t_global g_global;
+extern t_global	g_global;
 
 // double linked list
 t_tokens	*node_del_dll(t_tokens **dll, t_tokens *node);
@@ -159,7 +154,10 @@ int			check_opar_right(t_tokens *tokens);
 int			check_and_or_pipe_bg(t_tokens *tokens);
 int			check_brackets(t_tokens *tokens);
 int			get_next_flag(t_tokens *token);
-/*****************  expander functions  ********************/
+//signals handler functions
+void		sigint_handler(int siq);
+void		handle_signals(void);
+void		sigreset(void);
 //env functions
 t_env		*add_new_env(char *line);
 void		add_back_env(t_env **head, t_env *new);
@@ -167,7 +165,6 @@ t_env		*get_env(char **env);
 void		remove_quotes(t_tokens **tokens);
 void		merge_words(t_tokens **head);
 void		remove_spaces(t_tokens **tokens);
-void		display(t_tokens *tokens);
 void		find_remove_env(char *find, t_env **venv);
 char		*find_env(char *find, t_env *venv);
 //parser
@@ -182,18 +179,15 @@ void		add_back_cmdlist(t_cmdlist **head, t_cmdlist *new);
 t_tree		*connect_tree(t_tree *left, t_tree *right, t_tokens_flag type);
 int			parse_inred(t_tokens **token, int *err);
 int			parse_outred(t_tokens **token, int *err);
-
 //expander
 void		expander(t_env *env, t_tokens **tokens);
 void		add_back(t_env **lst, t_env *new);
-
 //execution utils
 int			get_status(int x);
 void		handle_red(int *fd);
 char		*append_char(char *str, char c);
 char		*get_path(char *word, t_env *env);
 char		**env_arr(t_env *env);
-
 //execution
 void		run(t_tree *cmd, t_env **env);
 void		execute_cmd(char *cmd, char **argv, t_env **env, int *fd);

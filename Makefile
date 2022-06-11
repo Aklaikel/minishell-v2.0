@@ -28,7 +28,6 @@ SRCS = minishell.c \
 		expander/get_env_utils2.c \
 		expander/remove_unwanted_tokens.c \
 		expander/merge_words.c \
-		display_tokens.c \
 		parser/parser.c \
 		parser/parser_utils.c \
 		parser/parse_redirections.c \
@@ -42,7 +41,8 @@ SRCS = minishell.c \
 		execution/builtin_cmds/unset_cmd.c \
 		execution/builtin_cmds/export_cmd.c \
 		execution/builtin_cmds/pwd_cmd.c \
-		execution/builtin_cmds/env_cmd.c 
+		execution/builtin_cmds/env_cmd.c \
+		signal_handler.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -52,10 +52,10 @@ RM =  rm -rf
 all : $(NAME)
 
 $(NAME) : $(OBJS) $(LIBFT) $(PRINTF)
-		$(CC) $(CFLAGS) -lreadline -lncurses $^ -o $(NAME) -L /goinfre/aklaikel/homebrew/opt/readline/lib 
+		$(CC) $(CFLAGS) -lreadline -lncurses $^ -o $(NAME) -L ~/goinfre/.brew/opt/readline/lib 
 
 %.o:%.c $(INC)/minishell.h
-	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@ -I /goinfre/aklaikel/homebrew/opt/readline/include
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@ -I ~/goinfre/.brew/opt/readline/include
 
 $(LIBFT):
 	make bonus -C libft

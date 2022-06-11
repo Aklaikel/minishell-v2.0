@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:05:15 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/10 08:28:34 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/11 08:21:25 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int	syntax_analyser(t_tokens *tokens)
 	int	status;
 
 	status = 0;
-	isbalanced_brackets(tokens);
-	isbalanced_quotes(tokens);
+	status = isbalanced_brackets(tokens);
+	if (status == 0)
+		status = isbalanced_quotes(tokens);
 	while (tokens && status == 0)
 	{
 		if (tokens->flag == PIPE || tokens->flag == AND || tokens->flag == OR)
