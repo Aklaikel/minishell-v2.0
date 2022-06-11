@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 19:46:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/11 08:09:41 by osallak          ###   ########.fr       */
+/*   Updated: 2022/06/11 10:20:16 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,9 @@ void	print_version(char **av, int ac)
 		return ;
 	if (!ft_strncmp(av[1], "--version", ft_strlen(av[1])))
 	{
-		ft_putstr_fd("minishell, version 2.0.0(1)-release \
-			(x86_64-apple-darwin18.7.0)\n", 1);
-		ft_putstr_fd("Copyright (C) 2022 Oussama Sallak aka (uss4ma) &&\
-			 anass klaikel aka (9li9el)\n", 1);
-		ft_putstr_fd("if you find an issue please be a man and \
-			tell us on this github repo:\n", 1);
+		ft_putstr_fd("minishell, version 2.0.0(1)-release (x86_64-apple-darwin18.7.0)\n", 1);
+		ft_putstr_fd("Copyright (C) 2022 Oussama Sallak aka (uss4ma) && anass klaikel aka (9li9el)\n", 1);
+		ft_putstr_fd("if you find an issue please be a man and tell us on this github repo:\n", 1);
 		ft_putstr_fd("<<https://github.com/Aklaikel/minishell-v2.0/issues>>\n"\
 			, 1);
 		clear_exit(0);
