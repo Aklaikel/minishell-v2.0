@@ -16,6 +16,8 @@ void	unset_cmd(char **cmd, t_env **env)
 {
 	int	i;
 
+	if (!*env)
+		return ;
 	if (!cmd || !*cmd || ft_strncmp(cmd[0], "unset", 255))
 		return ;
 	if (cmd[1] && cmd[1][0] == '-' \
