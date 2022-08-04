@@ -55,7 +55,6 @@ void	run_cmdlist(t_tree *cmd, t_env **env)
 	if (!*cmdlist)
 	{
 		printf("minishell :command not found");
-		clear_exit(127);
 		return ;
 	}
 	execute_cmd(*cmdlist, cmdlist, env, fd);
