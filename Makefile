@@ -49,13 +49,23 @@ OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 RM =  rm -rf
 
+
+UNAME := $(shell uname -s)
+
+ifeq ($(UNAME) , Linux)
+	INCDIR = -L/usr/local/lib -I/usr/local/include 
+
+else
+	INCDIR = -I ~/goinfre/.brew/opt/readline/include -L ~/goinfre/.brew/opt/readline/lib
+endif
+
 all : $(NAME)
 
 $(NAME) : $(OBJS) $(LIBFT) $(PRINTF)
-		$(CC) $(CFLAGS) -lreadline -lncurses $^ -o $(NAME) -L ~/goinfre/.brew/opt/readline/lib 
+		$(CC) $(CFLAGS) -lreadline -lncurses $^ -o $(NAME)  -I $(INCDIR) -lreadline
 
 %.o:%.c $(INC)/minishell.h
-	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@ -I ~/goinfre/.brew/opt/readline/include
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@ -I $(INCDIR) -lreadline
 
 $(LIBFT):
 	make bonus -C libft

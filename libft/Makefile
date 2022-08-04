@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: osallak <osallak@student.42.fr>            +#+  +:+       +#+         #
+#    By: uss4ma <uss4ma@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 22:54:23 by osallak           #+#    #+#              #
-#    Updated: 2022/03/20 23:56:58 by osallak          ###   ########.fr        #
+#    Updated: 2022/08/04 19:09:34 by uss4ma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ AR = @ar -rcs
 all: $(NAME)
 
 %.o:%.c $(INC)
-	$(CC) $(CFLAGS) -o $@ -c $< -I $(INC)
+	$(CC) $(CFLAGS) -o $@ -c $<
 	
 $(NAME):$(OBJS)
 	$(AR) $(NAME) $(OBJS)
