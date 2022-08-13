@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: uss4ma <uss4ma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:31:59 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/11 08:15:41 by osallak          ###   ########.fr       */
+/*   Updated: 2022/08/13 02:11:05 by uss4ma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,5 +202,6 @@ void		exit_cmd(char **cmd);
 void		export_cmd(char **cmd, t_env **venv);
 void		pwd_cmd(char **cmd, int *fd);
 void		unset_cmd(char **cmd, t_env **env);
+bool		display_version(char **av, int ac);
 
 #endif

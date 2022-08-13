@@ -53,10 +53,10 @@ RM =  rm -rf
 UNAME := $(shell uname -s)
 
 ifeq ($(UNAME) , Linux)
-	INCDIR = -L/usr/local/lib -I/usr/local/include 
+	INCDIR := -L/usr/local/lib -I/usr/local/include 
 
 else
-	INCDIR = -I ~/goinfre/.brew/opt/readline/include -L ~/goinfre/.brew/opt/readline/lib
+	INCDIR := -I ~/goinfre/.brew/opt/readline/include -L ~/goinfre/.brew/opt/readline/lib
 endif
 
 all : $(NAME)
@@ -80,3 +80,6 @@ fclean : clean
 	make fclean -C libft
 	make fclean -C printf_err
 re : fclean all
+
+run : $(NAME)
+	./$(NAME)

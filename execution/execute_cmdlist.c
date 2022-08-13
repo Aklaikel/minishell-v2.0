@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmdlist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: uss4ma <uss4ma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 04:41:06 by aklaikel          #+#    #+#             */
-/*   Updated: 2022/06/11 07:33:08 by osallak          ###   ########.fr       */
+/*   Updated: 2022/08/13 02:11:35 by uss4ma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static bool	is_builtin(char *cmd, char **argv, t_env **env, int *fd)
 		return (export_cmd(argv, env), set_status(0), true);
 	if (!ft_strncmp(cmd, "exit", sizeof("exit") + 1))
 		return (exit_cmd(argv), set_status(0), true);
+	if (!ft_strncmp(cmd, "version", sizeof("exit") + 1))
+		return (display_version(NULL, 2));
 	return (false);
 }
 
