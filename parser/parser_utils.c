@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:22:08 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/11 08:26:58 by osallak          ###   ########.fr       */
+/*   Updated: 2022/07/03 17:53:34 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	parse_heredoc(t_tokens **tokens, int *err)
 		input = readline("> ");
 		if (!input)
 			return (*err = 1, -1);
+		collect(input);
 		if (!strcmp(input, delim))
 			break ;
 		write(fd[1], input, ft_strlen(input));

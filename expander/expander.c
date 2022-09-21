@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: uss4ma <uss4ma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 21:17:20 by osallak           #+#    #+#             */
-/*   Updated: 2022/06/06 17:03:07 by osallak          ###   ########.fr       */
+/*   Updated: 2022/08/04 19:07:27 by uss4ma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	expand_wildcard(t_tokens **tokens)
 	DIR				*dir;
 	struct dirent	*entity;
 	t_tokens		*newlist;
-	t_tokens		*tmp;
 
 	(void)tokens;
 	dir = opendir(".");
@@ -41,7 +40,6 @@ void	expand_wildcard(t_tokens **tokens)
 			add_back_dll(&newlist, init_list_dll \
 				(collect(ft_strdup(entity->d_name)), WORD));
 	}
-	tmp = newlist;
 	if (!(*tokens)->next)
 		(*tokens)->next = newlist;
 	else
